@@ -1,0 +1,269 @@
+.g-header {
+  font-family: Microsoft JhengHei;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: relative;
+  margin-bottom: 50px;
+  min-width: 1000px;
+  height: 137px;
+  text-align: center;
+  display: block;
+}
+
+.g-header .ch1 {
+  fill: fill= "#666666";
+}
+
+.g-header .g-wrap-expand {
+  position: relative;
+  height: 48px;
+  width: 1200px;
+  display: block;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 14px;
+}
+
+.g-header .g-wrap-expand .g-header-top a.logo {
+  float: left;
+  height: 44px;
+  width: 128px;
+  display: inline-block;
+  margin-right: 36px;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% auto;
+  background-image: url(https://cdn04.pinkoi.com/pinkoi.site/event/xmas2018/logo_header.svg);
+}
+
+.g-header .g-wrap-expand .g-header-top .header-search {
+  display: inline-block;
+  width: 380px;
+  float: left;
+  vertical-align: top;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-search #header-search-form {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-search #header-search-form .search {
+  float: left;
+  width: calc(100% - 70px);
+  padding: 6px 32px 5px 14px;
+  line-height: 1.4;
+  border: 1px solid #ebebeb;
+  background: #fbfafa;
+  font-family: Microsoft JhengHei;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-search #header-search-form .submit {
+  display: inline-block;
+  float: left;
+  width: 70px;
+  padding: 10px 6px 9px;
+  background: #49454b;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  line-height: 1;
+  border: 0;
+  font-family: Microsoft JhengHei;
+  box-sizing: border-box;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-search #header-search-form .submit:hover {
+  background-color: #1e2124;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-search #header-search-form .trend {
+  float: left;
+  padding: 6px 0 0;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-search #header-search-form .trend a {
+  float: left;
+  font-weight: 400;
+  color: #49454b;
+  white-space: nowrap;
+  text-decoration: none;
+  font-size: 13px;
+  margin-right: 14px;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-search #header-search-form .trend a:nth-last-child(1) {
+  margin-right: 0;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-search #header-search-form a:hover {
+  color: #f5548c;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-search #header-search-form .g-voiceinput {
+  cursor: pointer;
+  position: absolute;
+  right: 70px;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  background: url(https://cdn04.pinkoi.com/pinkoi.site/general/mic_2x.png) center center no-repeat;
+  background-size: 30px;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right {
+  position: absolute;
+  display: -ms-flexbox;
+  display: flex;
+  right: 0;
+  -ms-flex-align: center;
+      align-items: center;
+  font-size: 14px;
+  width: 380px;
+  height: 59px;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative {
+  position: relative;
+  padding: 6px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative a {
+  margin-right: 18px;
+  text-decoration: none;
+  font-weight: 400;
+  color: #49454b;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative a:nth-of-type(1):hover {
+  color: #f5548c;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative a:nth-of-type(2):hover {
+  color: #f5548c;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative a:nth-of-type(2):hover .login-border {
+  border: 1px solid #f5548c;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative a:nth-of-type(2) .login-border {
+  border: 1px solid #49454b;
+  padding: 8px 10px;
+  border-radius: 3px;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .cart {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  background-position: center;
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .cart:hover svg > path {
+  fill: #f5548c;
+}
+
+.g-header .g-nav {
+  display: block;
+}
+
+.g-header .g-nav .nav-first {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: inherit;
+}
+
+.g-header .g-nav .nav-first .nav-first-li {
+  display: inline-block;
+  float: left;
+  width: calc((100% - 70px) / 8);
+  height: inherit;
+}
+
+.g-header .g-nav .nav-first .nav-first-li .title-bold-pink {
+  display: block;
+  width: initial;
+  font-size: 14px;
+  text-align: center;
+  color: #f5548c;
+  font-weight: 700;
+  padding-top: 14px;
+  padding-bottom: 10px;
+}
+
+.g-header .g-nav .nav-first .nav-first-li:hover .title-bold-pink {
+  border-bottom: 2px solid #f5548c;
+  padding-bottom: 10px;
+  transition: 0.3s;
+}
+
+.g-header .g-nav .nav-first .nav-first-li:hover .nav-second-campaign {
+  visibility: visible;
+}
+
+.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign {
+  position: absolute;
+  top: 48px;
+  width: auto;
+  min-width: 250px;
+  max-width: 500px;
+  font-size: 14px;
+  background-color: white;
+  padding-bottom: 20px;
+}
+
+.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign:hover {
+  visibility: visible;
+}
+
+.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign ul {
+  margin-left: 20px;
+  padding: 0;
+  text-align: left;
+}
+
+.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign ul li {
+  margin-top: 20px;
+  list-style-type: none;
+}
+
+.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign ul li:hover a > span {
+  border-bottom: 1px solid black;
+}
+
+.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign ul li a {
+  text-decoration: none;
+  color: #49454b;
+}
+
+.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign ul li a b {
+  display: inline-block;
+  background: #f5548c;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 20px;
+  padding: 3px 4px 2px;
+  border-radius: 3px;
+}
+
+.g-header .g-nav .nav-second-campaign {
+  visibility: hidden;
+}
+/*# sourceMappingURL=test.css.map */
