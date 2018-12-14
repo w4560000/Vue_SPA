@@ -11,10 +11,6 @@
   display: block;
 }
 
-.g-header .ch1 {
-  fill: fill= "#666666";
-}
-
 .g-header .g-wrap-expand {
   position: relative;
   height: 48px;
@@ -266,4 +262,4 @@
 .g-header .g-nav .nav-second-campaign {
   visibility: hidden;
 }
-/*# sourceMappingURL=test.css.map */
+/*# sourceMappingURL=gheader.css.map */
