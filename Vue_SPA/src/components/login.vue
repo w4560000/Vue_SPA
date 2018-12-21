@@ -1,27 +1,28 @@
 <template>
   <div class="login-body">
-    <div class="login-wrapper">
+    <div class="login-outer">
+     <div class="login-wrapper">
       <div class="login-inner-wrapper">
         <div class="login-upper">
           <div class="logo"></div>
           <div class="social-btn">
             <div class="inner-btn-wrapper">
               <div class="social-login-btn">
-                <a class="m-button-fb"></a>
-                <a class="m-button-weibo"></a>
-              </div>
+                <a class="m-button-fb">&nbsp;&nbsp;&nbsp;用Facebook登入</a>
+                <a class="m-button-weibo">&nbsp;&nbsp;&nbsp;无法用Weibo登录</a>
+               </div>
               <div class="social-login-btn">
-                <a class="m-button-twitter"></a>
-                <a class="m-button-weixin"></a>
-              </div>
-            </div>
-          </div>
+                <a class="m-button-twitter">&nbsp;&nbsp;&nbsp;無法用Twitter登入</a>
+                <a class="m-button-weixin">&nbsp;&nbsp;&nbsp;無法用Weixin微信登入</a>
+               </div>
+             </div>
+           </div>
           <div class="prev-next">
-            <i data-click="btn-prev"></i>
-            <i data-click="btn-next"></i>
-          </div>
+            <i data-click="btn-back" :class="{'back':!prev}"  @click="prev=!prev;"></i>
+            <i data-click="btn-next" :class="{'next':prev}"  @click="prev=!prev;"></i>
+           </div>
           <p class="promo">加入會員 72 小時內首次購物享 95 折優惠！</p>
-        </div>
+         </div>
         <div class="form-wrapper">
           <form id="login-form">
             <div class="login-message"></div>
@@ -53,6 +54,7 @@
           </div>
         </div>
       </div>
+     </div>
     </div>
   </div>
 </template>
@@ -61,7 +63,13 @@
 export default {
   name: 'login',
   data () {
-    return {}
+    return {
+      prev: true
+    }
   }
 }
 </script>
+
+<style>
+@import "../../css/login.css";
+</style>

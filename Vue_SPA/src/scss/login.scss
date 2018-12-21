@@ -1,3 +1,252 @@
-.login{
-    display: block;
+.login-body {
+  display: block;
+
+  .login-outer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d8d8d8;
+
+    .login-wrapper {
+      position: absolute;
+      width: 560px;
+      height: 633px;
+      border-radius: 8px 8px 8px 8px;
+      background: white;
+
+      .login-inner-wrapper {
+        position: relative;
+        display: block;
+
+        .login-upper {
+          display: block;
+          height: 277px;
+
+          padding-top: 24px;
+
+          .logo {
+            position: relative;
+            display: block;
+            width: 200px;
+            height: 68px;
+            margin: 0 auto;
+            margin-top: 0;
+            background-image: url(https://cdn04.pinkoi.com/pinkoi.site/event/xmas2018/logo_header.svg);
+            background-repeat: no-repeat;
+
+            background-position: center;
+            background-size: 200px auto;
+          }
+
+          .social-btn {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+            height: 140px;
+
+            margin: 0 auto;
+
+            .inner-btn-wrapper {
+              position: relative;
+              display: inline-block;
+              width: 740px;
+              padding-top: 16px;
+              text-align: left;
+
+              .social-login-btn {
+                position: relative;
+                top: 16px;
+                display: inline-block;
+                width: 300px;
+                height: 120px;
+                background: white;
+
+                .m-button-fb {
+                  position: absolute;
+
+                  width: 220px;
+                  height: 21px;
+                  padding: 15px 15px 15px 65px;
+                  color: #fff;
+                  border-radius: 8px 8px 8px 8px;
+                  background: #4f71b6;
+
+                  font-size: 21px;
+
+                  &::before {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    width: 50px;
+                    height: 50px;
+                    content: "";
+
+                    border-right: 1px solid #617fbd;
+                    background-image: url(https://cdn04.pinkoi.com/pinkoi.site/login/ico_fb_btn.png);
+                    background-repeat: no-repeat;
+                    background-position: 12px center;
+                    box-shadow: 1px 0 0 0 #4765a3;
+                  }
+                  &:hover {
+                    transform: translateY(-5px);
+
+                    box-shadow: 0 0.3em #244279;
+                  }
+                }
+                .m-button-weibo {
+                  position: absolute;
+                  top: 68px;
+
+                  width: 220px;
+                  height: 21px;
+                  padding: 15px 15px 15px 65px;
+                  color: #fff;
+                  border-radius: 8px 8px 8px 8px;
+                  background: rgb(224, 94, 94);
+
+                  font-size: 21px;
+
+                  &::before {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    width: 52px;
+                    height: 52px;
+                    content: "";
+
+                    border-radius: 8px 0 0 8px;
+                    background-color: #d8d8d8;
+                    background-image: url(https://cdn04.pinkoi.com/pinkoi.site/login/ico_weibo_btn.png);
+                    background-repeat: no-repeat;
+                    background-position: 12px center;
+                  }
+                  &:hover {
+                    transform: translateY(-5px);
+
+                    box-shadow: 0 0.3em #c21b24;
+                  }
+                }
+                  .m-button-twitter {
+                    position: absolute;
+                    width: 220px;
+                    height: 21px;
+                    padding: 15px 15px 15px 65px;
+                    color: #fff;
+                    border-radius: 8px 8px 8px 8px;
+                    background: #33a6d2;
+
+                    font-size: 21px;
+
+                    &::before {
+                      position: absolute;
+                      top: 0;
+                      bottom: 0;
+                      left: 0;
+                      width: 50px;
+                      height: 50px;
+                      content: "";
+
+                      border-right: 1px solid #33a6d2;
+                      background-image: url(https://cdn04.pinkoi.com/pinkoi.site/login/ico_twitter_btn_1.png);
+                      background-repeat: no-repeat;
+                      background-position: 12px center;
+                      box-shadow: 1px 0 0 0 #4287d7;
+                    }
+                    &:hover {
+                      transform: translateY(-5px);
+
+                      box-shadow: 0 0.3em #4287d7;
+                    }
+                  }
+                  .m-button-weixin {
+                    position: absolute;
+                    top: 68px;
+                    display: block;
+                    width: 220px;
+                    height: 21px;
+                    padding: 15px 15px 15px 65px;
+                    color: #fff;
+                    border-radius: 8px 8px 8px 8px;
+                    background: rgb(224, 94, 94);
+
+                    font-size: 21px;
+
+                    &::before {
+                      position: absolute;
+                      top: 0;
+                      bottom: 0;
+                      left: 0;
+                      width: 52px;
+                      height: 52px;
+                      content: "";
+
+                      border-radius: 8px 0 0 8px;
+                      background-color: #d8d8d8;
+                      background-image: url(https://cdn04.pinkoi.com/pinkoi.site/login/ico_login_weixin@2x.png);
+                      background-repeat: no-repeat;
+                      background-position: 12px center;
+                    }
+                    &:hover {
+                      transform: translateY(-5px);
+
+                      box-shadow: 0 0.3em #c21b24;
+                    }
+                  }
+                }
+              }
+
+              .prev-next {
+                position: absolute;
+                top: 180px;
+                right: 10%;
+                left: 10%;
+                display: block;
+                height: 10%;
+
+                i[data-click="btn-next"] {
+                  display: block;
+                  float: right;
+                  width: 19px;
+                  height: 31px;
+                  cursor: pointer;
+
+                  background: url(https://cdn04.pinkoi.com/pinkoi.site/login/img_arrow_r_2x.png)
+                    right center no-repeat;
+                  background-size: 19px 31px;
+                }
+                i[data-click="btn-back"] {
+                  display: block;
+                  float: left;
+                  width: 19px;
+                  height: 31px;
+                  cursor: pointer;
+
+                  background: url(//cdn04.pinkoi.com/pinkoi.site/login/img_arrow_l_2x.png)
+                    left center no-repeat;
+                  background-size: 19px 31px;
+                }
+              }
+              .promo {
+                position: relative;
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+.next {
+  visibility: hidden;
+}
+.back {
+  visibility: hidden;
 }
