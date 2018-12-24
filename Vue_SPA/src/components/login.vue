@@ -7,13 +7,13 @@
             <div class="logo"></div>
             <div class="social-btn">
               <div class="inner-btn-wrapper">
-                <div class="social-login-btn" v-if="prev">
+                <div class="social-login-btn" :class="{'animation-toright':prev}" v-if="prev">
                   <a class="m-button-fb">用Facebook登入</a>
                   <a class="m-button-weibo">
                     <i class="useless"></i>无法用Weibo登录
                   </a>
                 </div>
-                <div class="social-login-btn" v-if="!prev">
+                <div class="social-login-btn" :class="{'animation-toleft':!prev}" v-if="!prev">
                   <a class="m-button-twitter">
                     <i class="useless"></i>無法用Twitter登入
                   </a>

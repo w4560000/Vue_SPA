@@ -1,3 +1,6 @@
+$font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC",
+  "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese",
+  "Droid Sans Fallback", sans-serif;
 .login-body {
   display: block;
 
@@ -36,7 +39,7 @@
             height: 68px;
             margin: 0 auto;
             margin-top: 0;
-            background-image: url(https://cdn04.pinkoi.com/pinkoi.site/event/xmas2018/logo_header.svg);
+            background-image: url(../src/image/svg_logo_header.svg);
             background-repeat: no-repeat;
 
             background-position: center;
@@ -48,7 +51,7 @@
             display: inline-block;
             width: 300px;
             height: 140px;
-            margin-top: 16px;
+            margin-top: 24px;
 
             .inner-btn-wrapper {
               position: relative;
@@ -76,7 +79,7 @@
                   background: #4f71b6;
                   text-align: center;
                   font-size: 20px;
-
+                  font-family: $font-family;
                   &::before {
                     position: absolute;
                     top: 0;
@@ -87,7 +90,7 @@
                     content: "";
 
                     border-right: 1px solid #617fbd;
-                    background-image: url(https://cdn04.pinkoi.com/pinkoi.site/login/ico_fb_btn.png);
+                    background-image: url(../src/image/img_login_facebook_icon.png);
                     background-repeat: no-repeat;
                     background-position: 12px center;
                     box-shadow: 1px 0 0 0 #4765a3;
@@ -96,6 +99,7 @@
                     transform: translateY(-5px);
 
                     box-shadow: 0 0.3em #244279;
+                    transition-duration: 0.15s;
                   }
                 }
                 .m-button-weibo {
@@ -110,7 +114,7 @@
                   font-size: 20px;
                   text-align: center;
                   overflow: hidden;
-
+                  font-family: $font-family;
                   z-index: 1;
                   &::before {
                     position: absolute;
@@ -123,14 +127,14 @@
 
                     border-radius: 8px 0px 0px 8px;
                     background-color: #d8d8d8;
-                    background-image: url(https://cdn04.pinkoi.com/pinkoi.site/login/ico_weibo_btn.png);
+                    background-image: url(../src/image/img_login_weibo_icon.png);
                     background-repeat: no-repeat;
                     background-position: 12px center;
                   }
 
                   &:hover {
                     transform: translateY(-5px);
-
+                    transition-duration: 0.15s;
                     box-shadow: 0 0.3em rgb(224, 104, 24);
                   }
                 }
@@ -145,7 +149,7 @@
                   text-align: center;
                   font-size: 20px;
                   overflow: hidden;
-
+                  font-family: $font-family;
                   &::before {
                     position: absolute;
                     top: 0;
@@ -156,7 +160,7 @@
                     content: "";
 
                     border-right: 1px solid #53bae2;
-                    background-image: url(https://cdn04.pinkoi.com/pinkoi.site/login/ico_twitter_btn_1.png);
+                    background-image: url(../src/image/img_login_twitter_icon.png);
                     background-repeat: no-repeat;
                     background-position: 12px center;
                     box-shadow: 1px 0 0 0 #2593be;
@@ -164,7 +168,7 @@
 
                   &:hover {
                     transform: translateY(-5px);
-
+                    transition-duration: 0.15s;
                     box-shadow: 0 0.3em #4287d7;
                   }
                 }
@@ -181,7 +185,7 @@
                   font-size: 20px;
                   text-align: center;
                   overflow: hidden;
-
+                  font-family: $font-family;
                   &::before {
                     position: absolute;
                     top: 0;
@@ -193,7 +197,7 @@
                     border-radius: 8px 8px 8px 8px;
                     border-right: 1px solid #7fc04f;
                     background-color: #65b331;
-                    background-image: url(https://cdn04.pinkoi.com/pinkoi.site/login/ico_login_weixin@2x.png);
+                    background-image: url(../src/image/img_login_weixin_icon.png);
                     background-repeat: no-repeat;
                     background-position: 5px center;
                     background-size: 80%;
@@ -201,7 +205,7 @@
                   }
                   &:hover {
                     transform: translateY(-5px);
-
+                    transition-duration: 0.15s;
                     box-shadow: 0 0.3em #3a7212;
                   }
                 }
@@ -224,9 +228,14 @@
               height: 31px;
               cursor: pointer;
               z-index: 999;
-              background: url(https://cdn04.pinkoi.com/pinkoi.site/login/img_arrow_r_2x.png)
-                right center no-repeat;
+              background: url(../src/image/img_login_next_white.png) right
+                center no-repeat;
               background-size: 19px 31px;
+              &:hover {
+                background: url(../src/image/img_login_next_pink.png) left
+                  center no-repeat;
+                background-size: 19px 31px;
+              }
             }
             i[data-click="btn-back"] {
               display: block;
@@ -235,9 +244,15 @@
               height: 31px;
               cursor: pointer;
               z-index: 999;
-              background: url(//cdn04.pinkoi.com/pinkoi.site/login/img_arrow_l_2x.png)
-                left center no-repeat;
+              background: url(../src/image/img_login_back_white.png) left center
+                no-repeat;
               background-size: 19px 31px;
+
+              &:hover {
+                background: url(../src/image/img_login_back_pink.png) left
+                  center no-repeat;
+                background-size: 19px 31px;
+              }
             }
           }
           .promo {
@@ -245,85 +260,153 @@
             margin: 0 10px 24px 10px;
             font-size: 15px;
             display: block;
+            font-family: $font-family;
           }
-
         }
-          .form-wrapper{
-            #login-form{
-              .login-pinkoi-account{
-                font-size: 20px;
+        .form-wrapper {
+          #login-form {
+            .login-pinkoi-account {
+              font-size: 20px;
+              text-align: center;
+              font-family: $font-family;
+            }
+            ul {
+              position: relative;
+              display: block;
+              list-style-type: none;
+
+              li {
+                position: relative;
+                display: block;
+                width: 228px;
+                left: 17%;
+
+                #login-id {
+                  display: block;
+                  width: inherit;
+                  height: inherit;
+                  padding: 18px 20px 17px 50px;
+                  border: 1px solid #ccc;
+                  border-radius: 8px 8px 0 0;
+                  outline: none;
+                  font-family: $font-family;
+                }
+                #id-input {
+                  position: absolute;
+                  color: #bbb;
+                  left: 20px;
+                  right: 12px;
+                  top: 0;
+                  bottom: 3px;
+                  text-align: left;
+                  padding: 18px 30px 15px 28px;
+                  background-image: url(../src/image/img_login_account_icon.png);
+                  background-size: 21px 300px;
+                  background-repeat: no-repeat;
+                  background-position: 0 16px;
+                  font-family: $font-family;
+                }
+                #login-password {
+                  display: block;
+                  width: inherit;
+                  height: inherit;
+                  border: 1px solid #ccc;
+                  padding: 18px 20px 17px 50px;
+                  border-radius: 0 0 8px 8px;
+                  outline: none;
+                  font-family: $font-family;
+                }
+                #password-input {
+                  position: absolute;
+                  color: #bbb;
+                  left: 20px;
+                  right: 12px;
+                  top: 0;
+                  bottom: 3px;
+                  text-align: left;
+                  padding: 18px 30px 15px 28px;
+                  background-image: url(../src/image/img_login_account_icon.png);
+                  background-size: 21px 300px;
+                  background-repeat: no-repeat;
+                  background-position: 0 -93px;
+                  font-family: $font-family;
+                }
+              }
+            }
+
+            .button-wrapper {
+              width: 300px;
+              margin-left: auto;
+              margin-right: auto;
+              margin-top: 16px;
+              .login-submit {
+                padding-right: 40px;
+                padding-left: 40px;
+                width: 100%;
+                box-sizing: border-box;
+                font-weight: 600;
+                padding: 12px 40px 13px 40px;
+                background: #f5548c;
+                font-size: 21px;
+                color: #fff;
+                text-align: center;
+                border-radius: 8px 8px 8px 8px;
+                border: none;
+                font-family: $font-family;
+              }
+            }
+          }
+          .login-help {
+            text-align: center;
+            width: 100%;
+            line-height: 1;
+            font-size: 0;
+            .login-problem {
+              text-align: center;
+              padding: 16px 0 0 0;
+              width: 100%;
+              line-height: 1;
+              font-size: 0;
+              span[data-click="forgetpassword"] {
+                position: relative;
+                padding-right: 16px;
+                font-size: 14px;
+                color: #888;
+                cursor: pointer;
+                display: inline-block;
+                font-family: $font-family;
+              }
+              span[data-click="resend"] {
+                padding-right: 0;
+                padding-left: 16px;
+                position: relative;
+                font-size: 14px;
+                color: #888;
+                cursor: pointer;
+                display: inline-block;
+                line-height: 1;
                 text-align: center;
               }
-                ul{
-                  position: relative;
-                  display: block;
-                  list-style-type: none;
-                  
-                  li{
-                    position: relative;
-                    display: block;
-                    width:228px;
-                    left:17%;
-                    
-                  #login-id{
-                    display: block;
-                    width: inherit;
-                    height: inherit;
-                    padding: 18px 20px 17px 50px;
-                    border: 1px solid #ccc;
-                    border-radius: 8px 8px 0 0;
-                    outline: none;
-                    
-                  }
-                  #id-input{
-                    position: absolute;
-                    color: #bbb;
-                    left: 20px; 
-                    right: 12px;
-                    top: 0;
-                    bottom: 3px;
-                    text-align: left;
-                    padding: 18px 30px 15px 28px;
-                    background-image: url(https://cdn04.pinkoi.com/pinkoi.site/login/ico_login.png);
-                    background-size: 21px 300px;
-                    background-repeat: no-repeat;
-                    background-position: 0 16px;
-                    
-                  }
-                  #login-password{
-                    display: block;
-                    width: inherit;
-                    height: inherit;
-                    border: 1px solid #ccc;
-                    padding: 18px 20px 17px 50px;
-                    border-radius: 0 0 8px 8px;
-                    outline: none;
-                  }
-                  #password-input{
-                     position: absolute;
-                    color: #bbb;
-                    left: 20px;
-                    right: 12px;
-                    top: 0;
-                    bottom: 3px;
-                    text-align: left;
-                    padding: 18px 30px 15px 28px;
-                    background-image: url(https://cdn04.pinkoi.com/pinkoi.site/login/ico_login.png);
-                    background-size: 21px 300px;
-                    background-repeat: no-repeat;
-                    background-position: 0 -93px;
-                    
-                  }
-                }
-                }
+            }
+            .lower-block {
+              font-size: 16px;
+              padding: 16px 0 0 0;
+              color: #4a4a4a;
+              span[data-click="signup"] {
+                font-size: 16px;
+                color: #268ddf;
+                cursor: pointer;
+                display: inline-block;
+                line-height: 1;
+                text-align: center;
               }
             }
           }
         }
       }
     }
-  
-
+  }
+}
 
 //共用css
 .next {
@@ -331,6 +414,50 @@
 }
 .back {
   visibility: hidden;
+}
+
+.animation-toright {
+  position: relative;
+
+  display: inline-block;
+  width: 300px;
+  height: 120px;
+  background: white;
+  border-radius: 8px 8px 8px 8px;
+
+  /* animation 參數設定 */
+
+  transform-origin: 0%;
+  animation: toright 0.1s;
+}
+@keyframes toright {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.animation-toleft {
+  position: relative;
+
+  display: inline-block;
+  width: 300px;
+  height: 120px;
+  background: white;
+  border-radius: 8px 8px 8px 8px;
+
+  /* animation 參數設定 */
+  transform-origin: 100%;
+  animation: toleft 0.1s;
+}
+@keyframes toleft {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .useless {
