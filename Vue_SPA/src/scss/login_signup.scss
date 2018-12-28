@@ -1,0 +1,33 @@
+.login-body {
+  display: block;
+  .login-outer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d8d8d8;
+    .login-wrapper {
+      position: absolute;
+      width: 560px;
+      height: 563px;
+      border-radius: 8px 8px 8px 8px;
+      background: white;
+      .login-inner-wrapper {
+        position: relative;
+        display: block;
+        .logo{
+            background: url(//cdn04.pinkoi.com/pinkoi.site/general/topnav_sprite_v7.svg) center 0 no-repeat;
+    background-position: 0 -252px;
+    background-size: 565px auto;
+    width: 200px;
+    height: 64px;
+    margin: 24px auto 0 auto;
+        }
+      }
+    }
+  }
+}

@@ -21,7 +21,7 @@
             <div class="header-right">
               <div class="relative">
               <a href="https://google.com" class="design">我要開設計館</a>
-              <router-link class="login" to="/login">
+              <router-link  to="/login">
                 <span class="login-border">登入/註冊</span>
               </router-link>
               <a href="https://google.com" class="cart">

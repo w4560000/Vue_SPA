@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import gheader from '../components/gheader'
 import login from '../components/login'
+import login_signup from '../components/login_signup'
 Vue.use(Router)
 
 export default new Router({
@@ -17,6 +18,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/login_signup',
+      name:'login_signup',
+      component:login_signup
     }
   ]
 })

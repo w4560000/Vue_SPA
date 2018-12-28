@@ -1,270 +1,263 @@
 .g-header {
-    font-family: Microsoft JhengHei;
-    margin:0;
-    padding: 0;
-    width: 100%;
-      position: relative;
-      margin-bottom: 50px;
-      min-width: 1000px;
-      height: 137px;
-      text-align:center;
-      display: block;
-        .g-wrap-expand{
-            position: relative;
-            height: 48px;
-            width: 1200px;
-            display: block;
-            margin:0 auto;
-            padding-top: 20px;
-            padding-bottom: 14px;
-           .g-header-top{
-                 a.logo{
-                  float:left;
-                  height: 44px;
-                  width: 128px;
-                  display: inline-block;
-                  margin-right: 36px;
-                  vertical-align: middle;
-                  background-repeat: no-repeat;
-                  background-position: center;
-                  background-size: 100% auto;
-                  background-image: url(../src/image/svg_logo_header.svg);
-                 }
+  font-family: Microsoft JhengHei;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: relative;
+  margin-bottom: 50px;
+  min-width: 1000px;
+  height: 137px;
+  text-align: center;
+  display: block;
+  .g-wrap-expand {
+    position: relative;
+    height: 48px;
+    width: 1200px;
+    display: block;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 14px;
+    .g-header-top {
+      a.logo {
+        float: left;
+        height: 44px;
+        width: 128px;
+        display: inline-block;
+        margin-right: 36px;
+        vertical-align: middle;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% auto;
+        background-image: url(../src/image/svg_logo_header.svg);
+      }
 
-              .header-search{
-                 display: inline-block;
-                 width: 380px;
-                 float:left;
-                 vertical-align: top;
-                 font-size: 14px;
-                 font-weight: 400;
-                 
-                 #header-search-form{
-                     position: relative;
-                    display: inline-block;
-                    width: 100%;
+      .header-search {
+        display: inline-block;
+        width: 380px;
+        float: left;
+        vertical-align: top;
+        font-size: 14px;
+        font-weight: 400;
 
-                   .search{                  
-                     float:left;
-                     width: calc(100% - 70px);
-                     padding: 6px 32px 5px 14px;
-                     line-height: 1.4;
-                     border: 1px solid #ebebeb;
-                     background: #fbfafa;
-                     font-family: Microsoft JhengHei;
-                     }
+        #header-search-form {
+          position: relative;
+          display: inline-block;
+          width: 100%;
 
-                   .submit{  
+          .search {
+            float: left;
+            width: calc(100% - 70px);
+            padding: 6px 32px 5px 14px;
+            line-height: 1.4;
+            border: 1px solid #ebebeb;
+            background: #fbfafa;
+            font-family: Microsoft JhengHei;
+          }
 
-                   &:hover{
-                       background-color:#1e2124;
-                   }
-                     display: inline-block;
-                     float:left;     
-                     width:70px; 
-                     padding: 10px 6px 9px;
-                     background: #49454b;
-                     color: #fff;
-                     font-size: 13px;
-                     cursor: pointer;
-                     line-height: 1;
-                     border: 0;
-                     font-family: Microsoft JhengHei;
-                     box-sizing: border-box;      
-                     }
+          .submit {
+            &:hover {
+              background-color: #1e2124;
+            }
+            display: inline-block;
+            float: left;
+            width: 70px;
+            padding: 10px 6px 9px;
+            background: #49454b;
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+            line-height: 1;
+            border: 0;
+            font-family: Microsoft JhengHei;
+            box-sizing: border-box;
+          }
 
-                   .trend{
-                    float: left;
-                    padding: 6px 0 0;
-                    display: inline-block;
-                    white-space: nowrap;
+          .trend {
+            float: left;
+            padding: 6px 0 0;
+            display: inline-block;
+            white-space: nowrap;
 
-                     a{
-                        float: left;
-                        font-weight: 400;
-                        color: #49454b;
-                        white-space: nowrap;
-                        text-decoration:none;
-                        font-size: 13px;
-                        margin-right: 14px;
-                     }
-                    
-                     a:nth-last-child(1) { 
-                      margin-right: 0;
-                      }
-                     }
-                     
-                     a:hover{
-                        color:#f5548c;
-                     }
-                     .g-voiceinput{
-                        cursor: pointer;
-                        position: absolute;
-                        right: 70px;
-                        top: 0;
-                        width: 32px;
-                        height: 32px;
-                        background: url(../src/image/img_search_mic_icon.png) center center no-repeat;
-                        background-size: 30px;
-                     }
-                 }
-              }
-              
-              .header-right{
-                position: absolute;
-                display: flex;
-                right: 0;
-                align-items:center;
-                font-size: 14px;
-                width:380px;
-                height:59px;
-               
-                .relative{
-                    position: relative;
-                    padding: 6px;
-                    line-height: 1.4;
-                    font-weight: 400;
+            a {
+              float: left;
+              font-weight: 400;
+              color: #49454b;
+              white-space: nowrap;
+              text-decoration: none;
+              font-size: 13px;
+              margin-right: 14px;
+            }
 
-                    a{
-                        margin-right: 18px;
-                        text-decoration:none;
-                        font-weight: 400;
-                          color: #49454b;
-                    }
+            a:nth-last-child(1) {
+              margin-right: 0;
+            }
+          }
 
-                    a:nth-of-type(1):hover{
-                       color:#f5548c;
-                    }
-                  
-                  a:nth-of-type(2) { 
-
-                    &:hover{
-                        color:#f5548c;
-                        .login-border{
-                            border:1px solid #f5548c;
-                        }
-
-                    }
-                      .login-border{
-                        border: 1px solid #49454b;
-                        padding: 8px 10px;
-                        border-radius: 3px;
-                      }
-
-                 }
-                 //購物車
-                    .cart { 
-
-                    &:hover{
-                        svg > path{
-                        fill:#f5548c;
-                        }
-                    }
-
-                     width :24px;
-                     height: 24px;
-                     position: relative;
-                     background-position: center;
-                     display: inline-block;
-                     vertical-align: middle;
-                     background-repeat: no-repeat;
-                     }
-                 }
-             }
-         }
-     }
-     
-     .g-nav{
-         display: block;
-         .nav-first {
-            position: relative;
-            list-style: none;
-            margin:0;
-            padding: 0;
-            width:100%;
-            height: inherit;
-            
-            .nav-first-li{
-                
-                display: inline-block;
-                float: left;
-                width: calc((100% - 70px) / 8);
-                height: inherit;
-                
-                .title-bold-pink{
-                    display: block;
-                    width: initial;   //預設 待研究
-                    font-size: 14px;
-                    text-align: center;
-                    color: #f5548c;
-                    font-weight: 700;
-                    padding-top: 14px;
-                    padding-bottom: 10px;
-                }
-                
-                &:hover {
-                    .title-bold-pink{
-                    border-bottom: 2px solid #f5548c;
-                    padding-bottom: 10px;
-                    transition: 0.3s;
-                     }
-                    .nav-second-campaign{  //顯示li
-                        visibility: visible;
-                     }   
-                 }
-                .nav-second-campaign {
-                    position:absolute;
-                    top:48px;
-                    width: auto;
-                    min-width: 250px;
-                    max-width: 500px;
-                    font-size: 14px;
-                    background-color: white;
-                    padding-bottom: 20px;
-                    &:hover{
-                        &{visibility: visible;}  //自己顯示自己
-                    }
-                    ul{
-                        margin-left:20px;
-                        padding: 0;
-                        text-align: left;
-                        li{
-                          margin-top:20px;
-                          list-style-type: none;
-
-                          &:hover{ 
-                             a > span{ border-bottom: 1px solid black; }
-                          }
-
-                          a { 
-                              text-decoration:none; 
-                              color: #49454b;
-                             b{
-                                display: inline-block;
-                                background: #f5548c;
-                                color: #fff;
-                                font-size: 12px;
-                                font-weight: 400;
-                                margin-left:20px;
-                                padding: 3px 4px 2px;
-                                border-radius: 3px;
-                             }
-                             }
-                         }
-                     }
-                 }
-            
-             }
-         }
-        .nav-second-campaign{  //li先隱藏，等hover作用顯示
-            visibility: hidden;
+          a:hover {
+            color: #f5548c;
+          }
+          .g-voiceinput {
+            cursor: pointer;
+            position: absolute;
+            right: 70px;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            background: url(../src/image/img_search_mic_icon.png) center center
+              no-repeat;
+            background-size: 30px;
+          }
         }
-     }
- }
-  
-  
-  
-  
-  
-  
- 
+      }
+
+      .header-right {
+        position: absolute;
+        display: flex;
+        right: 0;
+        align-items: center;
+        font-size: 14px;
+        width: 380px;
+        height: 59px;
+
+        .relative {
+          position: relative;
+          padding: 6px;
+          line-height: 1.4;
+          font-weight: 400;
+
+          a {
+            margin-right: 18px;
+            text-decoration: none;
+            font-weight: 400;
+            color: #49454b;
+          }
+
+          a:nth-of-type(1):hover {
+            color: #f5548c;
+          }
+
+          a:nth-of-type(2) {
+            &:hover {
+              color: #f5548c;
+              .login-border {
+                border: 1px solid #f5548c;
+              }
+            }
+            .login-border {
+              border: 1px solid #49454b;
+              padding: 8px 10px;
+              border-radius: 3px;
+            }
+          }
+          //購物車
+          .cart {
+            &:hover {
+              svg > path {
+                fill: #f5548c;
+              }
+            }
+
+            width: 24px;
+            height: 24px;
+            position: relative;
+            background-position: center;
+            display: inline-block;
+            vertical-align: middle;
+            background-repeat: no-repeat;
+          }
+        }
+      }
+    }
+  }
+
+  .g-nav {
+    display: block;
+    .nav-first {
+      position: relative;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: inherit;
+
+      .nav-first-li {
+        display: inline-block;
+        float: left;
+        width: calc((100% - 70px) / 8);
+        height: inherit;
+
+        .title-bold-pink {
+          display: block;
+          width: initial; //預設 待研究
+          font-size: 14px;
+          text-align: center;
+          color: #f5548c;
+          font-weight: 700;
+          padding-top: 14px;
+          padding-bottom: 10px;
+        }
+
+        &:hover {
+          .title-bold-pink {
+            border-bottom: 2px solid #f5548c;
+            padding-bottom: 10px;
+            transition: 0.3s;
+          }
+          .nav-second-campaign {
+            //顯示li
+            visibility: visible;
+          }
+        }
+        .nav-second-campaign {
+          position: absolute;
+          top: 48px;
+          width: auto;
+          min-width: 250px;
+          max-width: 500px;
+          font-size: 14px;
+          background-color: white;
+          padding-bottom: 20px;
+          &:hover {
+            & {
+              visibility: visible;
+            } //自己顯示自己
+          }
+          ul {
+            margin-left: 20px;
+            padding: 0;
+            text-align: left;
+            li {
+              margin-top: 20px;
+              list-style-type: none;
+
+              &:hover {
+                a > span {
+                  border-bottom: 1px solid black;
+                }
+              }
+
+              a {
+                text-decoration: none;
+                color: #49454b;
+                b {
+                  display: inline-block;
+                  background: #f5548c;
+                  color: #fff;
+                  font-size: 12px;
+                  font-weight: 400;
+                  margin-left: 20px;
+                  padding: 3px 4px 2px;
+                  border-radius: 3px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .nav-second-campaign {
+      //li先隱藏，等hover作用顯示
+      visibility: hidden;
+    }
+  }
+}

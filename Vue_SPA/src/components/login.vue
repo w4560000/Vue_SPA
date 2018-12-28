@@ -2,8 +2,8 @@
   <div class="login-body">
     <div class="login-outer">
       <div class="login-wrapper">
-        <div class="login-inner-wrapper">
-          <div class="login-upper">
+        <div class="login-inner-wrapper" >
+          <div class="login-upper" >
             <div class="logo"></div>
             <div class="social-btn">
               <div class="inner-btn-wrapper">
@@ -75,7 +75,9 @@
               </div>
               <div class="lower-block">
                 還不是會員嗎?
+                <router-link  to="/login_signup">
                 <span data-click="signup">立刻註冊新帳號</span>
+                </router-link>
               </div>
             </div>
           </div>
