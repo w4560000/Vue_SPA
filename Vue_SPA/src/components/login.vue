@@ -1,7 +1,7 @@
 <template>
   <div class="login-body">
     <div class="login-outer">
-      <div class="login-wrapper">
+      <div class="login-wrapper-login">
         <div class="login-inner-wrapper" >
           <div class="login-upper" >
             <div class="logo"></div>
@@ -64,7 +64,6 @@
                 </li>
               </ul>
               <div class="button-wrapper">
-                <input type="hidden" name="csrf">
                 <input type="submit" class="login-submit" value="登入">
               </div>
             </form>

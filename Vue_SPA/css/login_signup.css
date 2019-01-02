@@ -1,5 +1,9 @@
+@charset "UTF-8";
 .login-body {
   display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
 }
 
 .login-body .login-outer {
@@ -17,7 +21,7 @@
   background-color: #d8d8d8;
 }
 
-.login-body .login-outer .login-wrapper {
+.login-body .login-outer .login-wrapper-signup {
   position: absolute;
   width: 560px;
   height: 563px;
@@ -25,17 +29,395 @@
   background: white;
 }
 
-.login-body .login-outer .login-wrapper .login-inner-wrapper {
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper {
   position: relative;
   display: block;
 }
 
-.login-body .login-outer .login-wrapper .login-inner-wrapper .logo {
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .logo {
   background: url(//cdn04.pinkoi.com/pinkoi.site/general/topnav_sprite_v7.svg) center 0 no-repeat;
   background-position: 0 -252px;
   background-size: 565px auto;
   width: 200px;
   height: 64px;
   margin: 24px auto 0 auto;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper {
+  display: block;
+  padding-top: 32px;
+  padding-bottom: 40px;
+  background: transparent;
+  border-radius: 0 0 8px 8px;
+  width: 100%;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper h2 {
+  display: block;
+  color: #555;
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form {
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-result {
+  margin: 0;
+  visibility: hidden;
+  height: 0;
+  max-width: 300px;
+  display: none;
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-result h2 {
+  margin-bottom: 31px;
+  color: #555;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-result p {
+  line-height: 1.2;
+  margin-bottom: 20px;
+  font-size: 14px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-signup-ul {
+  max-width: 300px;
+  padding: 0 20px;
+  margin: 0 auto;
+  list-style: none;
+  text-align: center;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-signup-ul li {
+  position: relative;
+  display: list-item;
+  list-style: none;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-signup-ul #signup-account {
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  padding: 17px 20px 17px 40px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  margin-bottom: -1px;
+  background: #fbfbfa;
+  outline: none;
+  color: #222;
+  margin: 0;
+  cursor: text;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-signup-ul #account-input {
+  background-position: 0 16px;
+  background-image: url(//cdn04.pinkoi.com/pinkoi.site/login/ico_login.png);
+  background-size: 21px 300px;
+  background-repeat: no-repeat;
+  position: absolute;
+  color: #bbb;
+  left: 0;
+  right: 12px;
+  top: 0;
+  bottom: 3px;
+  transform: translate(15px, 0);
+  padding: 15px 30px 15px 28px;
+  text-align: left;
+  font-size: 16px;
+  pointer-events: none;
+  z-index: 2;
+  line-height: 25px;
+  vertical-align: middle;
+  font-weight: 400;
+  cursor: default;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-signup-ul #signup-password {
+  width: 100%;
+  padding: 17px 20px 17px 40px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  margin-bottom: -1px;
+  border-radius: 0;
+  background: #fbfbfa;
+  outline: none;
+  color: #222;
+  line-height: normal;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-signup-ul #password-input {
+  background-position: 0 -93px;
+  background-image: url(//cdn04.pinkoi.com/pinkoi.site/login/ico_login.png);
+  background-size: 21px 300px;
+  background-repeat: no-repeat;
+  position: absolute;
+  color: #bbb;
+  left: 0;
+  right: 12px;
+  top: 0;
+  bottom: 3px;
+  transform: translate(15px, 0);
+  padding: 15px 30px 15px 28px;
+  text-align: left;
+  font-size: 16px;
+  pointer-events: none;
+  z-index: 2;
+  line-height: 25px;
+  vertical-align: middle;
+  font-weight: 400;
+  cursor: default;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-signup-ul #signup-email {
+  border-bottom: 1px solid #ccc;
+  border-radius: 0 0 5px 5px;
+  width: 100%;
+  padding: 17px 20px 17px 40px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  margin-bottom: -1px;
+  background: #fbfbfa;
+  outline: none;
+  color: #222;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-signup-ul #email-input {
+  background-position: 0 -211px;
+  background-image: url(//cdn04.pinkoi.com/pinkoi.site/login/ico_login.png);
+  background-size: 21px 300px;
+  background-repeat: no-repeat;
+  position: absolute;
+  color: #bbb;
+  left: 0;
+  right: 12px;
+  top: 0;
+  bottom: 3px;
+  transform: translate(15px, 0);
+  padding: 15px 30px 15px 28px;
+  text-align: left;
+  font-size: 16px;
+  pointer-events: none;
+  z-index: 2;
+  line-height: 25px;
+  vertical-align: middle;
+  font-weight: 400;
+  cursor: default;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form p {
+  line-height: 1.5;
+  margin: 24px auto;
+  color: #444;
+  max-width: 200px;
+  font-size: 13px;
+  padding: 0 20px;
+  text-align: left;
+  font-size: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form p a {
+  color: #4287d7;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 1.5;
+  font-size: 13px;
+  text-align: left;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .button-wrapper {
+  margin-top: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .button-wrapper .signup-button {
+  padding-right: 40px;
+  padding-left: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 21px;
+  background: #f5548c;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 2px;
+  border: none;
+  border-radius: 4px;
+  max-width: 100%;
+  display: block;
+  line-height: 1 !important;
+  padding: 12px 40px 13px 40px;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .button-wrapper-shoping {
+  margin-top: 0;
+  display: none;
+  padding: 0;
+  box-sizing: border-box;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .button-wrapper-shoping .button-shoping {
+  padding-right: 40px;
+  padding-left: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 21px;
+  background: #f5548c;
+  transition: transform 0.1s linear, box-shadow 0.1s linear;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 2px;
+  border: none;
+  border-radius: 4px;
+  max-width: 100%;
+  display: block;
+  line-height: 1 !important;
+  padding: 12px 40px 13px 40px;
+  outline: 0;
+  margin: 0;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .back-to-main {
+  cursor: pointer;
+  margin: 32px auto 0 auto;
+  padding: 0 10px;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 17px;
+  color: #4a4a4a;
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .back-to-main a {
+  text-decoration: none;
+}
+
+.login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .back-to-main a em {
+  font-style: normal;
+  color: #268ddf;
+  cursor: pointer;
+  font-size: 17px;
+  text-align: center;
+  font-family: inherit;
+}
+
+.Account_alert:before {
+  display: block;
+  content: "";
+  border: 7px solid #db484a;
+  border-color: transparent #db484a transparent transparent;
+  position: absolute;
+  right: 7px;
+  top: 20px;
+}
+
+.Account_alert:after {
+  content: attr(data-notice);
+  display: block;
+  background: #db484a;
+  color: #fff;
+  position: absolute;
+  top: 2px;
+  right: -103px;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.PassWord_alert:before {
+  display: block;
+  content: "";
+  border: 7px solid #db484a;
+  border-color: transparent #db484a transparent transparent;
+  position: absolute;
+  right: 7px;
+  top: 20px;
+}
+
+.PassWord_alert:after {
+  content: attr(data-notice);
+  display: block;
+  background: #db484a;
+  color: #fff;
+  position: absolute;
+  top: 2px;
+  right: -103px;
+  padding: 11px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.Email_alert:before {
+  display: block;
+  content: "";
+  border: 7px solid #db484a;
+  border-color: transparent #db484a transparent transparent;
+  position: absolute;
+  right: 7px;
+  top: 20px;
+}
+
+.Email_alert:after {
+  content: attr(data-notice);
+  display: block;
+  background: #db484a;
+  color: #fff;
+  position: absolute;
+  top: 2px;
+  right: -116px;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.submit_error {
+  visibility: visible;
+  height: auto;
+  padding: 20px 38px;
+  margin: 0 0 24px 0;
+  max-width: none;
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ca2020;
+  background: #f7e5e5;
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
 }
 /*# sourceMappingURL=login_signup.css.map */
