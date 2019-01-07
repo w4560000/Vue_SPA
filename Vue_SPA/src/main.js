@@ -13,16 +13,6 @@ Vue.prototype.axios = axios;
 
 Vue.config.productionTip = false;
 
-/*Vue.component("modal", {
-  props: ["Response_Message"],
-  template: "#modal-template",
-  data(){
-    return{
-      Response_Message_s:''
-    }
-  }
-  
-});*/
 
 /* eslint-disable no-new */
 new Vue({

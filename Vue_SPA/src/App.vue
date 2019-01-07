@@ -5,8 +5,28 @@
 </template>
 
 <script>
+/*var componentmodal ={
+  name:'test',
+  template: "#modal-template",
+  props:['Response_Message'],
+  
+  mounted() {
+    debugger;
+    this.Response_Message_s = this.Response_Message;
+  },
+  watch: {
+    Response_Message: {
+      deep: true,
+      handler(nv, ov) {
+        this.Response_Message_s = nv;
+      }
+    }
+  },
+  
+}*/
+
 export default {
-  name: 'App'
+  name: 'App',
 }
 </script>
 

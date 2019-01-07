@@ -95,50 +95,23 @@ import { create } from 'domain';
         </div>
       </div>
     </div>
-    <modal v-if="showModal" @close="showModal = false" :Response_Message="Response_Message" >
+    <modal v-if="showModal" @close="showModal = false" :Response_Message_s="Response_Message" :showvalidation_message="showvalidation_message" v-on:hiddenMessage="onhiddenMessage" >
     </modal>
-    <script type="text/x-template" id="modal-template">
-  <transition name="modal" >
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-          <div class="modal-footer">
-            {{Response_Message}}
-              <button class="modal-default-button"
-               @click="$emit('close')">
-                OK
-              </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </transition>
-</script>
   </div>
 </template>
-
+  
 <script>
 import {mapGetters} from 'vuex'
-var componentmodal ={
-  name:'test',
-  template: "#modal-template",
-  props:['Response_Message'],
-  data(){
-    return{
-      Response_Message:""
-    }
-  },
-  
-  
-}
+import login_Signup_Message from './login_Signup_Message'
 
 export default {
-  components:{'modal' : componentmodal},
+  components:{'modal' : login_Signup_Message},
   name: "login_signup",
   data() {
     return {
       showModal: false,
       Response_Message:"",
+      showvalidation_message:false,
       //預設帳號密碼文字和位置
       Account_placeholder_color: "#bbb",
       Account_Image_position: "16",
@@ -173,6 +146,10 @@ export default {
     };
   },
   methods: {
+    onhiddenMessage:function(data){
+                // 更新 showModal 為子組件修改的新數值
+                this.showModal = data
+    },
     Focus_Account_input: function() {
       this.$refs.Account.focus();
       this.Account_placeholder_color = "transparent";
@@ -216,6 +193,7 @@ export default {
       this.data_error_br = 0;
       this.data_error_br_count = 0;
       this.Issubmit_error = false;
+      this.showvalidation_message =false;
 
       if (this.User_Data.Account == "") this.IsAccount_alert = true;
       else this.IsAccount_alert = false;
@@ -335,6 +313,8 @@ export default {
             //this.$store.dispatch('update_token',data.data);
             _this.showModal=true;
             _this.Response_Message=data.data;
+            if(_this.Response_Message=='註冊成功！')
+            _this.showvalidation_message=true;
             })
           .catch(err => {
             console.log(err);
