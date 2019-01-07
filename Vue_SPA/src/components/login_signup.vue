@@ -71,8 +71,8 @@ import { create } from 'domain';
                     :style="com_Email_placeholder"
                     :class="{Email_alert : IsEmail_alert}"
                     data-notice="請填入 Email"
-                  >Email</label>
-                </li>
+                  >Email</label>{{token}}
+                </li>          
               </ul>
               <p>
                 按下註冊紐的同時，表示您已詳閱我們的
@@ -95,15 +95,50 @@ import { create } from 'domain';
         </div>
       </div>
     </div>
+    <modal v-if="showModal" @close="showModal = false" :Response_Message="Response_Message" >
+    </modal>
+    <script type="text/x-template" id="modal-template">
+  <transition name="modal" >
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+          <div class="modal-footer">
+            {{Response_Message}}
+              <button class="modal-default-button"
+               @click="$emit('close')">
+                OK
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</script>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+var componentmodal ={
+  name:'test',
+  template: "#modal-template",
+  props:['Response_Message'],
+  data(){
+    return{
+      Response_Message:""
+    }
+  },
+  
+  
+}
+
 export default {
+  components:{'modal' : componentmodal},
   name: "login_signup",
   data() {
     return {
-      token: "",
+      showModal: false,
+      Response_Message:"",
       //預設帳號密碼文字和位置
       Account_placeholder_color: "#bbb",
       Account_Image_position: "16",
@@ -177,7 +212,6 @@ export default {
     },
 
     form_submit: function() {
-      debugger;
       this.data_error = "";
       this.data_error_br = 0;
       this.data_error_br_count = 0;
@@ -291,14 +325,16 @@ export default {
       if (this.data_error == "") {
         var _this= this;
         this.axios
-          .post("https://localhost:44319/api/Oauth/authenticate", {
-            Account: "test1",
-            PassWord: "334567"
+          .post("https://localhost:44319/api/Account/SignupAccount", {
+            Account: _this.User_Data.Account,
+            PassWord: _this.User_Data.PassWord,
+            Email:_this.User_Data.Email
           })
           .then((data)=> 
             {
-              debugger;
-            _this.token = data.data.access_token
+            //this.$store.dispatch('update_token',data.data);
+            _this.showModal=true;
+            _this.Response_Message=data.data;
             })
           .catch(err => {
             console.log(err);
@@ -333,10 +369,15 @@ export default {
         color: this.Email_placeholder_color,
         "background-position": "0 " + this.Email_Image_position + "px"
       };
-    }
+    },
+     ...mapGetters(['token'])
   }
+  
 };
+
 </script>
+
+
 
 <style>
 @import "../../css/login_signup.css";
