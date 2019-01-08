@@ -44,6 +44,7 @@ import { create } from 'domain';
                     @blur="PassWord_placeholder(User_Data.PassWord)"
                     type="password"
                     name="passwd"
+                    maxlength="16"
                   >
                   <label
                     for="login-signup-password"
@@ -95,7 +96,12 @@ import { create } from 'domain';
         </div>
       </div>
     </div>
-    <modal v-if="showModal" @close="showModal = false" :Response_Message_s="Response_Message" :showvalidation_message="showvalidation_message" v-on:hiddenMessage="onhiddenMessage" >
+    <modal v-if="showModal" 
+    @close="showModal = false" 
+    :Response_Message_s="Response_Message" 
+    :showvalidation_message="showvalidation_message" 
+    :User_Data="User_Data"
+    v-on:hiddenMessage="onhiddenMessage" >
     </modal>
   </div>
 </template>

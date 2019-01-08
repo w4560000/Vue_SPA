@@ -8,7 +8,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: table;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .modal-mask .modal-wrapper {
@@ -22,7 +22,7 @@
   padding: 20px 30px;
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
   border-radius: 20px;
 }
@@ -40,21 +40,52 @@
 }
 
 .modal-mask .modal-wrapper .modal-container .validation-code {
-  margin-top: 100px;
+  margin-top: 15px;
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
   font-size: 20px;
 }
 
+.modal-mask .modal-wrapper .modal-container .validation-code .type_error {
+  height: auto;
+  padding: 40px 38px;
+  max-width: none;
+  display: block;
+  background: #f7e5e5;
+  font-size: 16px;
+  color: red;
+}
+
 .modal-mask .modal-wrapper .modal-container .validation-code input {
+  margin-top: 20px;
   display: inline-block;
   width: 50px;
   height: 50px;
   border-radius: 5px;
   outline: none;
   font-size: 25px;
+  text-align: center;
 }
 
 .modal-mask .modal-wrapper .modal-container .modal-default-button {
-  margin-top: 20px;
+  width: 150px;
+  height: 40px;
+  margin-top: 50px;
+  border-radius: 4px;
+  background: #f5548c;
+  font-weight: 600;
+  font-size: 21px;
+  color: #fff;
+  letter-spacing: 2px;
+  border: 2px  #f5548c solid;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+  line-height: 1 !important;
+  cursor: pointer;
+}
+
+.modal-mask .modal-wrapper .modal-container .modal-default-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.3em #7c1030;
+  transition-duration: 0.15s;
 }
 /*# sourceMappingURL=login_signup_message.css.map */
