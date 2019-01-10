@@ -8,7 +8,7 @@ import { create } from 'domain';
           <div class="logo"></div>
           <div class="form-wrapper">
             <h2 class="sign_up_string">註冊個人帳號</h2>
-            <form id="login-signup-form" class="login-form" @submit.prevent="form_submit">
+            <form id="login-signup-form" class="login-form" @submit.prevent="signup_submit">
               <div v-html="data_error" id="login-message" :class="{submit_error : Issubmit_error}"></div>
               <div class="login-result">
                 <h2>註冊成功</h2>
@@ -194,7 +194,7 @@ export default {
       }
     },
 
-    form_submit: function() {
+    signup_submit: function() {
       this.data_error = "";
       this.data_error_br = 0;
       this.data_error_br_count = 0;
@@ -309,7 +309,7 @@ export default {
       if (this.data_error == "") {
         var _this= this;
         this.axios
-          .post("https://localhost:44319/api/Account/SignupAccount", {
+          .post("/Account/SignupAccount", {
             Account: _this.User_Data.Account,
             PassWord: _this.User_Data.PassWord,
             Email:_this.User_Data.Email

@@ -1,17 +1,13 @@
 // 配置API接口地址与服务器静态文件地址
-var root = 'http://localhost:8080/';
+var root = 'https://localhost:44319/api';
 // 引用axios
 var axios = require('axios')
-var qs = require('qs')
 
 var instance = axios.create({
   baseURL: root,
   timeout: 10000,
-  //headers: {'X-Custom-Header': 'foobar'},
   withCredentials: true,
-  /*auth:{
-    access_token:""
-  }*/
+  
 });
 instance.defaults.headers.post['Content-Type'] = 'application/json'
 //全局封装错误处理函数

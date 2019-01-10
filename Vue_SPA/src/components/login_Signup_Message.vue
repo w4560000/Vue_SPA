@@ -9,7 +9,11 @@
           <br>並輸入驗證碼！
         </div>
         <div class="validation-code" v-if="showvalidation_message">
-          <div class="type_error" :style="com_show_error">{{error_message}}<br/>{{Response_error_message}}</div>
+          <div class="type_error" :style="com_show_error">
+            {{error_message}}
+            <br>
+            {{Response_error_message}}
+          </div>
           <input
             type="text"
             id="first_validation_code"
@@ -69,61 +73,96 @@
         >驗證</button>
       </div>
     </div>
-    <alert v-if="Is_Signup_success" :Response_Message_f="Response_Message_f"></alert>
+    <alert v-if="Is_Signup_success" :API_Response_Message="API_Response_Message"></alert>
   </div>
 </template>
 
 <script>
-import login_Signup_Finish_Alert from './login_Signup_Finish_Alert'
+import login_Signin_Signup_Alert from "./login_Signin_Signup_Alert";
 export default {
-  components:{'alert' : login_Signup_Finish_Alert},
+  components: { alert: login_Signin_Signup_Alert },
   props: {
+    //從註冊頁面props API回傳是否註冊成功的訊息
     Response_Message_s: {
       type: String
     },
+    //從註冊頁面props 若註冊成功則開啟驗證碼div
     showvalidation_message: { type: Boolean },
+    //從註冊頁面props User_Data
     User_Data: { type: Object }
   },
   data() {
     return {
+      //驗證碼的外框顏色，依照是否focus來變換
       focus_first_color: "#f5548c",
       focus_second_color: "rgb(56, 180, 76)",
       focus_third_color: "rgb(56, 180, 76)",
       focus_fourth_color: "rgb(56, 180, 76)",
+
+      //4位驗證碼和submit的tab排序
       tabindex1: 1,
       tabindex2: 2,
       tabindex3: 3,
       tabindex4: 4,
       tabindex5: 5,
+
+      //前端regex驗證帳密&email 格式輸入是否正確
       error_message: "",
-      Response_error_message:"",
+
+      //API回傳驗證錯誤訊息
+      Response_error_message: "",
+
+      //判斷API回傳驗證錯誤訊息的DIV是否隱藏
       Is_show_error: "hidden",
+
+      //若API回傳驗證成功，則開啟partial view 通知驗證成功!
       Response_Message_f: "",
+
+      //判別驗證成功的partial view是否開啟
       Is_Signup_success: false,
-      VerificationCode:""
+
+      //4位驗證碼，統整為string，方便API POST
+      VerificationCode: ""
     };
   },
   methods: {
+    //POST至API 確認驗證碼是否正確
     validation: function() {
-      debugger;
-      this.VerificationCode=this.$refs.firstvc.value +this.$refs.svc.value+this.$refs.tvc.value+this.$refs.fvc.value;
+      this.VerificationCode =
+        this.$refs.firstvc.value +
+        this.$refs.svc.value +
+        this.$refs.tvc.value +
+        this.$refs.fvc.value;
       if (this.error_message == "") {
         var _this = this;
         this.axios
-          .post("https://localhost:44319/api/Account/SignupFinish", {
+          .post("/Account/CheckVerificationCode", {
             Account: _this.User_Data.Account,
             VerificationCode: _this.VerificationCode
           })
           .then(data => {
             debugger;
             //this.$store.dispatch('update_token',data.data);
-            _this.Response_Message_f = data.data;
-            if (_this.Response_Message_f == "驗證成功！")
+            if (data.data == "驗證成功！") {
               _this.Is_Signup_success = true;
-            else {
+              _this.API_Response_Message=data.data;
+              this.axios
+                .post("/Account/ResponseJWT", {
+                  Account: _this.User_Data.Account
+                })
+                .then(data => {
+                  debugger;
+                  //this.$store.dispatch('update_token',data.data);
+                  window.localStorage.setItem("login",_this.User_Data.Account);
+                  window.localStorage.setItem(_this.User_Data.Account+"_JWT",data.data);
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            } else {
               _this.Is_show_error = "visible";
-              _this.error_message = data.data.slice(0,5);
-              _this.Response_error_message=data.data.slice(5);
+              _this.error_message = data.data.slice(0, 5);
+              _this.Response_error_message = data.data.slice(5);
             }
           })
           .catch(err => {
@@ -132,6 +171,8 @@ export default {
       }
       //this.$emit("hiddenMessage", false);
     },
+
+    //若focus在驗證碼的input時，keyup 'Tab'鍵來操作input的css
     nextfocus: function(ref) {
       if (ref == "svc") {
         this.focus_first_color = "rgb(56, 180, 76)";
@@ -172,6 +213,7 @@ export default {
         }
       }
     },
+    //當input被click時，init tabindex，防止user因隨便點擊input使得tabindex大亂
     inittabindex1: function() {
       this.tabindex1 = 1;
       this.tabindex2 = 2;
@@ -216,6 +258,10 @@ export default {
       this.focus_third_color = "rgb(56, 180, 76)";
       this.focus_fourth_color = "#f5548c";
     },
+    //input 和 submit type 任何鍵時，觸發的method
+    //1.按Tab，則不動作
+    //2.若按數字=>判別是否符合regex字串=>判別當前focus element id =>依照各個input設定tabindex & css border
+    //若輸入非數字，則提醒輸入錯誤，並留在原地不跳轉input。
     keycode: function(event) {
       if (event.key == "Tab") return true;
       var regex_Account_validation = new RegExp("^[0-9]+$");
@@ -232,7 +278,7 @@ export default {
           this.focus_fourth_color = "rgb(56, 180, 76)";
           this.$refs.svc.value = "";
           this.Is_show_error = "hidden";
-          this.error_message="";
+          this.error_message = "";
           this.$refs.svc.focus();
         } else if (document.activeElement.id == "second_validation_code") {
           this.tabindex1 = 6;
@@ -246,7 +292,7 @@ export default {
           this.focus_fourth_color = "rgb(56, 180, 76)";
           this.$refs.tvc.value = "";
           this.Is_show_error = "hidden";
-          this.error_message="";
+          this.error_message = "";
           this.$refs.tvc.focus();
         } else if (document.activeElement.id == "third_validation_code") {
           this.tabindex1 = 6;
@@ -260,7 +306,7 @@ export default {
           this.focus_fourth_color = "#f5548c";
           this.$refs.fvc.value = "";
           this.Is_show_error = "hidden";
-          this.error_message="";
+          this.error_message = "";
           this.$refs.fvc.focus();
         } else if (document.activeElement.id == "fourth_validation_code") {
           this.tabindex1 = 6;
@@ -273,7 +319,7 @@ export default {
           this.focus_third_color = "rgb(56, 180, 76)";
           this.focus_fourth_color = "rgb(56, 180, 76)";
           this.Is_show_error = "hidden";
-          this.error_message="";
+          this.error_message = "";
           this.$refs.click.focus();
         }
       } else {
@@ -298,6 +344,7 @@ export default {
         }
       }
     },
+    //判別submit  keyup 任何鍵的method(除了Enter & Tab不動作外，其餘按鍵都會重製tabindex & css border，並focus回input 1)
     keybutton: function(event) {
       if (event.key != "Enter" && event.key != "Tab") {
         this.tabindex1 = 1;
@@ -315,6 +362,7 @@ export default {
     }
   },
   computed: {
+    //動態變換input 的 border
     com_focus_first() {
       return { border: "2px " + this.focus_first_color + " solid" };
     },
@@ -327,10 +375,12 @@ export default {
     com_focus_fourth() {
       return { border: "2px " + this.focus_fourth_color + " solid" };
     },
+    //動態變換error div 的顯示與否
     com_show_error() {
       return { visibility: this.Is_show_error };
     }
   },
+  //自建 vue function
   directives: {
     focus: {
       inserted: function(el) {

@@ -2,9 +2,9 @@
   <div class="alert-mask">
     <div class="alert-wrapper">
       <div class="alert-container">
-        {{Response_Message_f}}
+        {{API_Response_Message}}
         <div class="success">
-          <router-link to="/login_signup">
+          <router-link to="/">
             <span data-click="signup">立即返回首頁！</span>
           </router-link>
         </div>
@@ -17,9 +17,13 @@
 <script>
 export default {
   props: {
-    Response_Message_f: {
+    API_Response_Message: {
       type: String
     }
+  },
+  data() {
+    return {
+    };
   }
 };
 </script>

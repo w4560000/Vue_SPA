@@ -2,8 +2,8 @@
   <div class="login-body">
     <div class="login-outer">
       <div class="login-wrapper-login">
-        <div class="login-inner-wrapper" >
-          <div class="login-upper" >
+        <div class="login-inner-wrapper">
+          <div class="login-upper">
             <div class="logo"></div>
             <div class="social-btn">
               <div class="inner-btn-wrapper">
@@ -30,7 +30,7 @@
             <p class="promo">加入會員 72 小時內首次購物享 95 折優惠！</p>
           </div>
           <div class="form-wrapper">
-            <form id="login-form">
+            <form id="login-form" @submit.prevent="login_submit">
               <div class="login-message"></div>
               <p class="login-pinkoi-account">或使用 Pinkoi 帳號登入</p>
               <ul>
@@ -72,10 +72,9 @@
                 <span data-click="forgetpassword">忘記密碼</span>
                 <span data-click="resend">重寄認證信</span>
               </div>
-              <div class="lower-block">
-                還不是會員嗎?
-                <router-link  to="/login_signup">
-                <span data-click="signup">立刻註冊新帳號</span>
+              <div class="lower-block">還不是會員嗎?
+                <router-link to="/login_signup">
+                  <span data-click="signup">立刻註冊新帳號</span>
                 </router-link>
               </div>
             </div>
@@ -83,11 +82,14 @@
         </div>
       </div>
     </div>
+    <alert v-if="Is_Signin_success" :API_Response_Message="API_Response_Message"></alert>
   </div>
 </template>
 
 <script>
+import login_Signin_Signup_Alert from "./login_Signin_Signup_Alert";
 export default {
+    components: { alert: login_Signin_Signup_Alert },
   name: "login",
   data() {
     return {
@@ -99,6 +101,8 @@ export default {
       PassWord_placeholder_color: "#bbb",
       PassWord_Image_position: "-93",
 
+      Is_Signin_success: false,
+      API_Response_Message:"",
       //使用者資料
       User_Data: {
         Account: "",
@@ -132,6 +136,27 @@ export default {
         this.PassWord_placeholder_color = "#bbb";
         this.PassWord_Image_position = "-93";
       }
+    },
+    login_submit: function() {
+      var _this=this;
+      this.axios
+        .post("/Account/SigninValidation", {
+          Account: _this.User_Data.Account,
+          PassWord: _this.User_Data.PassWord
+        })
+        .then(data => {
+          //this.$store.dispatch('update_token',data.data);
+          if (data.data.message == "登入成功！") {
+            _this.API_Response_Message = data.data.message;
+            _this.Is_Signin_success = true;
+            window.localStorage.setItem("login",_this.User_Data.Account);
+            window.localStorage.setItem(_this.User_Data.Account+"_JWT",data.data.jwt);
+
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   computed: {

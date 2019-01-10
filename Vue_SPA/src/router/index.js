@@ -11,18 +11,30 @@ export default new Router({
     {
       path: '/',
       name: 'gheader',
-      component: gheader,
+      component(resolve){ 
+        require.ensure(['../components/gheader.vue'], () => {
+					resolve(require('../components/gheader.vue'));
+				});
+     },
       mode: 'history'
     },
     {
       path: '/login',
       name: 'login',
-      component: login
+      component(resolve){ 
+        require.ensure(['../components/login.vue'], () => {
+					resolve(require('../components/login.vue'));
+				});
+     }
     },
     {
       path: '/login_signup',
       name:'login_signup',
-      component:login_signup
+      component(resolve){ 
+        require.ensure(['../components/login_signup.vue'], () => {
+					resolve(require('../components/login_signup.vue'));
+				});
+     }
     }
   ]
 })

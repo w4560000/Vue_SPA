@@ -25,5 +25,40 @@
   transition: all 0.3s ease;
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
   border-radius: 20px;
+  font-size: 20px;
+}
+
+.alert-mask .alert-wrapper .alert-container .success {
+  margin-top: 50px;
+  left: 50%;
+  outline: none;
+  cursor: pointer;
+}
+
+.alert-mask .alert-wrapper .alert-container .success .router-link-active {
+  display: -ms-flexbox;
+  display: flex;
+  width: 200px;
+  height: 50px;
+  margin-left: 50px;
+  background: #f5548c;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.alert-mask .alert-wrapper .alert-container .success .router-link-active:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.3em #830e35;
+  transition-duration: 0.15s;
+}
+
+.alert-mask .alert-wrapper .alert-container .success .router-link-active span {
+  color: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+  font-size: 20px;
 }
 /*# sourceMappingURL=login_signup_finish_alert.css.map */
