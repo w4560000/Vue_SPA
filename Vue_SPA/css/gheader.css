@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .g-header {
   font-family: Microsoft JhengHei;
   margin: 0;
@@ -116,49 +117,175 @@
 
 .g-header .g-wrap-expand .g-header-top .header-right {
   position: absolute;
-  display: -ms-flexbox;
-  display: flex;
+  top: 50%;
   right: 0;
   -ms-flex-align: center;
       align-items: center;
   font-size: 14px;
-  width: 380px;
-  height: 59px;
 }
 
 .g-header .g-wrap-expand .g-header-top .header-right .relative {
   position: relative;
-  padding: 6px;
-  line-height: 1.4;
-  font-weight: 400;
+  font-size: 14px;
 }
 
-.g-header .g-wrap-expand .g-header-top .header-right .relative a {
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User {
+  position: relative;
+  margin-right: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  color: #49454b;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 6px;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User:hover .user_menu {
+  visibility: visible;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .image {
+  overflow: hidden;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  color: #49454b;
+  font-weight: 400;
+  line-height: 1.4;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .image img {
+  width: 100%;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .image .badge_active {
+  left: 26px;
+  display: block;
+  position: absolute;
+  top: 2px;
+  padding: 2px 4px;
+  border-radius: 8px;
+  line-height: 1;
+  background: #f5548c;
+  color: #fff;
+  font-size: 12px;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu {
+  position: absolute;
+  top: 36px;
+  right: 0;
+  z-index: 9999;
+  visibility: hidden;
+  transition: visibility 0.2s, opacity 0.2s linear;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu:hover {
+  visibility: visible;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container {
+  padding-top: 9px;
+  z-index: 7250;
+  position: relative;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox {
+  display: -ms-flexbox;
+  display: flex;
+  border: 1px solid #ebebeb;
+  box-shadow: 0 8px 20px 10px rgba(41, 36, 45, 0.04);
+  padding-top: 24px;
+  padding-bottom: 14px;
+  background: #fff;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox .user_list {
+  width: 250px;
+  box-sizing: border-box;
+  padding-right: 14px;
+  padding-left: 0px;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox .user_list .title {
+  padding-bottom: 6px;
+  display: block;
+  color: #49454b;
+  font-weight: 600;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox .user_list .title .my_mermbership {
+  display: inline-block;
+  vertical-align: middle;
+  width: 28px;
+  height: 28px;
+  color: #49454b;
+  cursor: pointer;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  background-image: url(//cdn04.pinkoi.com/pinkoi.site/my_membership/home_sprite_v3.svg);
+  cursor: pointer;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox .user_list .title .my_mermbership .login_menu {
+  background-position: 0 0;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox .user_list .title .Account {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 22px;
+  margin-left: 6px;
+  font-weight: 500;
+  max-width: 170px;
+  color: #49454b;
+  cursor: pointer;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox .user_list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: #49454b;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.g-header .g-wrap-expand .g-header-top .header-right a {
   margin-right: 18px;
   text-decoration: none;
   font-weight: 400;
   color: #49454b;
+  display: inline-block;
+  cursor: pointer;
+  outline: 0;
+  padding: 6px;
 }
 
-.g-header .g-wrap-expand .g-header-top .header-right .relative a:nth-of-type(1):hover {
+.g-header .g-wrap-expand .g-header-top .header-right a:nth-of-type(1):hover {
   color: #f5548c;
 }
 
-.g-header .g-wrap-expand .g-header-top .header-right .relative a:nth-of-type(2):hover {
+.g-header .g-wrap-expand .g-header-top .header-right a:nth-of-type(2):hover {
   color: #f5548c;
 }
 
-.g-header .g-wrap-expand .g-header-top .header-right .relative a:nth-of-type(2):hover .login-border {
+.g-header .g-wrap-expand .g-header-top .header-right a:nth-of-type(2):hover .login-border {
   border: 1px solid #f5548c;
 }
 
-.g-header .g-wrap-expand .g-header-top .header-right .relative a:nth-of-type(2) .login-border {
+.g-header .g-wrap-expand .g-header-top .header-right a:nth-of-type(2) .login-border {
   border: 1px solid #49454b;
   padding: 8px 10px;
   border-radius: 3px;
 }
 
-.g-header .g-wrap-expand .g-header-top .header-right .relative .cart {
+.g-header .g-wrap-expand .g-header-top .header-right .cart {
   width: 24px;
   height: 24px;
   position: relative;
@@ -168,15 +295,15 @@
   background-repeat: no-repeat;
 }
 
-.g-header .g-wrap-expand .g-header-top .header-right .relative .cart:hover svg > path {
+.g-header .g-wrap-expand .g-header-top .header-right .cart:hover svg > path {
   fill: #f5548c;
 }
 
-.g-header .g-nav {
+.g-nav {
   display: block;
 }
 
-.g-header .g-nav .nav-first {
+.g-nav .nav-first {
   position: relative;
   list-style: none;
   margin: 0;
@@ -185,14 +312,14 @@
   height: inherit;
 }
 
-.g-header .g-nav .nav-first .nav-first-li {
+.g-nav .nav-first .nav-first-li {
   display: inline-block;
   float: left;
   width: calc((100% - 70px) / 8);
   height: inherit;
 }
 
-.g-header .g-nav .nav-first .nav-first-li .title-bold-pink {
+.g-nav .nav-first .nav-first-li .title-bold-pink {
   display: block;
   width: initial;
   font-size: 14px;
@@ -203,17 +330,17 @@
   padding-bottom: 10px;
 }
 
-.g-header .g-nav .nav-first .nav-first-li:hover .title-bold-pink {
+.g-nav .nav-first .nav-first-li:hover .title-bold-pink {
   border-bottom: 2px solid #f5548c;
   padding-bottom: 10px;
   transition: 0.3s;
 }
 
-.g-header .g-nav .nav-first .nav-first-li:hover .nav-second-campaign {
+.g-nav .nav-first .nav-first-li:hover .nav-second-campaign {
   visibility: visible;
 }
 
-.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign {
+.g-nav .nav-first .nav-first-li .nav-second-campaign {
   position: absolute;
   top: 48px;
   width: auto;
@@ -224,31 +351,31 @@
   padding-bottom: 20px;
 }
 
-.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign:hover {
+.g-nav .nav-first .nav-first-li .nav-second-campaign:hover {
   visibility: visible;
 }
 
-.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign ul {
+.g-nav .nav-first .nav-first-li .nav-second-campaign ul {
   margin-left: 20px;
   padding: 0;
   text-align: left;
 }
 
-.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign ul li {
+.g-nav .nav-first .nav-first-li .nav-second-campaign ul li {
   margin-top: 20px;
   list-style-type: none;
 }
 
-.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign ul li:hover a > span {
+.g-nav .nav-first .nav-first-li .nav-second-campaign ul li:hover a > span {
   border-bottom: 1px solid black;
 }
 
-.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign ul li a {
+.g-nav .nav-first .nav-first-li .nav-second-campaign ul li a {
   text-decoration: none;
   color: #49454b;
 }
 
-.g-header .g-nav .nav-first .nav-first-li .nav-second-campaign ul li a b {
+.g-nav .nav-first .nav-first-li .nav-second-campaign ul li a b {
   display: inline-block;
   background: #f5548c;
   color: #fff;
@@ -259,7 +386,7 @@
   border-radius: 3px;
 }
 
-.g-header .g-nav .nav-second-campaign {
+.g-nav .nav-second-campaign {
   visibility: hidden;
 }
 /*# sourceMappingURL=gheader.css.map */

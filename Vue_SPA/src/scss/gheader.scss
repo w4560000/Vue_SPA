@@ -1,3 +1,6 @@
+$font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC",
+  "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese",
+  "Droid Sans Fallback", sans-serif;
 .g-header {
   font-family: Microsoft JhengHei;
   margin: 0;
@@ -92,7 +95,6 @@
               margin-right: 0;
             }
           }
-
           a:hover {
             color: #f5548c;
           }
@@ -112,152 +114,269 @@
 
       .header-right {
         position: absolute;
-        display: flex;
+        top: 50%;
         right: 0;
         align-items: center;
         font-size: 14px;
-        width: 380px;
-        height: 59px;
 
         .relative {
           position: relative;
-          padding: 6px;
-          line-height: 1.4;
-          font-weight: 400;
+          font-size: 14px;
 
-          a {
-            margin-right: 18px;
-            text-decoration: none;
-            font-weight: 400;
-            color: #49454b;
-          }
-
-          a:nth-of-type(1):hover {
-            color: #f5548c;
-          }
-
-          a:nth-of-type(2) {
-            &:hover {
-              color: #f5548c;
-              .login-border {
-                border: 1px solid #f5548c;
-              }
-            }
-            .login-border {
-              border: 1px solid #49454b;
-              padding: 8px 10px;
-              border-radius: 3px;
-            }
-          }
-          //購物車
-          .cart {
-            &:hover {
-              svg > path {
-                fill: #f5548c;
-              }
-            }
-
-            width: 24px;
-            height: 24px;
+          .Tab_User {
             position: relative;
-            background-position: center;
+            margin-right: 18px;
             display: inline-block;
             vertical-align: middle;
-            background-repeat: no-repeat;
+            color: #49454b;
+            font-weight: 400;
+            line-height: 1.4;
+            padding: 6px;
+            box-sizing: border-box;
+            font-family: $font-family;
+            &:hover {
+              .user_menu {
+                visibility: visible;
+              }
+            }
+            .image {
+              overflow: hidden;
+              width: 30px;
+              height: 30px;
+              border-radius: 30px;
+              color: #49454b;
+              font-weight: 400;
+              line-height: 1.4;
+              font-size: 14px;
+              font-family: inherit;
+              img {
+                width: 100%;
+              }
+              .badge_active {
+                left: 26px;
+                display: block;
+                position: absolute;
+                top: 2px;
+                padding: 2px 4px;
+                border-radius: 8px;
+                line-height: 1;
+                background: #f5548c;
+                color: #fff;
+                font-size: 12px;
+              }
+            }
+            .user_menu {
+              position: absolute;
+              top: 36px;
+              right: 0;
+              z-index: 9999;
+              visibility: hidden;
+              transition: visibility 0.2s, opacity 0.2s linear;
+              &:hover {
+                & {
+                  visibility: visible;
+                }
+              }
+              .user_menu_container {
+                padding-top: 9px;
+                z-index: 7250;
+                position: relative;
+                
+                .menu_border_flexbox {
+                  display: flex;
+                  border: 1px solid #ebebeb;
+                  box-shadow: 0 8px 20px 10px rgba(41, 36, 45, 0.04);
+                  padding-top: 24px;
+                  padding-bottom: 14px;
+                  background: #fff;
+                  
+                  .user_list {
+                    width: 250px;
+                    box-sizing: border-box;
+                    padding-right: 14px;
+                    padding-left: 0px;
+                    .title {
+                      padding-bottom: 6px;
+                      display: block;
+                      color: #49454b;
+                      font-weight: 600;
+                      .my_mermbership {
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 28px;
+                        height: 28px;
+                        color: #49454b;
+                        cursor: pointer;
+                        .login_menu {
+                          background-position: 0 0;
+                        }
+                        display: inline-block;
+                        width: 28px;
+                        height: 28px;
+                        background-image: url(//cdn04.pinkoi.com/pinkoi.site/my_membership/home_sprite_v3.svg);
+                        cursor: pointer;
+                      }
+                      .Account {
+                        display: inline-block;
+                        vertical-align: middle;
+                        line-height: 22px;
+                        margin-left: 6px;
+                        font-weight: 500;
+                        max-width: 170px;
+                        color: #49454b;
+                        cursor: pointer;
+                      }
+                    }
+                    ul {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                      color: #49454b;
+                      font-weight: 400;
+                      line-height: 1.4;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        a {
+          margin-right: 18px;
+          text-decoration: none;
+          font-weight: 400;
+          color: #49454b;
+          display: inline-block;
+          cursor: pointer;
+          outline: 0;
+          padding: 6px;
+        }
+
+        a:nth-of-type(1):hover {
+          color: #f5548c;
+        }
+
+        a:nth-of-type(2) {
+          &:hover {
+            color: #f5548c;
+            .login-border {
+              border: 1px solid #f5548c;
+            }
+          }
+          .login-border {
+            border: 1px solid #49454b;
+            padding: 8px 10px;
+            border-radius: 3px;
+          }
+        }
+        //購物車
+        .cart {
+          &:hover {
+            svg > path {
+              fill: #f5548c;
+            }
+          }
+
+          width: 24px;
+          height: 24px;
+          position: relative;
+          background-position: center;
+          display: inline-block;
+          vertical-align: middle;
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  }
+}
+
+.g-nav {
+  display: block;
+  .nav-first {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: inherit;
+
+    .nav-first-li {
+      display: inline-block;
+      float: left;
+      width: calc((100% - 70px) / 8);
+      height: inherit;
+
+      .title-bold-pink {
+        display: block;
+        width: initial; //預設 待研究
+        font-size: 14px;
+        text-align: center;
+        color: #f5548c;
+        font-weight: 700;
+        padding-top: 14px;
+        padding-bottom: 10px;
+      }
+
+      &:hover {
+        .title-bold-pink {
+          border-bottom: 2px solid #f5548c;
+          padding-bottom: 10px;
+          transition: 0.3s;
+        }
+        .nav-second-campaign {
+          //顯示li
+          visibility: visible;
+        }
+      }
+      .nav-second-campaign {
+        position: absolute;
+        top: 48px;
+        width: auto;
+        min-width: 250px;
+        max-width: 500px;
+        font-size: 14px;
+        background-color: white;
+        padding-bottom: 20px;
+        &:hover {
+          & {
+            visibility: visible;
+          } //自己顯示自己
+        }
+        ul {
+          margin-left: 20px;
+          padding: 0;
+          text-align: left;
+          li {
+            margin-top: 20px;
+            list-style-type: none;
+
+            &:hover {
+              a > span {
+                border-bottom: 1px solid black;
+              }
+            }
+
+            a {
+              text-decoration: none;
+              color: #49454b;
+              b {
+                display: inline-block;
+                background: #f5548c;
+                color: #fff;
+                font-size: 12px;
+                font-weight: 400;
+                margin-left: 20px;
+                padding: 3px 4px 2px;
+                border-radius: 3px;
+              }
+            }
           }
         }
       }
     }
   }
-
-  .g-nav {
-    display: block;
-    .nav-first {
-      position: relative;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: inherit;
-
-      .nav-first-li {
-        display: inline-block;
-        float: left;
-        width: calc((100% - 70px) / 8);
-        height: inherit;
-
-        .title-bold-pink {
-          display: block;
-          width: initial; //預設 待研究
-          font-size: 14px;
-          text-align: center;
-          color: #f5548c;
-          font-weight: 700;
-          padding-top: 14px;
-          padding-bottom: 10px;
-        }
-
-        &:hover {
-          .title-bold-pink {
-            border-bottom: 2px solid #f5548c;
-            padding-bottom: 10px;
-            transition: 0.3s;
-          }
-          .nav-second-campaign {
-            //顯示li
-            visibility: visible;
-          }
-        }
-        .nav-second-campaign {
-          position: absolute;
-          top: 48px;
-          width: auto;
-          min-width: 250px;
-          max-width: 500px;
-          font-size: 14px;
-          background-color: white;
-          padding-bottom: 20px;
-          &:hover {
-            & {
-              visibility: visible;
-            } //自己顯示自己
-          }
-          ul {
-            margin-left: 20px;
-            padding: 0;
-            text-align: left;
-            li {
-              margin-top: 20px;
-              list-style-type: none;
-
-              &:hover {
-                a > span {
-                  border-bottom: 1px solid black;
-                }
-              }
-
-              a {
-                text-decoration: none;
-                color: #49454b;
-                b {
-                  display: inline-block;
-                  background: #f5548c;
-                  color: #fff;
-                  font-size: 12px;
-                  font-weight: 400;
-                  margin-left: 20px;
-                  padding: 3px 4px 2px;
-                  border-radius: 3px;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    .nav-second-campaign {
-      //li先隱藏，等hover作用顯示
-      visibility: hidden;
-    }
+  .nav-second-campaign {
+    //li先隱藏，等hover作用顯示
+    visibility: hidden;
   }
 }
