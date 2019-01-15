@@ -486,3 +486,14 @@ $font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC",
     transform: rotate(10deg);
   }
 }
+.signin_error {
+  height: auto;
+  max-width: none;
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ca2020;
+  background: #f7e5e5;
+  text-align: center;
+  font-family: $font-family;
+}

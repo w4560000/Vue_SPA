@@ -21,7 +21,7 @@
       <div class="header-right">
         <div class="relative">
           <a href="https://google.com" class="design">我要開設計館</a>
-          <div class="Tab_User" v-if="Is_Login">
+          <div class="Tab_User" v-if="IsLogin">
             <div class="image">
               <img src="../image/img_login_icon.jpg">
               <div class="badge_active">1</div>
@@ -33,13 +33,14 @@
                     <a href="https://google.com" class="title">
                       <span class="my_mermbership">
                         <i class="login_menu"></i>
+                        <span class="Account">{{Login_User}}</span>
                       </span>
-                      <span class="Account">Account</span>
+                      
                     </a>
                     <ul>
                       <li>
                         <a href="https://google.com">
-                          <span>Email</span>
+                          <span>我的信箱</span>
                           <div class="badge">1</div>
                         </a>
                       </li>
@@ -54,11 +55,11 @@
               </div>
             </div>
           </div>
-          
-          <router-link to="/login" v-if="!Is_Login">
+
+          <router-link to="/login" v-if="!IsLogin">
             <span class="login-border">登入/註冊</span>
           </router-link>
-          
+
           <a href="https://google.com" class="cart">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path
@@ -144,24 +145,22 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: "gheader",
   data() {
     return {
-      Is_Login: false
     };
   },
-  methods:{
-    Logout:function(){
+  methods: {
+    Logout: function() {
       return true;
     }
   },
   computed: {
-    com_Is_Login() {
-      debugger;
-      if (window.localStorage.getItem("login") != null) this.Is_Login = true;
-      else this.Is_Login = false;
-    }
+    ...mapGetters(["IsLogin"]),
+    ...mapGetters(["Login_User"])
   }
 };
 </script>

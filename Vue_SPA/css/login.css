@@ -494,4 +494,16 @@
   background: red;
   transform: rotate(10deg);
 }
+
+.signin_error {
+  height: auto;
+  max-width: none;
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ca2020;
+  background: #f7e5e5;
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
+}
 /*# sourceMappingURL=login.css.map */

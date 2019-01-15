@@ -114,8 +114,8 @@ $font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC",
 
       .header-right {
         position: absolute;
-        top: 50%;
-        right: 0;
+        top: 23px;
+        right: 5px;
         align-items: center;
         font-size: 14px;
 
@@ -141,8 +141,8 @@ $font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC",
             }
             .image {
               overflow: hidden;
-              width: 30px;
-              height: 30px;
+              width: 50px;
+              height: 50px;
               border-radius: 30px;
               color: #49454b;
               font-weight: 400;
@@ -153,11 +153,11 @@ $font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC",
                 width: 100%;
               }
               .badge_active {
-                left: 26px;
+                left: 40px;
                 display: block;
                 position: absolute;
                 top: 2px;
-                padding: 2px 4px;
+                padding: 2.5px 5px;
                 border-radius: 8px;
                 line-height: 1;
                 background: #f5548c;
@@ -167,11 +167,10 @@ $font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC",
             }
             .user_menu {
               position: absolute;
-              top: 36px;
-              right: 0;
+              top: 50px;
+              right: 0px;
               z-index: 9999;
               visibility: hidden;
-              transition: visibility 0.2s, opacity 0.2s linear;
               &:hover {
                 & {
                   visibility: visible;
@@ -181,15 +180,15 @@ $font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC",
                 padding-top: 9px;
                 z-index: 7250;
                 position: relative;
-                
+
                 .menu_border_flexbox {
                   display: flex;
                   border: 1px solid #ebebeb;
                   box-shadow: 0 8px 20px 10px rgba(41, 36, 45, 0.04);
-                  padding-top: 24px;
+                  padding-top: 14px;
                   padding-bottom: 14px;
                   background: #fff;
-                  
+
                   .user_list {
                     width: 250px;
                     box-sizing: border-box;
@@ -204,36 +203,73 @@ $font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC",
                         display: inline-block;
                         vertical-align: middle;
                         width: 28px;
+                        position: absolute;
+                        left: 30px;
                         height: 28px;
+
                         color: #49454b;
                         cursor: pointer;
+                        &:hover {
+                          .Account {
+                            color: #f5548c;
+                          }
+                        }
                         .login_menu {
                           background-position: 0 0;
+                          display: inline-block;
+                          width: 28px;
+                          height: 28px;
+                          background-image: url(//cdn04.pinkoi.com/pinkoi.site/my_membership/home_sprite_v3.svg);
+                          cursor: pointer;
                         }
-                        display: inline-block;
-                        width: 28px;
-                        height: 28px;
-                        background-image: url(//cdn04.pinkoi.com/pinkoi.site/my_membership/home_sprite_v3.svg);
-                        cursor: pointer;
-                      }
-                      .Account {
-                        display: inline-block;
-                        vertical-align: middle;
-                        line-height: 22px;
-                        margin-left: 6px;
-                        font-weight: 500;
-                        max-width: 170px;
-                        color: #49454b;
-                        cursor: pointer;
+                        .Account {
+                          display: inline-block;
+                          position: absolute;
+                          vertical-align: middle;
+                          line-height: 22px;
+                          margin-left: 6px;
+                          font-weight: 500;
+                          max-width: 170px;
+                          color: #49454b;
+                          cursor: pointer;
+                          left: 40px;
+                          top: 5px;
+                          &:hover {
+                            & {
+                              color: #f5548c;
+                            }
+                          }
+                        }
                       }
                     }
                     ul {
                       list-style: none;
-                      margin: 0;
-                      padding: 0;
                       color: #49454b;
                       font-weight: 400;
                       line-height: 1.4;
+                      margin: 0;
+                      padding: 0;
+                      li:nth-child(1) {
+                        a {
+                          margin-top: 35px;
+                          margin-left: -60px;
+
+                          .badge {
+                            margin-left: 20px;
+                            float: right;
+                            padding: 2.5px 5px;
+                            border-radius: 8px;
+                            line-height: 1;
+                            background: #f5548c;
+                            color: #fff;
+                            font-size: 12px;
+                          }
+                        }
+                      }
+                      a {
+                        margin-top: 10px;
+                        margin-left: -120px;
+                      }
                     }
                   }
                 }
