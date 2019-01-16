@@ -7,5 +7,8 @@ export default {
   },
   Update_Login_User(state, payload) {
     state.Login_User = payload;
+  },
+  SetLoading(state, payload) {
+    state.IsLoading = payload;
   }
 };

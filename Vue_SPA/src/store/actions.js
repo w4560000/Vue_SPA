@@ -7,5 +7,8 @@ export default {
   },
   Update_Login_User({ commit }, payload) {
     commit("Update_Login_User", payload);
+  },
+  SetLoading({ commit }, payload) {
+    commit("SetLoading", payload);
   }
 };

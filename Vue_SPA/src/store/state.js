@@ -1,5 +1,6 @@
 export default {
-  Token: "4",
+  Token: "",
   IsLogin: false,
-  Login_User:""
+  Login_User:"",
+  IsLoading: false
 };

@@ -35,7 +35,6 @@
                         <i class="login_menu"></i>
                         <span class="Account">{{Login_User}}</span>
                       </span>
-                      
                     </a>
                     <ul>
                       <li>
@@ -141,21 +140,53 @@
       </ul>
     </div>
   </nav>
+  <alert v-if="Is_LogOut" :API_Response_Message="API_Response_Message" v-on:hiddenAlert="onhiddenAlert"></alert>
 </head>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-
+import { mapGetters } from "vuex";
+import { debug } from 'util';
+import logout_Alert from "./login_Signin_Signup_Alert";
 export default {
+    components: { alert: logout_Alert },
   name: "gheader",
   data() {
-    return {
+    return {Is_LogOut:false
     };
   },
   methods: {
     Logout: function() {
-      return true;
+      var _this = this;
+      this.axios
+        .post("/Account/LogOut", {
+          Account: _this.Login_User
+        })
+        .then(data => {
+          if (data.data == "登出成功！") {
+            _this.API_Response_Message = data.data;
+            _this.Is_LogOut = true;
+
+            //刪除localstorage帳戶登入訊息
+            window.localStorage.removeItem("login");
+            window.localStorage.removeItem(_this.Login_User + "_JWT");
+
+            //刪除Vuex帳戶登入訊息
+            this.$store.dispatch("Update_Token", "");
+            this.$store.dispatch("Check_Login", false);
+            this.$store.dispatch("Update_Login_User", "");
+          } else {
+            _this.IsSignin_error = true;
+            _this.Message = data.data.message;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    onhiddenAlert: function(bool){
+      debugger;
+      this.Is_LogOut=bool;
     }
   },
   computed: {

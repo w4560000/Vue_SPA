@@ -9,6 +9,23 @@ import axios from "./ajax/axios";
 import store from "./store/index";
 import global from "./components/common";
 
+
+axios.interceptors.request.use(function(config){
+store.dispatch("SetLoading", true);
+
+  return config
+
+});
+
+axios.interceptors.response.use(
+  response => {
+    debugger;
+    if (response.status == "200") 
+    store.dispatch("SetLoading", false);
+
+    return response;
+  });
+
 //  这样就可以通过$axios发起请求了（个人使用喜好）
 Vue.prototype.axios = axios;
 Vue.prototype.common = global;

@@ -7,5 +7,8 @@ export default {
   },
   Login_User: state => {
     return state.Login_User;
+  },
+  IsLoading: state => {
+    return state.IsLoading;
   }
 };
