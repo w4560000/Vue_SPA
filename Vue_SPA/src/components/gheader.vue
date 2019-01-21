@@ -152,10 +152,11 @@ export default {
     components: { alert: logout_Alert },
   name: "gheader",
   data() {
-    return {Is_LogOut:false
+    return {Is_LogOut:false,
     };
   },
   methods: {
+    //登出動作
     Logout: function() {
       var _this = this;
       this.axios
@@ -167,25 +168,15 @@ export default {
             _this.API_Response_Message = data.data;
             _this.Is_LogOut = true;
 
-            //刪除localstorage帳戶登入訊息
-            window.localStorage.removeItem("login");
-            window.localStorage.removeItem(_this.Login_User + "_JWT");
-
-            //刪除Vuex帳戶登入訊息
-            this.$store.dispatch("Update_Token", "");
-            this.$store.dispatch("Check_Login", false);
-            this.$store.dispatch("Update_Login_User", "");
-          } else {
-            _this.IsSignin_error = true;
-            _this.Message = data.data.message;
-          }
+            //刪除登陸訊息
+            _this.global.SetVuex_Localstorage_ForLogout(_this.Login_User)
+          } 
         })
         .catch(err => {
           console.log(err);
         });
     },
     onhiddenAlert: function(bool){
-      debugger;
       this.Is_LogOut=bool;
     }
   },

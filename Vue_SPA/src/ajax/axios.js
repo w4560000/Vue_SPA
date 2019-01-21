@@ -13,11 +13,6 @@ instance.defaults.headers.post["Content-Type"] = "application/json";
 //全局封装错误处理函数
 instance.interceptors.request.use(
   config => {
-
-    // 在post请求发送出去之前，对其进行编码
-    /*if (config.method === 'post') {
-      config.data = qs.stringify(config.data);
-    }*/
     return config;
   },
   err => {

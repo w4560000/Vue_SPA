@@ -44,27 +44,34 @@
                     v-on:keydown.9="login_nextfocus('PassWord')"
                     :tabindex="tabindex1"
                     v-focus="true"
+                    maxlength="16"
                   >
                   <label
                     id="id-input"
                     @click="Focus_Account_input"
                     :style="com_Account_placeholder"
+                    :class="{Login_Account_alert : IsLoginAccount_alert}"
+                    data-notice="請填入帳號"
                   >帳號</label>
                 </li>
                 <li>
                   <input
                     id="login-password"
+                    type="password"
                     ref="PassWord"
                     v-model="User_Data.PassWord"
                     @click="Focus_PassWord_input"
                     @blur="PassWord_placeholder(User_Data.PassWord)"
                     :tabindex="tabindex2"
                     v-on:keydown.9="login_nextfocus('submitbutton')"
+                    maxlength="16"
                   >
                   <label
                     id="password-input"
                     @click="Focus_PassWord_input"
                     :style="com_PassWord_placeholder"
+                    :class="{Login_PassWord_alert : IsLoginPassWord_alert}"
+                    data-notice="請填入密碼"
                   >密碼</label>
                 </li>
               </ul>
@@ -76,13 +83,16 @@
                   value="登入"
                   :tabindex="tabindex3"
                   v-on:keydown.9="login_nextfocus('Account')"
+                  :style="com_button_fucus"
+                  @mouseover="hoverbutton"
+                  @mouseleave="leavebutton"
                 >
               </div>
             </form>
             <div class="login-help">
               <div class="login-problem">
-                <span data-click="forgetpassword">忘記密碼</span>
-                <span data-click="resend">重寄認證信</span>
+                <span data-click="forgetpassword" @click="forget_password">忘記密碼</span>
+                <span data-click="resend" @click="forget_validation">重寄認證信</span>
               </div>
               <div class="lower-block">還不是會員嗎?
                 <router-link to="/login_signup">
@@ -95,13 +105,36 @@
       </div>
     </div>
     <alert v-if="Is_Signin_success" :API_Response_Message="API_Response_Message"></alert>
+    <modal
+      v-if="showModal"
+      @close="showModal = false"
+      :Response_Message_s="Response_Message"
+      :showvalidation_message="showvalidation_message"
+      :User_Data="User_Data"
+      :Button_Message="Button_Message"
+    ></modal>
+    <forget
+      v-if="Is_click_forget"
+      :forget_title="forget_title"
+      :forget_result="forget_result"
+      :submit_text="submit_text"
+      :dosomething="dosomething"
+      @close="Is_click_forget = false"
+      v-on:hiddenforget="onhiddenforget"
+    ></forget>
   </div>
 </template>
 
 <script>
 import login_Signin_Signup_Alert from "./login_Signin_Signup_Alert";
+import login_Signup_Message from "./login_Signup_Message";
+import login_forget from "./forget_password_validationcode";
 export default {
-  components: { alert: login_Signin_Signup_Alert },
+  components: {
+    alert: login_Signin_Signup_Alert,
+    modal: login_Signup_Message,
+    forget: login_forget
+  },
   name: "login",
   data() {
     return {
@@ -113,23 +146,50 @@ export default {
       PassWord_placeholder_color: "#bbb",
       PassWord_Image_position: "-93",
 
+      submit_transform_position: "0",
+      submit_box_shadow: "none",
+      //判斷是否登入成功&API Response
       Is_Signin_success: false,
       API_Response_Message: "",
+
+      //若登入失敗，則在原視窗顯示error
+      IsSignin_error: false,
+
       //使用者資料
       User_Data: {
         Account: "",
         PassWord: ""
       },
       Message: "使用 Pinkoi 帳號登入",
-      IsSignin_error: false,
+
+      //setting click tab鍵的排序
       tabindex1: 1,
       tabindex2: 2,
-      tabindex3: 3
+      tabindex3: 3,
+
+      //若input 輸入為空的alert
+      IsLoginAccount_alert: false,
+      IsLoginPassWord_alert: false,
+
+      //若註冊後，卻未驗證，則登入時會開啟子元件-驗證碼視窗
+      showModal: false,
+      Response_Message: "",
+      showvalidation_message: false,
+      Button_Message: "",
+
+      //點擊忘記密碼or重寄驗證信則開啟子元件 -forget視窗
+      Is_click_forget: false,
+      forget_title: "",
+      forget_result: "",
+      submit_text: "",
+
+      //存取點擊忘記密碼或重傳驗證信時的動作
+      dosomething: ""
     };
   },
   methods: {
+    //Focus Input時的動作
     Focus_Account_input: function() {
-      //Focus Account input 隱藏placeholder("帳號")&帳號icon變換
       this.$refs.Account.focus();
       this.Account_placeholder_color = "transparent";
       this.Account_Image_position = "-38";
@@ -138,7 +198,6 @@ export default {
       (this.tabindex1 = 1), (this.tabindex2 = 2), (this.tabindex3 = 3);
     },
     Focus_PassWord_input: function() {
-      //Focus PassWord input 隱藏placeholder("密碼")&密碼icon變換
       this.$refs.PassWord.focus();
       this.PassWord_placeholder_color = "transparent";
       this.PassWord_Image_position = "-154";
@@ -146,8 +205,8 @@ export default {
       this.IsSignin_error = false;
       (this.tabindex1 = 4), (this.tabindex2 = 2), (this.tabindex3 = 3);
     },
+    //若未Focus新密碼欄位，變換Icon顏色與樣式
     Account_placeholder: function(key) {
-      //blur Account input 若未輸入帳號，則placeholder("帳號")顯示
       if (key == "") {
         this.Account_placeholder_color = "#bbb";
         this.Account_Image_position = "16";
@@ -157,7 +216,6 @@ export default {
       }
     },
     PassWord_placeholder: function(key) {
-      //blur PassWord input 若為輸入密碼，則planceholder("密碼")顯示
       if (key == "") {
         this.PassWord_placeholder_color = "#bbb";
         this.PassWord_Image_position = "-93";
@@ -166,53 +224,116 @@ export default {
         this.PassWord_Image_position = "-154";
       }
     },
+    //送出submit的動作
     login_submit: function() {
-      var _this = this;
-      this.axios
-        .post("/Account/SigninValidation", {
-          Account: _this.User_Data.Account,
-          PassWord: _this.User_Data.PassWord
-        })
-        .then(data => {
-          if (data.data.message == "登入成功！") {
-            _this.API_Response_Message = data.data.message;
-            _this.Is_Signin_success = true;
+      if (this.User_Data.Account == "") {
+        this.IsLoginAccount_alert = true;
+        return;
+      } else {
+        this.IsLoginAccount_alert = false;
+      }
 
-            //更新Vuex
-            this.$store.dispatch("Update_Token", data.data.jwt);
-            this.$store.dispatch("Check_Login", true);
-            this.$store.dispatch("Update_Login_User", _this.User_Data.Account);
+      if (this.User_Data.PassWord == "") {
+        this.IsLoginPassWord_alert = true;
+        return;
+      } else {
+        this.IsLoginPassWord_alert = false;
+      }
+      if (
+        this.IsLoginAccount_alert == false &&
+        this.IsLoginPassWord_alert == false
+      ) {
+        var _this = this;
+        this.axios
+          .post("/Account/SigninValidation", {
+            Account: _this.User_Data.Account,
+            PassWord: _this.User_Data.PassWord
+          })
+          .then(data => {
+            if (data.data.message == "登入成功！") {
+              _this.API_Response_Message = data.data.message;
+              _this.Is_Signin_success = true;
 
-            //更新localstorage
-            window.localStorage.setItem("login", _this.User_Data.Account);
-            window.localStorage.setItem(
-              _this.User_Data.Account + "_JWT",
-              data.data.jwt
-            );
-          } else {
-            _this.IsSignin_error = true;
-            _this.Message = data.data.message;
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+              //更新帳號登入訊息&JWT
+              _this.global.SetVuex_Localstorage_ForLogin(_this.User_Data.Account,data.data.jwt);
+
+            } else if (data.data.message == "您的信箱尚未完成驗證程序！") {
+              _this.showModal = true;
+              _this.Response_Message = data.data.message;
+              _this.showvalidation_message = true;
+              _this.Button_Message = "驗證";
+            } else {
+              _this.IsSignin_error = true;
+              _this.Message = data.data.message;
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     },
+    //點擊tab時的動作
     login_nextfocus: function(ref) {
       if (ref == "Account") {
         this.Account_placeholder_color = "transparent";
         this.Account_Image_position = "-38";
+        this.submit_transform_position = "0";
+        this.submit_box_shadow = "none";
+
         this.tabindex3 += 3;
       } else if (ref == "PassWord") {
         this.PassWord_placeholder_color = "transparent";
         this.PassWord_Image_position = "-154";
         this.tabindex1 += 3;
-      } 
+      } else if (ref == "submitbutton") {
+        this.submit_transform_position = "-5";
+        this.submit_box_shadow = "0 0.3em #c41250";
+      }
       if (this.tabindex3 == 6) {
         this.tabindex1 = 1;
         this.tabindex2 = 2;
         this.tabindex3 = 3;
       }
+    },
+    //setting 子元件的data
+    forget_password: function() {
+      this.Is_click_forget = true;
+      this.forget_title = "忘記密碼？";
+      this.forget_result = "已將更換新密碼的資訊寄至您的信箱！";
+      this.submit_text = "重設密碼";
+      this.tabindex1 = 0;
+      this.tabindex2 = 0;
+      this.tabindex3 = 0;
+      this.dosomething = "reset_password";
+    },
+    forget_validation: function() {
+      this.Is_click_forget = true;
+      this.forget_title = "未收到驗證碼？";
+      this.forget_result = "已將驗證碼寄至您的信箱！";
+      this.submit_text = "重新寄送認證信";
+      this.tabindex1 = 0;
+      this.tabindex2 = 0;
+      this.tabindex3 = 0;
+      this.dosomething = "resendemail";
+    },
+    //子元件-forget回傳的值，用以判斷是否隱藏子元件
+    onhiddenforget: function(data) {
+      this.Is_click_forget = data;
+
+      //返回時，自動focus Account欄位
+      this.$refs.Account.focus();
+      this.Account_placeholder_color = "transparent";
+      this.Account_Image_position = "-38";
+      (this.tabindex1 = 1), (this.tabindex2 = 2), (this.tabindex3 = 3);
+    },
+    //因submit button的css值已被data鎖定，故無法再css裡設定，這邊用js event來完成 滑鼠hover & leave的動作
+    hoverbutton: function() {
+      this.submit_transform_position = "-5";
+      this.submit_box_shadow = "0 0.3em #c41250";
+    },
+    leavebutton: function() {
+      this.submit_transform_position = "0";
+      this.submit_box_shadow = "none";
     }
   },
   computed: {
@@ -228,6 +349,14 @@ export default {
       return {
         color: this.PassWord_placeholder_color,
         "background-position": "0 " + this.PassWord_Image_position + "px"
+      };
+    },
+    //當前submit button hover的css
+    com_button_fucus() {
+      return {
+        transform: "translateY(" + this.submit_transform_position + "px)",
+        "transition-duration": 0.15 + "s",
+        "box-shadow": this.submit_box_shadow
       };
     }
   },

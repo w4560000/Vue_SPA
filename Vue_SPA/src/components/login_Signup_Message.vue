@@ -70,7 +70,10 @@
           v-on:keydown.9="nextfocus('firstvc')"
           :tabindex="tabindex5"
           v-on:keyup="keybutton"
-        >驗證</button>
+          :style="com_validation_button_focus"
+          @mouseover="validation_hoverbutton"
+          @mouseleave="validation_leavebutton"
+        >{{Button_Message}}</button>
       </div>
     </div>
     <alert v-if="Is_Signup_success" :API_Response_Message="API_Response_Message"></alert>
@@ -89,7 +92,10 @@ export default {
     //從註冊頁面props 若註冊成功則開啟驗證碼div
     showvalidation_message: { type: Boolean },
     //從註冊頁面props User_Data
-    User_Data: { type: Object }
+    User_Data: { type: Object },
+    Button_Message: {
+      type: String
+    }
   },
   data() {
     return {
@@ -122,12 +128,21 @@ export default {
       Is_Signup_success: false,
 
       //4位驗證碼，統整為string，方便API POST
-      VerificationCode: ""
+      VerificationCode: "",
+
+      validation_submit_transform_position: "0",
+      validation_submit_box_shadow: "none"
     };
   },
   methods: {
     //POST至API 確認驗證碼是否正確
     validation: function() {
+      //若為確認，則代表該視窗當成ALERT ERROR MESSAGE來使用，點擊後則關閉回到上一頁
+      if (this.Button_Message == "確認") {
+        this.$emit("forget_hiddenMessage", false);
+        return;
+      }
+
       this.VerificationCode =
         this.$refs.firstvc.value +
         this.$refs.svc.value +
@@ -141,35 +156,50 @@ export default {
             VerificationCode: _this.VerificationCode
           })
           .then(data => {
-            debugger;
-            //this.$store.dispatch('update_token',data.data);
             if (data.data == "驗證成功！") {
-              _this.Is_Signup_success = true;
-              _this.API_Response_Message=data.data;
-              this.axios
-                .post("/Account/ResponseJWT", {
-                  Account: _this.User_Data.Account
-                })
-                .then(data => {
-                  debugger;
-                  //this.$store.dispatch('update_token',data.data);
-                  window.localStorage.setItem("login",_this.User_Data.Account);
-                  window.localStorage.setItem(_this.User_Data.Account+"_JWT",data.data);
-                })
-                .catch(err => {
-                  console.log(err);
-                });
+              if (_this.Response_Message_s == "請輸入驗證碼以重設密碼！") {
+                _this.$emit("forget_hiddenMessage", false);
+                _this.$emit("show_reset_password", true);
+                _this.$emit("Reset_API_Response_Message", "請輸入新密碼！");
+              } else {
+                _this.tabindex1 = 0;
+                _this.tabindex2 = 0;
+                _this.tabindex3 = 0;
+                _this.tabindex4 = 0;
+                _this.tabindex5 = 0;
+
+                //先存Response_Message
+                _this.API_Response_Message = data.data;
+                this.axios
+                  .post("/Account/ResponseJWT", {
+                    Account: _this.User_Data.Account
+                  })
+                  .then(data => {
+                    //等JWT到手再開啟驗證成功視窗！
+                    _this.Is_Signup_success = true;
+
+                    //儲存登入資訊至Vuex&Localstorage
+                    _this.global.SetVuex_Localstorage_ForLogin(
+                      _this.User_Data.Account,
+                      data.data
+                    );
+                  })
+                  .catch(err => {
+                    console.log(err);
+                  });
+              }
             } else {
+              //若驗證不成功，error div開啟
               _this.Is_show_error = "visible";
               _this.error_message = data.data.slice(0, 5);
               _this.Response_error_message = data.data.slice(5);
             }
           })
+
           .catch(err => {
             console.log(err);
           });
       }
-      //this.$emit("hiddenMessage", false);
     },
 
     //若focus在驗證碼的input時，keyup 'Tab'鍵來操作input的css
@@ -197,20 +227,25 @@ export default {
         this.focus_second_color = "rgb(56, 180, 76)";
         this.focus_third_color = "rgb(56, 180, 76)";
         this.focus_fourth_color = "rgb(56, 180, 76)";
+
+        this.validation_submit_transform_position = "-5";
+        this.validation_submit_box_shadow = "0 0.3em #c41250";
         this.tabindex4 += 5;
       } else {
         this.focus_first_color = "#f5548c";
         this.focus_second_color = "rgb(56, 180, 76)";
         this.focus_third_color = "rgb(56, 180, 76)";
         this.focus_fourth_color = "rgb(56, 180, 76)";
+        this.validation_submit_transform_position = "0";
+        this.validation_submit_box_shadow = "none";
         this.tabindex5 += 5;
-        if (this.tabindex5 == 10) {
-          this.tabindex1 = 1;
-          this.tabindex2 = 2;
-          this.tabindex3 = 3;
-          this.tabindex4 = 4;
-          this.tabindex5 = 5;
-        }
+      }
+      if (this.tabindex5 == 10) {
+        this.tabindex1 = 1;
+        this.tabindex2 = 2;
+        this.tabindex3 = 3;
+        this.tabindex4 = 4;
+        this.tabindex5 = 5;
       }
     },
     //當input被click時，init tabindex，防止user因隨便點擊input使得tabindex大亂
@@ -263,7 +298,9 @@ export default {
     //2.若按數字=>判別是否符合regex字串=>判別當前focus element id =>依照各個input設定tabindex & css border
     //若輸入非數字，則提醒輸入錯誤，並留在原地不跳轉input。
     keycode: function(event) {
-      if (event.key == "Tab") return true;
+      if (event.key == "Tab") {
+        return;
+      }
       var regex_Account_validation = new RegExp("^[0-9]+$");
       if (regex_Account_validation.test(event.key)) {
         if (document.activeElement.id == "first_validation_code") {
@@ -320,6 +357,8 @@ export default {
           this.focus_fourth_color = "rgb(56, 180, 76)";
           this.Is_show_error = "hidden";
           this.error_message = "";
+          this.validation_submit_transform_position = "-5";
+          this.validation_submit_box_shadow = "0 0.3em #c41250";
           this.$refs.click.focus();
         }
       } else {
@@ -357,8 +396,20 @@ export default {
         this.focus_third_color = "rgb(56, 180, 76)";
         this.focus_fourth_color = "rgb(56, 180, 76)";
         this.$refs.firstvc.value = "";
+        this.validation_submit_transform_position = "0";
+        this.validation_submit_box_shadow = "none";
+
         this.$refs.firstvc.focus();
       }
+    },
+        //因submit button的css值已被data鎖定，故無法再css裡設定，這邊用js event來完成 滑鼠hover & leave的動作
+    validation_hoverbutton: function() {
+      this.validation_submit_transform_position = "-5";
+      this.validation_submit_box_shadow = "0 0.3em #c41250";
+    },
+    validation_leavebutton: function() {
+      this.validation_submit_transform_position = "0";
+      this.validation_submit_box_shadow = "none";
     }
   },
   computed: {
@@ -378,6 +429,14 @@ export default {
     //動態變換error div 的顯示與否
     com_show_error() {
       return { visibility: this.Is_show_error };
+    },
+    com_validation_button_focus() {
+      return {
+        transform:
+          "translateY(" + this.validation_submit_transform_position + "px)",
+        "transition-duration": 0.15 + "s",
+        "box-shadow": this.validation_submit_box_shadow
+      };
     }
   },
   //自建 vue function

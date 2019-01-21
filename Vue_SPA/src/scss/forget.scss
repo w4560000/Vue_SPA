@@ -1,0 +1,303 @@
+$font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC",
+  "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese",
+  "Droid Sans Fallback", sans-serif;
+.login-forget-body {
+  display: block;
+  .login-forget-outer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d8d8d8;
+
+    .login-forget-wrapper-login {
+      position: absolute;
+      width: 560px;
+      height: 372px;
+      top: 152.5px;
+      border-radius: 8px 8px 8px 8px;
+      background: white;
+
+      .login-forget-inner-wrapper {
+        position: relative;
+        display: block;
+
+        .login-forget-upper {
+          display: block;
+          height: 277px;
+
+          padding-top: 24px;
+
+          .logo {
+            position: relative;
+            display: block;
+            width: 200px;
+            height: 68px;
+            margin: 0 auto;
+            margin-top: 0;
+            background-image: url(../src/image/svg_logo_header.svg);
+            background-repeat: no-repeat;
+
+            background-position: center;
+            background-size: 200px auto;
+          }
+
+          .div-forget {
+            padding-top: 32px;
+            padding-bottom: 40px;
+            background: #fbfbfa;
+            border-radius: 0 0 8px 8px;
+            text-align: center;
+            font-family: $font-family;
+            font-size: 13px;
+            line-height: 1.4;
+            //display: none;
+            .form-forget {
+              margin: 0 auto;
+              text-align: center;
+              display: block;
+              font-family: inherit;
+              font-size: 13px;
+              line-height: 1.4;
+              .forget-error-message {
+                visibility: hidden;
+                height: 0;
+                max-width: 300px;
+                margin: 0 auto;
+                display: none;
+                font-size: 16px;
+                font-weight: bold;
+                color: #ca2020;
+                background: #f7e5e5;
+                text-align: center;
+              }
+              h2 {
+                color: #555;
+                font-size: 20px;
+                font-weight: 400;
+                margin-bottom: 16px;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+                font-family: $font-family;
+              }
+              .forget-result {
+                margin-top: 14px;
+                line-height: 1.2;
+                height: auto;
+                visibility: hidden;
+                display: inline-block;
+                margin: 20px 0;
+                max-width: 300px;
+                text-align: center;
+                font-family: $font-family;
+                font-size: 13px;
+                p {
+                  margin-bottom: 6px;
+                  font-size: 16px;
+                  margin: 0 auto;
+                  text-align: center;
+                  font-family: $font-family;
+                }
+                em {
+                  font-style: normal;
+                  font-size: 16px;
+                  text-align: center;
+                  font-family: $font-family;
+                }
+              }
+              .forget-input {
+                max-width: 300px;
+                padding: 0 20px;
+                margin: 0 auto;
+                list-style: none;
+                display: block;
+                text-align: center;
+                font-family: $font-family;
+                li {
+                  position: relative;
+                  #forget-account {
+                    border-radius: 5px;
+                    border-bottom: 1px solid #ccc;
+                    width: 100%;
+                    padding: 17px 20px 17px 40px;
+                    box-sizing: border-box;
+                    font-size: 14px;
+                    border: 1px solid #ccc;
+                    margin-bottom: -1px;
+                    background: #fbfbfa;
+                    outline: none;
+                    color: #222;
+                  }
+                  #forget-account-input {
+                    background-position: 0 -211px;
+                    background-image: url(//cdn04.pinkoi.com/pinkoi.site/login/ico_login.png);
+                    background-size: 21px 300px;
+                    background-repeat: no-repeat;
+                    position: absolute;
+                    color: #bbb;
+                    left: 0;
+                    right: 12px;
+                    top: 0;
+                    bottom: 3px;
+                    transform: translate(15px, 0);
+                    padding: 15px 30px 15px 28px;
+                    text-align: left;
+                    font-size: 16px;
+                    pointer-events: none;
+                    z-index: 2;
+                    line-height: 25px;
+                    vertical-align: middle;
+                    font-weight: 400;
+                    font-family: $font-family;
+                    cursor: default;
+                    content: attr(data-notice);
+                  }
+
+                  #forget-email {
+                    border-radius: 5px;
+                    border-bottom: 1px solid #ccc;
+                    width: 100%;
+                    padding: 17px 20px 17px 40px;
+                    box-sizing: border-box;
+                    font-size: 14px;
+                    border: 1px solid #ccc;
+                    margin-bottom: -1px;
+                    background: #fbfbfa;
+                    outline: none;
+                    color: #222;
+                  }
+                  #forget-email-input {
+                    background-position: 0 -211px;
+                    background-image: url(//cdn04.pinkoi.com/pinkoi.site/login/ico_login.png);
+                    background-size: 21px 300px;
+                    background-repeat: no-repeat;
+                    position: absolute;
+                    color: #bbb;
+                    left: 0;
+                    right: 12px;
+                    top: 0;
+                    bottom: 3px;
+                    transform: translate(15px, 0);
+                    padding: 15px 30px 15px 28px;
+                    text-align: left;
+                    font-size: 16px;
+                    pointer-events: none;
+                    z-index: 2;
+                    line-height: 25px;
+                    vertical-align: middle;
+                    font-weight: 400;
+                    font-family: $font-family;
+                    cursor: default;
+                    content: attr(data-notice);
+                  }
+                }
+              }
+              .forget-submit {
+                padding: 0;
+                box-sizing: border-box;
+                width: 300px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 16px;
+                text-align: center;
+               
+                .forget-input-submit {
+                  padding-right: 40px;
+                  padding-left: 40px;
+                  width: 100%;
+                  box-sizing: border-box;
+                  font-weight: 600;
+                  cursor: pointer;
+                  font-size: 21px;
+                  background: #f5548c;
+                  color: #fff;
+                  text-align: center;
+                  letter-spacing: 2px;
+                  border: none;
+                  border-radius: 4px;
+                  max-width: 100%;
+                  display: block;
+                  padding: 12px 40px 13px 40px;
+                  outline: 0;
+                  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC",
+                  "Heiti TC", "\5FAE\8EDF\6B63\9ED1\9AD4",
+                  "Microsoft JhengHei", "Noto Sans T Chinese",
+                  "Droid Sans Fallback", sans-serif;
+                  cursor: pointer;
+                }
+                .backtologin {
+                  color: #268ddf;
+                  cursor: pointer;
+                  margin: 32px auto 0 auto;
+                  padding: 0 10px;
+                  border-radius: 5px;
+                  display: inline-block;
+                  font-size: 17px;
+                  text-align: center;
+                  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC",
+                  "Heiti TC", "\5FAE\8EDF\6B63\9ED1\9AD4",
+                  "Microsoft JhengHei", "Noto Sans T Chinese",
+                  "Droid Sans Fallback", sans-serif;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.Account_alert {
+    &:before {
+      display: block;
+      content: "";
+      border: 7px solid #db484a;
+      border-color: transparent #db484a transparent transparent;
+      position: absolute;
+      right: 2px;
+      top: 20px;
+    }
+    &:after {
+      content: attr(data-notice);
+      display: block;
+      background: #db484a;
+      color: #fff;
+      position: absolute;
+      top: 2px;
+      right: -108px;
+      padding: 12px 15px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+  }
+
+.Email_alert {
+    &:before {
+      display: block;
+      content: "";
+      border: 7px solid #db484a;
+      border-color: transparent #db484a transparent transparent;
+      position: absolute;
+      right: 2px;
+      top: 20px;
+    }
+    &:after {
+      content: attr(data-notice);
+      display: block;
+      background: #db484a;
+      color: #fff;
+      position: absolute;
+      top: 2px;
+      right: -116px;
+      padding: 12px 15px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+  }

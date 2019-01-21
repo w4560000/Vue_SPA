@@ -142,7 +142,6 @@
   text-align: left;
   font-size: 16px;
   pointer-events: none;
-  z-index: 2;
   line-height: 25px;
   vertical-align: middle;
   font-weight: 400;
@@ -180,7 +179,6 @@
   text-align: left;
   font-size: 16px;
   pointer-events: none;
-  z-index: 2;
   line-height: 25px;
   vertical-align: middle;
   font-weight: 400;
@@ -219,7 +217,6 @@
   text-align: left;
   font-size: 16px;
   pointer-events: none;
-  z-index: 2;
   line-height: 25px;
   vertical-align: middle;
   font-weight: 400;
@@ -389,7 +386,7 @@
   border: 7px solid #db484a;
   border-color: transparent #db484a transparent transparent;
   position: absolute;
-  right: 7px;
+  right: 6px;
   top: 20px;
 }
 
