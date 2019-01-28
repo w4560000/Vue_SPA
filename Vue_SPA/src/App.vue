@@ -1,38 +1,52 @@
 <template>
   <div id="app">
-    <router-view/>
+    <v-header v-if="IsShowHeader"></v-header>
+    <router-view></router-view>
+    <v-footer v-if="IsShowFooter"></v-footer>
   </div>
 </template>
 
 <script>
-/*var componentmodal ={
-  name:'test',
-  template: "#modal-template",
-  props:['Response_Message'],
-  
-  mounted() {
-    debugger;
-    this.Response_Message_s = this.Response_Message;
-  },
-  watch: {
-    Response_Message: {
-      deep: true,
-      handler(nv, ov) {
-        this.Response_Message_s = nv;
-      }
-    }
-  },
-  
-}*/
-
+import { mapGetters } from "vuex";
+import gheader from './components/gheader'
+import gfooter from './components/gfooter'
 export default {
-  name: 'App',
-}
+  name: "App",
+  data(){
+    return{}
+  },
+  mounted() {
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: "303337550271827",
+        cookie: true,
+        xfbml: true,
+        version: "v2.9"
+      });
+      FB.AppEvents.logPageView();
+
+      console.log("fbAsyncInit");
+
+      FB.getLoginStatus(response => {
+        console.log("res", response); // 這裡可以得到 fb 回傳的結果
+      });
+    };
+  },
+  components: {
+    'v-header' :gheader,
+    'v-footer' :gfooter,
+  },
+  computed:{
+    ...mapGetters(["IsShowHeader"]),
+    ...mapGetters(["IsShowFooter"]),
+  }
+
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -244,11 +244,11 @@
 .g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox .user_list .title .my_mermbership .Account {
   display: inline-block;
   position: absolute;
-  vertical-align: middle;
   line-height: 22px;
   margin-left: 6px;
   font-weight: 500;
   max-width: 170px;
+  min-width: 50px;
   color: #49454b;
   cursor: pointer;
   left: 40px;
@@ -357,7 +357,7 @@
   width: initial;
   font-size: 14px;
   text-align: center;
-  color: #f5548c;
+  color: block;
   font-weight: 700;
   padding-top: 14px;
   padding-bottom: 10px;
@@ -365,6 +365,7 @@
 
 .g-nav .nav-first .nav-first-li:hover .title-bold-pink {
   border-bottom: 2px solid #f5548c;
+  color: #f5548c;
   padding-bottom: 10px;
   transition: 0.3s;
 }

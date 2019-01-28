@@ -23,7 +23,8 @@
           <a href="https://google.com" class="design">我要開設計館</a>
           <div class="Tab_User" v-if="IsLogin">
             <div class="image">
-              <img src="../image/img_login_icon.jpg">
+              <img v-if="FBauthorized" :src="profilePicture">
+              <img v-else src="../image/img_login_icon.jpg">
               <div class="badge_active">1</div>
             </div>
             <div class="user_menu">
@@ -55,8 +56,8 @@
             </div>
           </div>
 
-          <router-link to="/login" v-if="!IsLogin">
-            <span class="login-border">登入/註冊</span>
+          <router-link to="login" v-if="!IsLogin">
+            <span class="login-border" @click="closeh_f">登入/註冊</span>
           </router-link>
 
           <a href="https://google.com" class="cart">
@@ -110,50 +111,53 @@
           </div>
         </li>
         <li class="nav-first-li">
-          <div class="nav-title2-7">配件飾品</div>
+          <div class="title-bold-pink">配件飾品</div>
           <div class="nav-second"></div>
         </li>
         <li class="nav-first-li">
-          <div class="nav-title2-7">居家生活</div>
+          <div class="title-bold-pink">居家生活</div>
           <div class="nav-second"></div>
         </li>
         <li class="nav-first-li">
-          <div class="nav-title2-7">包包提袋</div>
+          <div class="title-bold-pink">包包提袋</div>
           <div class="nav-second"></div>
         </li>
         <li class="nav-first-li">
-          <div class="nav-title2-7">衣著良品</div>
+          <div class="title-bold-pink">衣著良品</div>
           <div class="nav-second"></div>
         </li>
         <li class="nav-first-li">
-          <div class="nav-title2-7">文具卡片</div>
+          <div class="title-bold-pink">文具卡片</div>
           <div class="nav-second"></div>
         </li>
         <li class="nav-first-li">
-          <div class="nav-title2-7">所有分類</div>
+          <div class="title-bold-pink">所有分類</div>
           <div class="nav-second"></div>
         </li>
         <li class="nav-first-li">
-          <div class="nav-title2-7">探索更多</div>
+          <div class="title-bold-pink">探索更多</div>
           <div class="nav-second"></div>
         </li>
       </ul>
     </div>
   </nav>
-  <alert v-if="Is_LogOut" :API_Response_Message="API_Response_Message" v-on:hiddenAlert="onhiddenAlert"></alert>
+  <alert
+    v-if="Is_LogOut"
+    :API_Response_Message="API_Response_Message"
+    v-on:hiddenAlert="onhiddenAlert"
+  ></alert>
 </head>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import { debug } from 'util';
+import { debug } from "util";
 import logout_Alert from "./login_Signin_Signup_Alert";
 export default {
-    components: { alert: logout_Alert },
+  components: { alert: logout_Alert },
   name: "gheader",
   data() {
-    return {Is_LogOut:false,
-    };
+    return { Is_LogOut: false };
   },
   methods: {
     //登出動作
@@ -169,20 +173,31 @@ export default {
             _this.Is_LogOut = true;
 
             //刪除登陸訊息
-            _this.global.SetVuex_Localstorage_ForLogout(_this.Login_User)
-          } 
+            _this.global.SetVuex_Localstorage_ForLogout(_this.Login_User);
+          }
         })
         .catch(err => {
           console.log(err);
         });
     },
-    onhiddenAlert: function(bool){
-      this.Is_LogOut=bool;
+    onhiddenAlert: function(bool) {
+      this.Is_LogOut = bool;
+    },
+    //開啟註冊頁面，先關閉header&footer
+    closeh_f:function(){
+      this.$store.dispatch("updateIsShowHeader",false);
+      this.$store.dispatch("updateIsShowFooter",false);
     }
   },
   computed: {
+    profilePicture () {
+      debugger;
+      return (this.FBprofile.id != null) ? 'https://graph.facebook.com/'+this.FBprofile.id+'/picture?width=300' : '../image/img_login_icon.jpg'
+    },
     ...mapGetters(["IsLogin"]),
-    ...mapGetters(["Login_User"])
+    ...mapGetters(["Login_User"]),
+    ...mapGetters(["FBauthorized"]),
+    ...mapGetters(["FBprofile"])
   }
 };
 </script>

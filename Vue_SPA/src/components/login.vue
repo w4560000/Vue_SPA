@@ -8,7 +8,7 @@
             <div class="social-btn">
               <div class="inner-btn-wrapper">
                 <div class="social-login-btn" :class="{'animation-toright':prev}" v-if="prev">
-                  <a class="m-button-fb">用Facebook登入</a>
+                  <a class="m-button-fb" @click="FBLogin">用Facebook登入</a>
                   <a class="m-button-weibo">
                     <i class="useless"></i>无法用Weibo登录
                   </a>
@@ -255,8 +255,10 @@ export default {
               _this.Is_Signin_success = true;
 
               //更新帳號登入訊息&JWT
-              _this.global.SetVuex_Localstorage_ForLogin(_this.User_Data.Account,data.data.jwt);
-
+              _this.global.SetVuex_Localstorage_ForLogin(
+                _this.User_Data.Account,
+                data.data.jwt
+              );
             } else if (data.data.message == "您的信箱尚未完成驗證程序！") {
               _this.showModal = true;
               _this.Response_Message = data.data.message;
@@ -334,6 +336,51 @@ export default {
     leavebutton: function() {
       this.submit_transform_position = "0";
       this.submit_box_shadow = "none";
+    },
+    FBLogin: function() {
+      var _this = this;
+      FB.login(
+        function(response) {
+          _this.statusChangeCallback(response);
+        },
+        {
+          scope: "email, public_profile",
+          return_scopes: true
+        }
+      );
+    },
+
+    statusChangeCallback(response) {
+      var _this = this;
+      if (response.status === "connected") {
+
+        FB.api("/me?fields=name,id", function(response) {
+
+          _this.axios
+            .post("/Account/ResponseJWT", {
+              Account: response.name
+            })
+            .then(data => {
+              //儲存登入資訊至Vuex&Localstorage
+              _this.global.SetVuex_ForFBLogin(
+                response,
+                data.data
+              );
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        });
+
+        this.API_Response_Message = "Facebook登入成功！";
+        _this.Is_Signin_success = true;
+      } else if (response.status === "not_authorized") {
+        _this.global.SetVuex_Localstorage_ForFBLoginProfile("");
+      } else if (response.status === "unknown") {
+        _this.global.SetVuex_Localstorage_ForFBLoginProfile("");
+      } else {
+        _this.global.SetVuex_Localstorage_ForFBLoginProfile("");
+      }
     }
   },
   computed: {
@@ -360,6 +407,7 @@ export default {
       };
     }
   },
+
   directives: {
     focus: {
       inserted: function(el) {

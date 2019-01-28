@@ -10,5 +10,17 @@ export default {
   },
   SetLoading(state, payload) {
     state.IsLoading = payload;
+  },
+  SetFBprofile(state, payload) {
+    state.FBprofile = payload;
+  },
+  SetFBauthorized(state, payload) {
+    state.FBauthorized = payload;
+  },
+  updateIsShowHeader(state, payload) {
+    state.IsShowHeader = payload;
+  },
+  updateIsShowFooter(state, payload) {
+    state.IsShowFooter = payload;
   }
 };

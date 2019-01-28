@@ -10,5 +10,17 @@ export default {
   },
   IsLoading: state => {
     return state.IsLoading;
+  },
+  FBprofile: state => {
+    return state.FBprofile;
+  },
+  FBauthorized: state => {
+    return state.FBauthorized;
+  },
+  IsShowHeader: state => {
+    return state.IsShowHeader;
+  },
+  IsShowFooter: state => {
+    return state.IsShowFooter;
   }
 };
