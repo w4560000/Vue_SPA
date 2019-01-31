@@ -2,7 +2,7 @@
 var root = "https://localhost:44319/api";
 // 引用axios
 var axios = require("axios");
-
+import store from "../store/index";
 
 var instance = axios.create({
   baseURL: root,
@@ -22,6 +22,16 @@ instance.interceptors.request.use(
 // http response 拦截器
 instance.interceptors.response.use(
   response => {
+    //若API回傳JWT 則馬上儲存
+    var user = localStorage.getItem("login");
+    var FBuser = localStorage.getItem("FBlogin");
+debugger;
+    if (response.data.jwt != null || response.data.jwt != undefined) {
+      if (user != null)
+        window.localStorage.setItem(user + "_JWT", response.data.jwt);
+      else if (FBuser != null)
+        window.localStorage.setItem(FBuser + "_JWT", response.data.jwt);
+    }
     return response;
   },
   error => {

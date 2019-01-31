@@ -22,5 +22,8 @@ export default {
   },
   updateIsShowFooter(state, payload) {
     state.IsShowFooter = payload;
+  },
+  SetImageURL(state, payload) {
+    state.ImageURL = payload;
   }
 };

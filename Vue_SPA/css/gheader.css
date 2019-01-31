@@ -273,8 +273,12 @@
   margin-left: -60px;
 }
 
+.g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox .user_list ul li:nth-child(1) a span {
+  margin-left: 5px;
+}
+
 .g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox .user_list ul li:nth-child(1) a .badge {
-  margin-left: 20px;
+  margin-left: 10px;
   float: right;
   padding: 2.5px 5px;
   border-radius: 8px;

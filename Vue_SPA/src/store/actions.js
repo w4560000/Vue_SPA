@@ -30,5 +30,9 @@ export default {
   //確認FOOTER是否顯示
   updateIsShowFooter({ commit }, payload) {
     commit("updateIsShowFooter", payload);
+  },
+  //取得大頭貼
+  SetImageURL({commit} ,payload){
+    commit("SetImageURL",payload);
   }
 };

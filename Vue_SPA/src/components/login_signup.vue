@@ -118,7 +118,7 @@
       :showvalidation_message="showvalidation_message"
       :User_Data="User_Data"
       :Button_Message="Button_Message"
-      v-on:hiddenMessage="onhiddenMessage"
+      v-on:forget_hiddenMessage="onhiddenMessage"
     ></modal>
 
     <Loading v-if="IsLoading" @close="IsLoading"></Loading>

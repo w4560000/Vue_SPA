@@ -137,6 +137,7 @@ export default {
   methods: {
     //POST至API 確認驗證碼是否正確
     validation: function() {
+      debugger;
       //若為確認，則代表該視窗當成ALERT ERROR MESSAGE來使用，點擊後則關閉回到上一頁
       if (this.Button_Message == "確認") {
         this.$emit("forget_hiddenMessage", false);
@@ -181,7 +182,7 @@ export default {
                     //儲存登入資訊至Vuex&Localstorage
                     _this.global.SetVuex_Localstorage_ForLogin(
                       _this.User_Data.Account,
-                      data.data
+                      data.data.jwt
                     );
                   })
                   .catch(err => {

@@ -29,6 +29,15 @@ export default new Router({
           resolve(require("../components/login_signup.vue"));
         });
       }
+    },
+    {
+      path: "/test",
+      name:"test",
+      component(resolve) {
+        require.ensure(["../components/uploadimg.vue"], () => {
+          resolve(require("../components/uploadimg.vue"));
+        });
+      }
     }
   ]
 });

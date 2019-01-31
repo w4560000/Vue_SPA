@@ -6,5 +6,6 @@ export default {
   FBprofile: {},
   FBauthorized: false,
   IsShowHeader: true,
-  IsShowFooter: true
+  IsShowFooter: true,
+  ImageURL: require('../image/img_login_icon.jpg')
 };

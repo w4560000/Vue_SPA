@@ -22,5 +22,8 @@ export default {
   },
   IsShowFooter: state => {
     return state.IsShowFooter;
+  },
+  ImageURL:state=>{
+    return state.ImageURL;
   }
 };

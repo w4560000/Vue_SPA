@@ -9,7 +9,7 @@ import axios from "./ajax/axios";
 import store from "./store/index";
 import global from "./components/common";
 
-import FBSDK from './components/assets/application';
+import FBSDK from "./components/assets/application";
 
 axios.interceptors.request.use(function(config) {
   //若在重設密碼頁面，不載入Loading，因在父元件有設定Loading，故子元件(ResetPassWord)ajax時也會載入，在此排除掉
@@ -39,30 +39,57 @@ Vue.config.productionTip = false;
 router.beforeEach((to, from, next) => {
   var user = localStorage.getItem("login");
   var FBuser = localStorage.getItem("FBlogin");
+  var Account = "";
+
+  if (user != null) Account = user;
+  else if (FBuser != null) Account = FBuser;
+
+  //載入頁面等同於user有在操作系統，幫他更新JWT
+  axios.post("/Account/ResponseJWT", {
+    Account: Account
+  });
 
   if (user != null) {
     store.dispatch("Update_Login_User", user);
     store.dispatch("Check_Login", true);
     store.dispatch("Update_Token", localStorage.getItem(user + "_JWT"));
-  }
-  else if(FBuser !=null){
+  } else if (FBuser != null) {
     store.dispatch("Check_Login", true);
     store.dispatch("Update_Login_User", FBuser);
+    store.dispatch("Update_Token", localStorage.getItem(FBuser + "_JWT"));
     store.dispatch("SetFBauthorized", true);
 
-    var FBprofile={name:FBuser,id:localStorage.getItem("FBuserID")};
+    var FBprofile = { name: FBuser, id: localStorage.getItem("FBuserID") };
     store.dispatch("SetFBprofile", FBprofile);
   }
 
   //返回首頁時，顯示header&footer
-  if(to.fullPath =="/")
-  {
-    store.dispatch("updateIsShowHeader",true);
-    store.dispatch("updateIsShowFooter",true);
+  if (to.fullPath == "/") {
+    store.dispatch("updateIsShowHeader", true);
+    store.dispatch("updateIsShowFooter", true);
+
+    axios
+    .post(
+      "/Account/GetImage",
+      {
+        Account: Account,
+      },
+      {
+        headers: { Authorization: "bearer " + localStorage.getItem(Account + "_JWT") }
+      }
+    )
+    .then(data => {
+      debugger;
+      if(data.data != "")
+      store.dispatch("SetImageURL", data.data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
   }
   next();
 });
-
 
 /* eslint-disable no-new */
 new Vue({

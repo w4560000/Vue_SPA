@@ -24,7 +24,7 @@
           <div class="Tab_User" v-if="IsLogin">
             <div class="image">
               <img v-if="FBauthorized" :src="profilePicture">
-              <img v-else src="../image/img_login_icon.jpg">
+              <img v-else :src="GetImageURL">
               <div class="badge_active">1</div>
             </div>
             <div class="user_menu">
@@ -39,10 +39,10 @@
                     </a>
                     <ul>
                       <li>
-                        <a href="https://google.com">
-                          <span>我的信箱</span>
+                        <router-link to="/test">
+                          <span>更換大頭照</span>
                           <div class="badge">1</div>
-                        </a>
+                        </router-link>
                       </li>
                       <li>
                         <a @click="Logout">
@@ -184,20 +184,27 @@ export default {
       this.Is_LogOut = bool;
     },
     //開啟註冊頁面，先關閉header&footer
-    closeh_f:function(){
-      this.$store.dispatch("updateIsShowHeader",false);
-      this.$store.dispatch("updateIsShowFooter",false);
+    closeh_f: function() {
+      this.$store.dispatch("updateIsShowHeader", false);
+      this.$store.dispatch("updateIsShowFooter", false);
     }
   },
   computed: {
-    profilePicture () {
-      debugger;
-      return (this.FBprofile.id != null) ? 'https://graph.facebook.com/'+this.FBprofile.id+'/picture?width=300' : '../image/img_login_icon.jpg'
+    profilePicture() {
+      return this.FBprofile.id != null
+        ? "https://graph.facebook.com/" +
+            this.FBprofile.id +
+            "/picture?width=300"
+        : "../image/img_login_icon.jpg";
+    },
+    GetImageURL() {
+      return this.ImageURL;
     },
     ...mapGetters(["IsLogin"]),
     ...mapGetters(["Login_User"]),
     ...mapGetters(["FBauthorized"]),
-    ...mapGetters(["FBprofile"])
+    ...mapGetters(["FBprofile"]),
+    ...mapGetters(["ImageURL"])
   }
 };
 </script>

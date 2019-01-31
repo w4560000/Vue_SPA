@@ -364,7 +364,7 @@ export default {
               //儲存登入資訊至Vuex&Localstorage
               _this.global.SetVuex_ForFBLogin(
                 response,
-                data.data
+                data.data.jwt
               );
             })
             .catch(err => {
