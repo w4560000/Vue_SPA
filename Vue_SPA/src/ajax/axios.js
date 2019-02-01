@@ -1,5 +1,5 @@
 // 配置API接口地址与服务器静态文件地址
-var root = "https://localhost:44319/api";
+var root = "https://182.155.24.37:8787/api";
 // 引用axios
 var axios = require("axios");
 import store from "../store/index";
@@ -10,6 +10,7 @@ var instance = axios.create({
   withCredentials: true
 });
 instance.defaults.headers.post["Content-Type"] = "application/json";
+instance.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 //全局封装错误处理函数
 instance.interceptors.request.use(
   config => {

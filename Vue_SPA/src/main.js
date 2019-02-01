@@ -44,11 +44,12 @@ router.beforeEach((to, from, next) => {
   if (user != null) Account = user;
   else if (FBuser != null) Account = FBuser;
 
-  //載入頁面等同於user有在操作系統，幫他更新JWT
-  axios.post("/Account/ResponseJWT", {
-    Account: Account
-  });
-
+  if (Account != "") {
+    //載入頁面等同於user有在操作系統，幫他更新JWT
+    axios.post("/Account/ResponseJWT", {
+      Account: Account
+    });
+  }
   if (user != null) {
     store.dispatch("Update_Login_User", user);
     store.dispatch("Check_Login", true);
@@ -68,25 +69,28 @@ router.beforeEach((to, from, next) => {
     store.dispatch("updateIsShowHeader", true);
     store.dispatch("updateIsShowFooter", true);
 
-    axios
-    .post(
-      "/Account/GetImage",
-      {
-        Account: Account,
-      },
-      {
-        headers: { Authorization: "bearer " + localStorage.getItem(Account + "_JWT") }
-      }
-    )
-    .then(data => {
-      debugger;
-      if(data.data != "")
-      store.dispatch("SetImageURL", data.data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-
+    if (Account != "") {
+      axios
+        .post(
+          "/Account/GetImage",
+          {
+            Account: Account
+          },
+          {
+            headers: {
+              Authorization: "bearer " + localStorage.getItem(Account + "_JWT")
+            }
+          }
+        )
+        .then(data => {
+          debugger;
+          if (data.data != "")
+            if (data.data != "") store.dispatch("SetImageURL", data.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
   next();
 });
