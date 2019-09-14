@@ -1,84 +1,81 @@
 // 配置API接口地址与服务器静态文件地址
-var root = "https://182.155.24.37:8787/api";
+import store from '../store/index'
+var localhost = 'http://localhost:44319/api'
+var root = localhost === undefined ? 'https://182.155.24.37:8787/api' : localhost
 // 引用axios
-var axios = require("axios");
-import store from "../store/index";
+var axios = require('axios')
 
 var instance = axios.create({
   baseURL: root,
   timeout: 10000,
   withCredentials: true
-});
-instance.defaults.headers.post["Content-Type"] = "application/json";
-instance.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-//全局封装错误处理函数
+})
+instance.defaults.headers.post['Content-Type'] = 'application/json'
+instance.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
+// 全局封装错误处理函数
 instance.interceptors.request.use(
   config => {
-    return config;
+    return config
   },
   err => {
-    return Promise.reject(err);
+    return Promise.reject(err)
   }
-);
+)
 // http response 拦截器
 instance.interceptors.response.use(
   response => {
-    //若API回傳JWT 則馬上儲存
-    var user = localStorage.getItem("login");
-    var FBuser = localStorage.getItem("FBlogin");
-debugger;
+    // 若API回傳JWT 則馬上儲存
+    var user = localStorage.getItem('login')
+    var FBuser = localStorage.getItem('FBlogin')
+    debugger
     if (response.data.jwt != null || response.data.jwt != undefined) {
-      if (user != null)
-        window.localStorage.setItem(user + "_JWT", response.data.jwt);
-      else if (FBuser != null)
-        window.localStorage.setItem(FBuser + "_JWT", response.data.jwt);
+      if (user != null) { window.localStorage.setItem(user + '_JWT', response.data.jwt) } else if (FBuser != null) { window.localStorage.setItem(FBuser + '_JWT', response.data.jwt) }
     }
-    return response;
+    return response
   },
   error => {
     if (error.response) {
-      console.log("请求错误", error.response.status);
+      console.log('请求错误', error.response.status)
       switch (error.response.status) {
         case 401:
           // store.dispatch('logout');
-          console.log("401");
-          break;
+          console.log('401')
+          break
         case 404:
-          console.log("接口不存在");
-          break;
+          console.log('接口不存在')
+          break
         case 500:
-          console.log("服务器错误");
+          console.log('服务器错误')
       }
     }
-    return Promise.reject(error); // 返回接口返回的错误信息
+    return Promise.reject(error) // 返回接口返回的错误信息
   }
-);
-export default instance;
+)
+export default instance
 
-function getdata(method, url, params, success, failure) {
+function getdata (method, url, params, success, failure) {
   axios({
     method: method,
     url: url,
-    data: method === "POST" || method === "PUT" ? params : null,
-    params: method === "GET" || method === "DELETE" ? params : null,
+    data: method === 'POST' || method === 'PUT' ? params : null,
+    params: method === 'GET' || method === 'DELETE' ? params : null,
     baseURL: root,
-    withCredentials: true, //跨域请求凭证验证。
+    withCredentials: true, // 跨域请求凭证验证。
     timeout: 3000
   })
-    .then(function(res) {
-      success(res.data);
+    .then(function (res) {
+      success(res.data)
     })
-    .catch(function(err) {
-      let res = err.response;
+    .catch(function (err) {
+      let res = err.response
       if (err) {
-        console.log("api error, HTTP CODE: " + res.status);
-        failure(err.response.statusText);
-        return;
+        console.log('api error, HTTP CODE: ' + res.status)
+        failure(err.response.statusText)
       }
-    });
+    })
 }
 // 返回在vue模板中的调用接口
-/*export default {
+/* export default {
   get: function (url, params, success, failure) {
     return getdata('GET', url, params, success, failure)
   },
@@ -92,5 +89,5 @@ function getdata(method, url, params, success, failure) {
     return getdata('DELETE', url, params, success, failure)
   },
   root: root
- 
-}*/
+
+} */
