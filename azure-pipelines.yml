@@ -23,7 +23,7 @@ steps:
     command: custom
     workingDir: '$(build.sourcesDirectory)'
     verbose: false
-    customCommand: 'npm run build'
+    customCommand: 'run build'
 
 - task: ArchiveFiles@2
   displayName: Archive
