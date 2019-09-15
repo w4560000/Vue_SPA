@@ -6,9 +6,9 @@
 trigger:
 - master
 
+
 pool:
-  name: Azure Pipelines
-  demands: npm
+  vmImage: vs2017-win2016
 
 steps:
 - task: Npm@1
