@@ -14,21 +14,21 @@ steps:
 - task: Npm@1
   displayName: 'npm install'
   inputs:
-    workingDir: '$(build.sourcesDirectory)/$(Build.Repository.Name)'
+    workingDir: '$(build.sourcesDirectory)/vue_spa'
     verbose: false
 
 - task: Npm@1
   displayName: 'npm build'
   inputs:
     command: custom
-    workingDir: '$(build.sourcesDirectory)/$(Build.Repository.Name)'
+    workingDir: '$(build.sourcesDirectory)/vue_spa'
     verbose: false
     customCommand: 'run build'
 
 - task: ArchiveFiles@2
   displayName: Archive
   inputs:
-    rootFolderOrFile: '$(build.sourcesDirectory)/$(Build.Repository.Name)/dist'
+    rootFolderOrFile: '$(build.sourcesDirectory)/vue_spa/dist'
     includeRootFolder: false
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.SourceVersion)_$(Build.BuildId).zip'
 
