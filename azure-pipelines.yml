@@ -7,18 +7,23 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu 16.04'
+  name: Azure Pipelines
+  demands: npm
 
 steps:
-- task: NodeTool@0
+- task: Npm@1
+  displayName: 'npm install'
   inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+    workingDir: '$(build.sourcesDirectory)'
+    verbose: false
 
-- script: |
-    npm  install -g
-    npm run build
-  displayName: 'npm install and build'
+- task: Npm@1
+  displayName: 'npm build'
+  inputs:
+    command: custom
+    workingDir: '$(build.sourcesDirectory)'
+    verbose: false
+    customCommand: 'npm run build'
 
 - task: ArchiveFiles@2
   displayName: Archive
