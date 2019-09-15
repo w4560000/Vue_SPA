@@ -14,14 +14,14 @@ steps:
 - task: Npm@1
   displayName: 'npm install'
   inputs:
-    workingDir: '$(build.sourcesDirectory)'
+    workingDir: '$(build.sourcesDirectory)/vue_spa'
     verbose: false
 
 - task: Npm@1
   displayName: 'npm build'
   inputs:
     command: custom
-    workingDir: '$(build.sourcesDirectory)'
+    workingDir: '$(build.sourcesDirectory)/vue_spa'
     verbose: false
     customCommand: 'run build'
 
