@@ -5,7 +5,7 @@
   "author": "Leo",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --https --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
@@ -14,6 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "ajv": "^5.5.2",
     "axios": "^0.18.0",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.4",
@@ -86,5 +87,10 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
+  },
+  "license": "ISC"
 }

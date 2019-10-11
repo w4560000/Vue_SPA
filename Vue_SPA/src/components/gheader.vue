@@ -150,61 +150,55 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { debug } from "util";
-import logout_Alert from "./login_Signin_Signup_Alert";
+import { mapGetters } from 'vuex';
+import { debug } from 'util';
+import logout_Alert from './login_Signin_Signup_Alert';
 export default {
   components: { alert: logout_Alert },
-  name: "gheader",
-  data() {
+  name: 'gheader',
+  data () {
     return { Is_LogOut: false };
   },
   methods: {
-    //登出動作
-    Logout: function() {
+    // 登出動作
+    Logout: function () {
       var _this = this;
-      this.axios
-        .post("/Account/LogOut", {
-          Account: _this.Login_User
-        })
-        .then(data => {
-          if (data.data == "登出成功！") {
-            _this.API_Response_Message = data.data;
+      this.api.Logout(this.global.SetAccountData({Account: this.Login_User}))
+        .then(response => {
+          if (response.data.responseStatusCode === _this.responseStatusCode.signOutSucces.statusCode) {
+            _this.API_Response_Message = _this.global.GetResponseMessage(response);
             _this.Is_LogOut = true;
 
-            //刪除登陸訊息
-            _this.global.SetVuex_Localstorage_ForLogout(_this.Login_User);
+            // 刪除登陸訊息
+            _this.global.SetVuexLocalstorageForLogout(_this.Login_User);
           }
-        })
-        .catch(err => {
-          console.log(err);
         });
     },
-    onhiddenAlert: function(bool) {
+    onhiddenAlert: function (bool) {
       this.Is_LogOut = bool;
     },
-    //開啟註冊頁面，先關閉header&footer
-    closeh_f: function() {
-      this.$store.dispatch("updateIsShowHeader", false);
-      this.$store.dispatch("updateIsShowFooter", false);
+    // 開啟註冊頁面，先關閉header&footer
+    closeh_f: function () {
+      this.$store.dispatch('updateIsShowHeader', false);
+      this.$store.dispatch('updateIsShowFooter', false);
     }
   },
   computed: {
-    profilePicture() {
+    profilePicture () {
       return this.FBprofile.id != null
-        ? "https://graph.facebook.com/" +
+        ? 'https://graph.facebook.com/' +
             this.FBprofile.id +
-            "/picture?width=300"
-        : "../image/img_login_icon.jpg";
+            '/picture?width=300'
+        : '../image/img_login_icon.jpg';
     },
-    GetImageURL() {
+    GetImageURL () {
       return this.ImageURL;
     },
-    ...mapGetters(["IsLogin"]),
-    ...mapGetters(["Login_User"]),
-    ...mapGetters(["FBauthorized"]),
-    ...mapGetters(["FBprofile"]),
-    ...mapGetters(["ImageURL"])
+    ...mapGetters(['IsLogin']),
+    ...mapGetters(['Login_User']),
+    ...mapGetters(['FBauthorized']),
+    ...mapGetters(['FBprofile']),
+    ...mapGetters(['ImageURL'])
   }
 };
 </script>

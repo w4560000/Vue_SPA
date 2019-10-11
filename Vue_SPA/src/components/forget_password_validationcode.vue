@@ -12,17 +12,17 @@
                 <h2>請輸入帳號以及註冊信箱！</h2>
                 <div class="forget-result" >
                   <p>{{forget_result}}</p>
-                  <em>{{User_Data.Email}}</em>
+                  <em>{{UserData.Email}}</em>
                 </div>
                 <ul class="forget-input">
                   <li>
                     <input
                       id="forget-account"
                       ref="forget_account"
-                      v-model="User_Data.Account"
+                      v-model="UserData.Account"
                       v-focus
                       @click="Focus_forget_Account_input"
-                      @blur="forget_Account_placeholder(User_Data.Account)"
+                      @blur="forget_Account_placeholder(UserData.Account)"
                       v-on:keydown.9="forget_nextfocus('forget_email')"
                       :tabindex="forget_tabindex1"
                     >
@@ -39,9 +39,9 @@
                     <input
                       id="forget-email"
                       ref="forget_email"
-                      v-model="User_Data.Email"
+                      v-model="UserData.Email"
                       @click="Focus_forget_Email_input"
-                      @blur="forget_Email_placeholder(User_Data.Email)"
+                      @blur="forget_Email_placeholder(UserData.Email)"
                       v-on:keydown.9="forget_nextfocus('forget_submitbutton')"
                       :tabindex="forget_tabindex2"
                     >
@@ -80,7 +80,7 @@
       @close="showModal"
       :Response_Message_s="Response_Message"
       :showvalidation_message="showvalidation_message"
-      :User_Data="User_Data"
+      :UserData="UserData"
       :Button_Message="Button_Message"
       v-on:forget_hiddenMessage="onforget_hiddenMessage"
       v-on:show_reset_password="onshow_reset_password"
@@ -90,25 +90,25 @@
     <reset
       v-if="Is_Reset_password"
       :Reset_API_Response_Message="Reset_API_Response_Message"
-      :Account="User_Data.Account"
+      :Account="UserData.Account"
     ></reset>
   </div>
 </template>
 
 <script>
-import login_Signup_Message from "./login_Signup_Message";
-import Loading from "./loading/index";
-import Reset_password from "./reset_password";
+import loginSignupMessage from './login_Signup_Message';
+import Loading from './loading/index';
+import ResetPassword from './reset_password';
 
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 export default {
   components: {
-    modal: login_Signup_Message,
+    modal: loginSignupMessage,
     Loading: Loading,
-    reset: Reset_password
+    reset: ResetPassword
   },
   props: {
-    //父元件props過來的參數
+    // 父元件props過來的參數
     forget_title: {
       type: String
     },
@@ -118,184 +118,178 @@ export default {
     submit_text: {
       type: String
     },
-    dosomething: {
-      type: String
+    resendMailType: {
+      type: Number
     }
   },
-  data() {
+  data () {
     return {
-      //使用者資訊
-      User_Data: {
-        Account: "",
-        Email: ""
+      // 使用者資訊
+      UserData: {
+        Account: '',
+        Email: '',
+        ResendMailType: 0
       },
 
-      //若帳號與信箱未填寫則提醒
+      // 若帳號與信箱未填寫則提醒
       IsAccount_alert: false,
       IsEmail_alert: false,
 
-      //tabindex
+      // tabindex
       forget_tabindex1: 1,
       forget_tabindex2: 2,
       forget_tabindex3: 3,
-      
-      //input&submit button的css data
-      forget_Account_placeholder_color: "transparent",
-      forget_Account_Image_position: "-38",
-      forget_Email_placeholder_color: "#bbb",
-      forget_Email_Image_position: "-211",
 
-      //submit button的hover css data
-      forget_submit_transform_position: "0",
-      forget_submit_box_shadow: "none",
+      // input&submit button的css data
+      forget_Account_placeholder_color: 'transparent',
+      forget_Account_Image_position: '-38',
+      forget_Email_placeholder_color: '#bbb',
+      forget_Email_Image_position: '-211',
 
-      //驗證碼子元件&訊息
+      // submit button的hover css data
+      forget_submit_transform_position: '0',
+      forget_submit_box_shadow: 'none',
+
+      // 驗證碼子元件&訊息
       showModal: false,
-      Response_Message: "",
+      Response_Message: '',
 
-      //驗證碼子元件的驗證碼div
+      // 驗證碼子元件的驗證碼div
       showvalidation_message: false,
 
-      //驗證碼子元件的button文字
-      Button_Message: "",
+      // 驗證碼子元件的button文字
+      Button_Message: '',
 
-      //Reset子元件&訊息
+      // Reset子元件&訊息
       Is_Reset_password: false,
-      Reset_API_Response_Message: ""
+      Reset_API_Response_Message: ''
     };
   },
+  mounted () {
+    debugger;
+    this.UserData.ResendMailType = this.resendMailType;
+  },
   methods: {
-    //返回上一頁
-    backtologin: function() {
-      this.$emit("hiddenforget", false);
-      return;
+    // 返回上一頁
+    backtologin: function () {
+      this.$emit('hiddenforget', false);
     },
-    //送出submit的動作
-    forget_submit: function() {
-      if (this.User_Data.Account == "") {
+    // 送出submit的動作
+    forget_submit: function () {
+      if (this.UserData.Account === '') {
         this.IsAccount_alert = true;
         return;
       } else {
         this.IsAccount_alert = false;
       }
-      if (this.User_Data.Email == "") {
+      if (this.UserData.Email === '') {
         this.IsEmail_alert = true;
-        reutrn;
+        return;
       } else {
         this.IsEmail_alert = false;
       }
 
-      //若帳號與信箱都已填寫，並驗證，則傳送驗證信
-      if (this.IsAccount_alert == false && this.IsEmail_alert == false) {
+      // 若帳號與信箱都已填寫，並驗證，則傳送驗證信
+      if (!this.IsAccount_alert && !this.IsEmail_alert) {
         var _this = this;
-        this.axios
-          .post("/Account/check_reset_PassWord_or_resendEmail", {
-            Account: _this.User_Data.Account,
-            Email: _this.User_Data.Email,
-            dosomething: _this.dosomething
-          })
-          .then(data => {
-            //開啟驗證信子元件視窗
+        debugger;
+        this.api.ReSendEmailForReSetPassWord(this.global.SetAccountData(this.UserData))
+          .then(response => {
+            debugger;
+            // 開啟驗證信子元件視窗
             _this.showModal = true;
-            _this.Response_Message = data.data;
+            _this.Response_Message = _this.global.GetResponseMessage(response);
 
-            //先重置父元件tabindex
+            // 先重置父元件tabindex
             _this.forget_tabindex1 = 0;
             _this.forget_tabindex2 = 0;
             _this.forget_tabindex3 = 0;
 
-
-            if (
-              _this.Response_Message == "請輸入驗證碼以重設密碼！" ||
-              _this.Response_Message == "驗證信已重寄，請確認!"
-            ) {
+            if (response.data.responseStatusCode === _this.responseStatusCode.reSetPassWordVerificationCode.statusCode) {
               _this.showvalidation_message = true;
-              _this.Button_Message = "驗證";
+              _this.Button_Message = '驗證';
             } else {
-              _this.Button_Message = "確認";
+              _this.Button_Message = '確認';
             }
-          })
-          .catch(err => {
-            console.log(err);
           });
       }
     },
-    //若未Focus欄位，變換Icon顏色與樣式
-    forget_Account_placeholder: function(key) {
-      if (key == "") {
-        this.forget_Account_placeholder_color = "#bbb";
-        this.forget_Account_Image_position = "16";
+    // 若未Focus欄位，變換Icon顏色與樣式
+    forget_Account_placeholder: function (key) {
+      if (key === '') {
+        this.forget_Account_placeholder_color = '#bbb';
+        this.forget_Account_Image_position = '16';
         this.IsAccount_alert = false;
       }
     },
-    forget_Email_placeholder: function(key) {
-      if (key == "") {
-        this.forget_Email_placeholder_color = "#bbb";
-        this.forget_Email_Image_position = "-211";
+    forget_Email_placeholder: function (key) {
+      if (key === '') {
+        this.forget_Email_placeholder_color = '#bbb';
+        this.forget_Email_Image_position = '-211';
         this.IsEmail_alert = false;
       }
     },
-    //Focus 欄位
-    Focus_forget_Account_input: function() {
+    // Focus 欄位
+    Focus_forget_Account_input: function () {
       this.$refs.forget_account.focus();
-      this.forget_Account_placeholder_color = "transparent";
-      this.forget_Account_Image_position = "-38";
+      this.forget_Account_placeholder_color = 'transparent';
+      this.forget_Account_Image_position = '-38';
       this.forget_tabindex1 = 1;
       this.forget_tabindex2 = 2;
       this.forget_tabindex3 = 3;
     },
-    Focus_forget_Email_input: function() {
+    Focus_forget_Email_input: function () {
       this.$refs.forget_email.focus();
-      this.forget_Email_placeholder_color = "transparent";
-      this.forget_Email_Image_position = "-264";
+      this.forget_Email_placeholder_color = 'transparent';
+      this.forget_Email_Image_position = '-264';
       this.forget_tabindex1 = 1;
       this.forget_tabindex2 = 2;
       this.forget_tabindex3 = 3;
     },
-    //按下Tab時的動作，變換新密碼欄位的icon樣式與submit button的css hover
-    forget_nextfocus: function(ref) {
-      if (ref == "forget_email") {
+    // 按下Tab時的動作，變換新密碼欄位的icon樣式與submit button的css hover
+    forget_nextfocus: function (ref) {
+      if (ref === 'forget_email') {
         this.forget_tabindex1 += 3;
 
-        this.forget_Email_placeholder_color = "transparent";
-        this.forget_Email_Image_position = "-264";
-        this.forget_submit_transform_position = "0";
-        this.forget_submit_box_shadow = "none";
-      } else if (ref == "forget_submitbutton") {
+        this.forget_Email_placeholder_color = 'transparent';
+        this.forget_Email_Image_position = '-264';
+        this.forget_submit_transform_position = '0';
+        this.forget_submit_box_shadow = 'none';
+      } else if (ref === 'forget_submitbutton') {
         this.forget_tabindex2 += 3;
 
-        this.forget_submit_transform_position = "-5";
-        this.forget_submit_box_shadow = "0 0.3em #c41250";
+        this.forget_submit_transform_position = '-5';
+        this.forget_submit_box_shadow = '0 0.3em #c41250';
       } else {
-        this.forget_Account_placeholder_color = "transparent";
-        this.forget_Account_Image_position = "-38";
-        this.forget_submit_transform_position = "0";
-        this.forget_submit_box_shadow = "none";
+        this.forget_Account_placeholder_color = 'transparent';
+        this.forget_Account_Image_position = '-38';
+        this.forget_submit_transform_position = '0';
+        this.forget_submit_box_shadow = 'none';
         this.forget_tabindex1 = 1;
         this.forget_tabindex2 = 2;
         this.forget_tabindex3 = 3;
       }
     },
-    //因submit button的css值已被data鎖定，故無法再css裡設定，這邊用js event來完成 滑鼠hover & leave的動作
-    forget_hoverbutton: function() {
-      this.forget_submit_transform_position = "-5";
-      this.forget_submit_box_shadow = "0 0.3em #c41250";
+    // 因submit button的css值已被data鎖定，故無法再css裡設定，這邊用js event來完成 滑鼠hover & leave的動作
+    forget_hoverbutton: function () {
+      this.forget_submit_transform_position = '-5';
+      this.forget_submit_box_shadow = '0 0.3em #c41250';
     },
-    forget_leavebutton: function() {
-      this.forget_submit_transform_position = "0";
-      this.forget_submit_box_shadow = "none";
+    forget_leavebutton: function () {
+      this.forget_submit_transform_position = '0';
+      this.forget_submit_box_shadow = 'none';
     },
 
-    //驗證碼子元件回傳的事件，用以關閉驗證碼子元件
-    onforget_hiddenMessage: function(data) {
+    // 驗證碼子元件回傳的事件，用以關閉驗證碼子元件
+    onforget_hiddenMessage: function (data) {
       this.showModal = data;
     },
-    //驗證碼子元件回傳的事件，回傳的message會當成Reset子元件的title
-    onReset_API_Response_Message: function(data) {
+    // 驗證碼子元件回傳的事件，回傳的message會當成Reset子元件的title
+    onReset_API_Response_Message: function (data) {
       this.Reset_API_Response_Message = data;
     },
-    //驗證碼子元件回傳的事件，判斷是否開啟Reset子元件
-    onshow_reset_password: function(data) {
+    // 驗證碼子元件回傳的事件，判斷是否開啟Reset子元件
+    onshow_reset_password: function (data) {
       this.Is_Reset_password = data;
       if (data) {
         this.forget_tabindex1 = 0;
@@ -305,34 +299,34 @@ export default {
     }
   },
   computed: {
-    //當前Account_planceholder狀態
-    com_forget_Account_placeholder() {
+    // 當前Account_planceholder狀態
+    com_forget_Account_placeholder () {
       return {
         color: this.forget_Account_placeholder_color,
-        "background-position": "0 " + this.forget_Account_Image_position + "px"
+        'background-position': '0 ' + this.forget_Account_Image_position + 'px'
       };
     },
-    //當前Email_planceholder狀態
-    com_forget_Email_placeholder() {
+    // 當前Email_planceholder狀態
+    com_forget_Email_placeholder () {
       return {
         color: this.forget_Email_placeholder_color,
-        "background-position": "0 " + this.forget_Email_Image_position + "px"
+        'background-position': '0 ' + this.forget_Email_Image_position + 'px'
       };
     },
-    //當前submit button hover的css
-    com_forget_submitfocus() {
+    // 當前submit button hover的css
+    com_forget_submitfocus () {
       return {
         transform:
-          "translateY(" + this.forget_submit_transform_position + "px)",
-        "transition-duration": 0.15 + "s",
-        "box-shadow": this.forget_submit_box_shadow
+          'translateY(' + this.forget_submit_transform_position + 'px)',
+        'transition-duration': 0.15 + 's',
+        'box-shadow': this.forget_submit_box_shadow
       };
     },
-    ...mapGetters(["IsLoading"])
+    ...mapGetters(['IsLoading'])
   },
   directives: {
     focus: {
-      inserted: function(el) {
+      inserted: function (el) {
         // 聚焦元素
         el.focus();
       }
@@ -340,7 +334,6 @@ export default {
   }
 };
 </script>
-
 
 <style>
 @import "../../css/forget.css";

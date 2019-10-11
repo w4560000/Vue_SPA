@@ -4,8 +4,6 @@
   </footer>
 </template>
 
-
- 
 <style>
 footer {
   position: absolute;
@@ -17,8 +15,8 @@ footer {
 </style>
 <script>
 export default {
-  name: "gfooter",
-  data() {
+  name: 'gfooter',
+  data () {
     return {};
   }
 };

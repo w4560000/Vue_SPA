@@ -118,7 +118,7 @@
       :forget_title="forget_title"
       :forget_result="forget_result"
       :submit_text="submit_text"
-      :dosomething="dosomething"
+      :resendMailType="resendMailType"
       @close="Is_click_forget = false"
       v-on:hiddenforget="onhiddenforget"
     ></forget>
@@ -126,144 +126,139 @@
 </template>
 
 <script>
-import login_Signin_Signup_Alert from "./login_Signin_Signup_Alert";
-import login_Signup_Message from "./login_Signup_Message";
-import login_forget from "./forget_password_validationcode";
+import loginSigninSignupAlert from './login_Signin_Signup_Alert';
+import loginSignupMessage from './login_Signup_Message';
+import loginforget from './forget_password_validationcode';
 export default {
   components: {
-    alert: login_Signin_Signup_Alert,
-    modal: login_Signup_Message,
-    forget: login_forget
+    alert: loginSigninSignupAlert,
+    modal: loginSignupMessage,
+    forget: loginforget
   },
-  name: "login",
-  data() {
+  name: 'login',
+  data () {
     return {
-      prev: true, //控制登入btn的按鈕，true = (該頁面為fb_wb_bt)，false = (該頁面為tw_wx_bt)
+      prev: true, // 控制登入btn的按鈕，true = (該頁面為fb_wb_bt)，false = (該頁面為tw_wx_bt)
 
-      //預設帳號密碼文字和位置
-      Account_placeholder_color: "transparent",
-      Account_Image_position: "-38",
-      PassWord_placeholder_color: "#bbb",
-      PassWord_Image_position: "-93",
+      // 預設帳號密碼文字和位置
+      Account_placeholder_color: 'transparent',
+      Account_Image_position: '-38',
+      PassWord_placeholder_color: '#bbb',
+      PassWord_Image_position: '-93',
 
-      submit_transform_position: "0",
-      submit_box_shadow: "none",
-      //判斷是否登入成功&API Response
+      submit_transform_position: '0',
+      submit_box_shadow: 'none',
+      // 判斷是否登入成功&API Response
       Is_Signin_success: false,
-      API_Response_Message: "",
+      API_Response_Message: '',
 
-      //若登入失敗，則在原視窗顯示error
+      // 若登入失敗，則在原視窗顯示error
       IsSignin_error: false,
 
-      //使用者資料
+      // 使用者資料
       User_Data: {
-        Account: "",
-        PassWord: ""
+        Account: '',
+        PassWord: ''
       },
-      Message: "使用 Pinkoi 帳號登入",
+      Message: '使用 Pinkoi 帳號登入',
 
-      //setting click tab鍵的排序
+      // setting click tab鍵的排序
       tabindex1: 1,
       tabindex2: 2,
       tabindex3: 3,
 
-      //若input 輸入為空的alert
+      // 若input 輸入為空的alert
       IsLoginAccount_alert: false,
       IsLoginPassWord_alert: false,
 
-      //若註冊後，卻未驗證，則登入時會開啟子元件-驗證碼視窗
+      // 若註冊後，卻未驗證，則登入時會開啟子元件-驗證碼視窗
       showModal: false,
-      Response_Message: "",
+      Response_Message: '',
       showvalidation_message: false,
-      Button_Message: "",
+      Button_Message: '',
 
-      //點擊忘記密碼or重寄驗證信則開啟子元件 -forget視窗
+      // 點擊忘記密碼or重寄驗證信則開啟子元件 -forget視窗
       Is_click_forget: false,
-      forget_title: "",
-      forget_result: "",
-      submit_text: "",
+      forget_title: '',
+      forget_result: '',
+      submit_text: '',
 
-      //存取點擊忘記密碼或重傳驗證信時的動作
-      dosomething: ""
+      // 存取點擊忘記密碼或重傳驗證信時的動作
+      resendMailType: 0
     };
   },
   methods: {
-    //Focus Input時的動作
-    Focus_Account_input: function() {
+    // Focus Input時的動作
+    Focus_Account_input: function () {
       this.$refs.Account.focus();
-      this.Account_placeholder_color = "transparent";
-      this.Account_Image_position = "-38";
-      this.Message = "使用 Pinkoi 帳號登入";
+      this.Account_placeholder_color = 'transparent';
+      this.Account_Image_position = '-38';
+      this.Message = '使用 Pinkoi 帳號登入';
       this.IsSignin_error = false;
-      (this.tabindex1 = 1), (this.tabindex2 = 2), (this.tabindex3 = 3);
+      this.tabindex1 = 1;
+      this.tabindex2 = 2;
+      this.tabindex3 = 3;
     },
-    Focus_PassWord_input: function() {
+    Focus_PassWord_input: function () {
       this.$refs.PassWord.focus();
-      this.PassWord_placeholder_color = "transparent";
-      this.PassWord_Image_position = "-154";
-      this.Message = "使用 Pinkoi 帳號登入";
+      this.PassWord_placeholder_color = 'transparent';
+      this.PassWord_Image_position = '-154';
+      this.Message = '使用 Pinkoi 帳號登入';
       this.IsSignin_error = false;
-      (this.tabindex1 = 4), (this.tabindex2 = 2), (this.tabindex3 = 3);
+      this.tabindex1 = 4;
+      this.tabindex2 = 2;
+      this.tabindex3 = 3;
     },
-    //若未Focus新密碼欄位，變換Icon顏色與樣式
-    Account_placeholder: function(key) {
-      if (key == "") {
-        this.Account_placeholder_color = "#bbb";
-        this.Account_Image_position = "16";
+    // 若未Focus新密碼欄位，變換Icon顏色與樣式
+    Account_placeholder: function (key) {
+      if (key === '') {
+        this.Account_placeholder_color = '#bbb';
+        this.Account_Image_position = '16';
       } else {
-        this.Account_placeholder_color = "transparent";
-        this.Account_Image_position = "-38";
+        this.Account_placeholder_color = 'transparent';
+        this.Account_Image_position = '-38';
       }
     },
-    PassWord_placeholder: function(key) {
-      if (key == "") {
-        this.PassWord_placeholder_color = "#bbb";
-        this.PassWord_Image_position = "-93";
+    PassWord_placeholder: function (key) {
+      if (key === '') {
+        this.PassWord_placeholder_color = '#bbb';
+        this.PassWord_Image_position = '-93';
       } else {
-        this.PassWord_placeholder_color = "transparent";
-        this.PassWord_Image_position = "-154";
+        this.PassWord_placeholder_color = 'transparent';
+        this.PassWord_Image_position = '-154';
       }
     },
-    //送出submit的動作
-    login_submit: function() {
-      if (this.User_Data.Account == "") {
+    // 送出submit的動作
+    login_submit: function () {
+      if (this.User_Data.Account === '') {
         this.IsLoginAccount_alert = true;
         return;
       } else {
         this.IsLoginAccount_alert = false;
       }
 
-      if (this.User_Data.PassWord == "") {
+      if (this.User_Data.PassWord === '') {
         this.IsLoginPassWord_alert = true;
         return;
       } else {
         this.IsLoginPassWord_alert = false;
       }
       if (
-        this.IsLoginAccount_alert == false &&
-        this.IsLoginPassWord_alert == false
+        this.IsLoginAccount_alert === false &&
+        this.IsLoginPassWord_alert === false
       ) {
         var _this = this;
-        this.axios
-          .post("/Account/SigninValidation", {
-            Account: _this.User_Data.Account,
-            PassWord: _this.User_Data.PassWord
-          })
+        this.api.Signin(this.global.SetAccountData(_this.User_Data))
           .then(data => {
-            if (data.data.message == "登入成功！") {
-              _this.API_Response_Message = data.data.message;
+            debugger;
+            if (data.data.responseStatusCode === _this.responseStatusCode.signinSuccess.statusCode) {
+              _this.API_Response_Message = Array.join(data.data.result);
               _this.Is_Signin_success = true;
-
-              //更新帳號登入訊息&JWT
-              _this.global.SetVuex_Localstorage_ForLogin(
-                _this.User_Data.Account,
-                data.data.jwt
-              );
-            } else if (data.data.message == "您的信箱尚未完成驗證程序！") {
+            } else if (data.data.responseStatusCode === _this.responseStatusCode.emailUnAuthentication.statusCode) {
               _this.showModal = true;
               _this.Response_Message = data.data.message;
               _this.showvalidation_message = true;
-              _this.Button_Message = "驗證";
+              _this.Button_Message = '驗證';
             } else {
               _this.IsSignin_error = true;
               _this.Message = data.data.message;
@@ -274,95 +269,95 @@ export default {
           });
       }
     },
-    //點擊tab時的動作
-    login_nextfocus: function(ref) {
-      if (ref == "Account") {
-        this.Account_placeholder_color = "transparent";
-        this.Account_Image_position = "-38";
-        this.submit_transform_position = "0";
-        this.submit_box_shadow = "none";
+    // 點擊tab時的動作
+    login_nextfocus: function (ref) {
+      if (ref === 'Account') {
+        this.Account_placeholder_color = 'transparent';
+        this.Account_Image_position = '-38';
+        this.submit_transform_position = '0';
+        this.submit_box_shadow = 'none';
 
         this.tabindex3 += 3;
-      } else if (ref == "PassWord") {
-        this.PassWord_placeholder_color = "transparent";
-        this.PassWord_Image_position = "-154";
+      } else if (ref === 'PassWord') {
+        this.PassWord_placeholder_color = 'transparent';
+        this.PassWord_Image_position = '-154';
         this.tabindex1 += 3;
-      } else if (ref == "submitbutton") {
-        this.submit_transform_position = "-5";
-        this.submit_box_shadow = "0 0.3em #c41250";
+      } else if (ref === 'submitbutton') {
+        this.submit_transform_position = '-5';
+        this.submit_box_shadow = '0 0.3em #c41250';
       }
-      if (this.tabindex3 == 6) {
+      if (this.tabindex3 === 6) {
         this.tabindex1 = 1;
         this.tabindex2 = 2;
         this.tabindex3 = 3;
       }
     },
-    //setting 子元件的data
-    forget_password: function() {
+    // setting 子元件的data
+    forget_password: function () {
       this.Is_click_forget = true;
-      this.forget_title = "忘記密碼？";
-      this.forget_result = "已將更換新密碼的資訊寄至您的信箱！";
-      this.submit_text = "重設密碼";
+      this.forget_title = '忘記密碼？';
+      this.forget_result = '已將更換新密碼的資訊寄至您的信箱！';
+      this.submit_text = '重設密碼';
       this.tabindex1 = 0;
       this.tabindex2 = 0;
       this.tabindex3 = 0;
-      this.dosomething = "reset_password";
+      this.resendMailType = this.mailEnum.reSetPassWord;
     },
-    forget_validation: function() {
+    forget_validation: function () {
       this.Is_click_forget = true;
-      this.forget_title = "未收到驗證碼？";
-      this.forget_result = "已將驗證碼寄至您的信箱！";
-      this.submit_text = "重新寄送認證信";
+      this.forget_title = '未收到驗證碼？';
+      this.forget_result = '已將驗證碼寄至您的信箱！';
+      this.submit_text = '重新寄送認證信';
       this.tabindex1 = 0;
       this.tabindex2 = 0;
       this.tabindex3 = 0;
-      this.dosomething = "resendemail";
+      this.resendMailType = this.mailEnum.reSendVerificationCode;
     },
-    //子元件-forget回傳的值，用以判斷是否隱藏子元件
-    onhiddenforget: function(data) {
+    // 子元件-forget回傳的值，用以判斷是否隱藏子元件
+    onhiddenforget: function (data) {
       this.Is_click_forget = data;
 
-      //返回時，自動focus Account欄位
+      // 返回時，自動focus Account欄位
       this.$refs.Account.focus();
-      this.Account_placeholder_color = "transparent";
-      this.Account_Image_position = "-38";
-      (this.tabindex1 = 1), (this.tabindex2 = 2), (this.tabindex3 = 3);
+      this.Account_placeholder_color = 'transparent';
+      this.Account_Image_position = '-38';
+      this.tabindex1 = 1;
+      this.tabindex2 = 2;
+      this.tabindex3 = 3;
     },
-    //因submit button的css值已被data鎖定，故無法再css裡設定，這邊用js event來完成 滑鼠hover & leave的動作
-    hoverbutton: function() {
-      this.submit_transform_position = "-5";
-      this.submit_box_shadow = "0 0.3em #c41250";
+    // 因submit button的css值已被data鎖定，故無法再css裡設定，這邊用js event來完成 滑鼠hover & leave的動作
+    hoverbutton: function () {
+      this.submit_transform_position = '-5';
+      this.submit_box_shadow = '0 0.3em #c41250';
     },
-    leavebutton: function() {
-      this.submit_transform_position = "0";
-      this.submit_box_shadow = "none";
+    leavebutton: function () {
+      this.submit_transform_position = '0';
+      this.submit_box_shadow = 'none';
     },
-    FBLogin: function() {
+    FBLogin: function () {
       var _this = this;
-      FB.login(
-        function(response) {
+      this.FB.login(
+        function (response) {
           _this.statusChangeCallback(response);
         },
         {
-          scope: "email, public_profile",
+          scope: 'email, public_profile',
           return_scopes: true
         }
       );
     },
 
-    statusChangeCallback(response) {
+    statusChangeCallback (response) {
       var _this = this;
-      if (response.status === "connected") {
-
-        FB.api("/me?fields=name,id", function(response) {
-
+      if (response.status === 'connected') {
+        this.FB.api('/me?fields=name,id', function (response) {
           _this.axios
-            .post("/Account/ResponseJWT", {
+            .post('/Account/ResponseJWT', {
               Account: response.name
             })
             .then(data => {
-              //儲存登入資訊至Vuex&Localstorage
-              _this.global.SetVuex_ForFBLogin(
+              // 儲存登入資訊至Vuex&Localstorage
+              _this.global.SetVuexForFBLogin(
                 response,
                 data.data.jwt
               );
@@ -372,45 +367,41 @@ export default {
             });
         });
 
-        this.API_Response_Message = "Facebook登入成功！";
+        this.API_Response_Message = 'Facebook登入成功！';
         _this.Is_Signin_success = true;
-      } else if (response.status === "not_authorized") {
-        _this.global.SetVuex_Localstorage_ForFBLoginProfile("");
-      } else if (response.status === "unknown") {
-        _this.global.SetVuex_Localstorage_ForFBLoginProfile("");
       } else {
-        _this.global.SetVuex_Localstorage_ForFBLoginProfile("");
+        _this.global.SetVuex_Localstorage_ForFBLoginProfile('');
       }
     }
   },
   computed: {
-    com_Account_placeholder() {
-      //判別當前Account_planceholder狀態
+    com_Account_placeholder () {
+      // 判別當前Account_planceholder狀態
       return {
         color: this.Account_placeholder_color,
-        "background-position": "0 " + this.Account_Image_position + "px"
+        'background-position': '0 ' + this.Account_Image_position + 'px'
       };
     },
-    com_PassWord_placeholder() {
-      //判別當前PassWord_planceholder狀態
+    com_PassWord_placeholder () {
+      // 判別當前PassWord_planceholder狀態
       return {
         color: this.PassWord_placeholder_color,
-        "background-position": "0 " + this.PassWord_Image_position + "px"
+        'background-position': '0 ' + this.PassWord_Image_position + 'px'
       };
     },
-    //當前submit button hover的css
-    com_button_fucus() {
+    // 當前submit button hover的css
+    com_button_fucus () {
       return {
-        transform: "translateY(" + this.submit_transform_position + "px)",
-        "transition-duration": 0.15 + "s",
-        "box-shadow": this.submit_box_shadow
+        transform: 'translateY(' + this.submit_transform_position + 'px)',
+        'transition-duration': 0.15 + 's',
+        'box-shadow': this.submit_box_shadow
       };
     }
   },
 
   directives: {
     focus: {
-      inserted: function(el) {
+      inserted: function (el) {
         // 聚焦元素
         el.focus();
       }
