@@ -16,10 +16,10 @@ instance.defaults.headers.post['Access-Control-Allow-Origin'] = 'origin-list';
 // 全局封装错误处理函数
 instance.interceptors.request.use(
   config => {
-    return config;
+    return config
   },
   err => {
-    return Promise.reject(err);
+    return Promise.reject(err)
   }
 );
 
@@ -55,7 +55,7 @@ instance.interceptors.response.use(
           console.log('服务器错误');
       }
     }
-    return Promise.reject(error); // 返回接口返回的错误信息
+    return Promise.reject(error) // 返回接口返回的错误信息
   }
 );
 
