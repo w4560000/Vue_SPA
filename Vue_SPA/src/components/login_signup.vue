@@ -188,7 +188,6 @@ export default {
     },
     // Focus時，變更Input icon
     Focus_Account_input: function () {
-      debugger;
       this.$refs.Account.focus();
       this.Account_placeholder_color = 'transparent';
       this.Account_Image_position = '-38';
@@ -402,7 +401,6 @@ export default {
           var _this = this;
           this.api.SignupAccount(this.global.SetAccountData(_this.UserData))
             .then(response => {
-              debugger;
               // 驗證碼子元件&訊息
               _this.showModal = true;
               _this.Response_Message = _this.global.GetResponseMessage(response);

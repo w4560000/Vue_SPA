@@ -9,12 +9,15 @@
   right: 0;
   bottom: 0;
   left: 0;
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-pack: center;
-      justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background-color: #d8d8d8;
 }
 
@@ -101,13 +104,17 @@
   background-image: url(../src/image/img_login_facebook_icon.png);
   background-repeat: no-repeat;
   background-position: 12px center;
-  box-shadow: 1px 0 0 0 #4765a3;
+  -webkit-box-shadow: 1px 0 0 0 #4765a3;
+          box-shadow: 1px 0 0 0 #4765a3;
 }
 
 .login-body .login-outer .login-wrapper-login .login-inner-wrapper .login-upper .social-btn .inner-btn-wrapper .social-login-btn .m-button-fb:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0.3em #244279;
-  transition-duration: 0.15s;
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-box-shadow: 0 0.3em #244279;
+          box-shadow: 0 0.3em #244279;
+  -webkit-transition-duration: 0.15s;
+          transition-duration: 0.15s;
 }
 
 .login-body .login-outer .login-wrapper-login .login-inner-wrapper .login-upper .social-btn .inner-btn-wrapper .social-login-btn .m-button-weibo {
@@ -142,9 +149,12 @@
 }
 
 .login-body .login-outer .login-wrapper-login .login-inner-wrapper .login-upper .social-btn .inner-btn-wrapper .social-login-btn .m-button-weibo:hover {
-  transform: translateY(-5px);
-  transition-duration: 0.15s;
-  box-shadow: 0 0.3em #e06818;
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-transition-duration: 0.15s;
+          transition-duration: 0.15s;
+  -webkit-box-shadow: 0 0.3em #e06818;
+          box-shadow: 0 0.3em #e06818;
 }
 
 .login-body .login-outer .login-wrapper-login .login-inner-wrapper .login-upper .social-btn .inner-btn-wrapper .social-login-btn .m-button-twitter {
@@ -174,13 +184,17 @@
   background-image: url(../src/image/img_login_twitter_icon.png);
   background-repeat: no-repeat;
   background-position: 12px center;
-  box-shadow: 1px 0 0 0 #2593be;
+  -webkit-box-shadow: 1px 0 0 0 #2593be;
+          box-shadow: 1px 0 0 0 #2593be;
 }
 
 .login-body .login-outer .login-wrapper-login .login-inner-wrapper .login-upper .social-btn .inner-btn-wrapper .social-login-btn .m-button-twitter:hover {
-  transform: translateY(-5px);
-  transition-duration: 0.15s;
-  box-shadow: 0 0.3em #4287d7;
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-transition-duration: 0.15s;
+          transition-duration: 0.15s;
+  -webkit-box-shadow: 0 0.3em #4287d7;
+          box-shadow: 0 0.3em #4287d7;
 }
 
 .login-body .login-outer .login-wrapper-login .login-inner-wrapper .login-upper .social-btn .inner-btn-wrapper .social-login-btn .m-button-weixin {
@@ -213,13 +227,17 @@
   background-repeat: no-repeat;
   background-position: 5px center;
   background-size: 80%;
-  box-shadow: 1px 0 0 0 #64a534;
+  -webkit-box-shadow: 1px 0 0 0 #64a534;
+          box-shadow: 1px 0 0 0 #64a534;
 }
 
 .login-body .login-outer .login-wrapper-login .login-inner-wrapper .login-upper .social-btn .inner-btn-wrapper .social-login-btn .m-button-weixin:hover {
-  transform: translateY(-5px);
-  transition-duration: 0.15s;
-  box-shadow: 0 0.3em #3a7212;
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-transition-duration: 0.15s;
+          transition-duration: 0.15s;
+  -webkit-box-shadow: 0 0.3em #3a7212;
+          box-shadow: 0 0.3em #3a7212;
 }
 
 .login-body .login-outer .login-wrapper-login .login-inner-wrapper .login-upper .prev-next {
@@ -293,7 +311,8 @@
   width: 100%;
   padding: 17px 20px 17px 40px;
   border: 1px solid #ccc;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border-radius: 8px 8px 0 0;
   outline: none;
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
@@ -326,7 +345,8 @@
   border-radius: 0 0 8px 8px;
   outline: none;
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   cursor: text;
 }
 
@@ -359,7 +379,8 @@
   padding-right: 40px;
   padding-left: 40px;
   width: 100%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-weight: 600;
   padding: 12px 40px 13px 40px;
   background: #f5548c;
@@ -441,16 +462,31 @@
   background: white;
   border-radius: 8px 8px 8px 8px;
   /* animation 參數設定 */
-  transform-origin: 0%;
-  animation: toright 0.1s;
+  -webkit-transform-origin: 0%;
+          transform-origin: 0%;
+  -webkit-animation: toright 0.1s;
+          animation: toright 0.1s;
+}
+
+@-webkit-keyframes toright {
+  from {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
 }
 
 @keyframes toright {
   from {
-    transform: scaleX(0);
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
   }
   to {
-    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
   }
 }
 
@@ -462,16 +498,31 @@
   background: white;
   border-radius: 8px 8px 8px 8px;
   /* animation 參數設定 */
-  transform-origin: 100%;
-  animation: toleft 0.1s;
+  -webkit-transform-origin: 100%;
+          transform-origin: 100%;
+  -webkit-animation: toleft 0.1s;
+          animation: toleft 0.1s;
+}
+
+@-webkit-keyframes toleft {
+  from {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
 }
 
 @keyframes toleft {
   from {
-    transform: scaleX(0);
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
   }
   to {
-    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
   }
 }
 
@@ -486,7 +537,8 @@
   /*设置right和top使叉号居中*/
   border-radius: 0 0 0 50%;
   background: red;
-  transform: rotate(-11deg);
+  -webkit-transform: rotate(-11deg);
+          transform: rotate(-11deg);
 }
 
 .useless::after {
@@ -500,7 +552,8 @@
   /*设置right和top使叉号居中*/
   border-radius: 0 0 0 50%;
   background: red;
-  transform: rotate(10deg);
+  -webkit-transform: rotate(10deg);
+          transform: rotate(10deg);
 }
 
 .signin_error {

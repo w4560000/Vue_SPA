@@ -30,7 +30,7 @@ api.instance.interceptors.response.use(response => {
   if (response.status === 200) {
     store.dispatch('SetLoading', false);
 
-    if (response.data.jwtData.jwt !== null) {
+    if (response.data.jwtData !== null && response.data.jwtData.jwt !== null) {
       global.SetVuexLocalstorageForLogin(response.data.jwtData);
     }
   }
@@ -77,19 +77,12 @@ router.beforeEach((to, from, next) => {
   if (to.fullPath === '/') {
     store.dispatch('updateIsShowHeader', true);
     store.dispatch('updateIsShowFooter', true);
-
     if (Account !== '') {
-      api.GetImage({account: Account})
-        .then(data => {
-          debugger;
-          if (data.data !== '') {
-            if (data.data !== '') {
-              store.dispatch('SetImageURL', data.data);
-            }
+      api.GetImage({AccountName: Account})
+        .then(response => {
+          if (response.data.responseStatusCode === responseStatusCodeEnum.getAccountImageSuccess.statusCode) {
+            store.dispatch('SetImageURL', response.data.data + `?random= + ${Math.random()}`);
           }
-        })
-        .catch(err => {
-          console.log(err);
         });
     }
   }

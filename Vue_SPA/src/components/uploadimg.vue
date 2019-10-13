@@ -31,82 +31,81 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Upload_Success_Alert from "./login_Signin_Signup_Alert";
-import Upload_Error_Message from "./login_Signup_Message";
-import { debug } from "util";
+import { mapGetters } from 'vuex';
+import Upload_Success_Alert from './login_Signin_Signup_Alert';
+import Upload_Error_Message from './login_Signup_Message';
+import { debug } from 'util';
 
 export default {
-  name: "uploadimg",
+  name: 'uploadimg',
   components: {
     Uploadmodal: Upload_Error_Message,
     Uploadalert: Upload_Success_Alert
   },
-  data() {
+  data () {
     return {
       // 轉成base64字串的Url
-      dataUrl: "",
-      //確認是否點擊大頭照上傳
+      dataUrl: '',
+      // 確認是否點擊大頭照上傳
       IsUpload: false,
 
       //
-      type: "",
+      type: '',
 
-      //大頭照上傳的input，因若一開始為file，則fb使用者點擊時，就算alert出錯誤視窗，還是會叫他選檔案，改為判斷是否為fb使用者後再設定input type
-      inputtype: "",
+      // 大頭照上傳的input，因若一開始為file，則fb使用者點擊時，就算alert出錯誤視窗，還是會叫他選檔案，改為判斷是否為fb使用者後再設定input type
+      inputtype: '',
       Is_Upload_success: false,
 
       ShowUploadMessage: false,
       Uploadshowvalidation_message: false,
-      UploadButton_Message: "",
-      UploadResponse_Message: ""
+      UploadButton_Message: '',
+      UploadResponse_Message: ''
     };
   },
   methods: {
-    imgPreview(file) {
+    imgPreview (file) {
       let _this = this;
       // 看支持不支持FileReader
       if (!file || !window.FileReader) return;
 
       if (/^image/.test(file.type)) {
-        _this.type = file.type + "檔";
+        _this.type = file.type + '檔';
         // 创建一个reader
         let reader = new FileReader();
         // 将图片将转成 base64 格式
         reader.readAsDataURL(file);
         // 读取成功后的回调
-        reader.onloadend = function() {
+        reader.onloadend = function () {
           _this.dataUrl = this.result;
           _this.IsUpload = true;
         };
       }
     },
 
-    changeimage: function() {
+    changeimage: function () {
       if (this.FBauthorized == true) {
-        this.UploadResponse_Message = "使用FB登入無法更改大頭照！";
+        this.UploadResponse_Message = '使用FB登入無法更改大頭照！';
         this.Is_Upload_success = true;
-        this.inputtype = "text";
-        this.$refs.inputer.type = "text";
+        this.inputtype = 'text';
+        this.$refs.inputer.type = 'text';
       } else {
-        this.inputtype = "file";
+        this.inputtype = 'file';
 
-        //控制dom type，防止彈出select file window
-        this.$refs.inputer.type = "file";
+        // 控制dom type，防止彈出select file window
+        this.$refs.inputer.type = 'file';
         this.$refs.inputer.click();
       }
     },
-    handleFileChange(e) {
-      debugger;
+    handleFileChange (e) {
       if (this.FBauthorized == false) {
         let inputDOM = this.$refs.inputer;
 
-        //抓取檔案
+        // 抓取檔案
         this.file =
           inputDOM.files[0] == undefined
             ? e.path[0].files[0]
             : inputDOM.files[0];
-        this.errText = "";
+        this.errText = '';
 
         let size = Math.floor(this.file.size / 1024);
         if (size > 1000) {
@@ -115,7 +114,7 @@ export default {
         }
 
         // 触发这个组件对象的input事件
-        this.$emit("input", this.file);
+        this.$emit('input', this.file);
 
         // 这里就可以获取到文件的名字了
         this.fileName = this.file.name;
@@ -126,31 +125,24 @@ export default {
         this.imgPreview(this.file);
       }
     },
-    on_hiddenMessage: function(bool) {
+    on_hiddenMessage: function (bool) {
       this.ShowUploadMessage = bool;
     },
-    submitimage: function() {
+    submitimage: function () {
       var _this = this;
-      this.axios
-        .post(
-          "/Account/UpLoadImage",
-          {
-            Account: _this.Login_User,
-            base64data: _this.dataUrl
-          },
-          {
-            headers: { Authorization: "bearer " + _this.Token }
-          }
-        )
-        .then(data => {
-          debugger;
-          _this.UploadResponse_Message = data.data;
-          if (data.data == "上傳成功！") {
-            _this.Is_Upload_success = true;
-          } else {
+      this.api.UpLoadImage(
+        {
+          Account: _this.Login_User,
+          base64data: _this.dataUrl
+        })
+        .then(response => {
+          _this.UploadResponse_Message = _this.global.GetResponseMessage(response);
+          if (response.data.responseStatusCode === _this.responseStatusCode.accountImageTypeError.statusCode ||
+          response.data.responseStatusCode === _this.responseStatusCode.upLoadAccountImageFail.statusCode) {
             _this.ShowUploadMessage = true;
-
-            _this.UploadButton_Message = "確認";
+            _this.UploadButton_Message = '確認';
+          } else {
+            _this.Is_Upload_success = true;
           }
         })
         .catch(err => {
@@ -159,9 +151,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["Login_User"]),
-    ...mapGetters(["Token"]),
-    ...mapGetters(["FBauthorized"])
+    ...mapGetters(['Login_User']),
+    ...mapGetters(['Token']),
+    ...mapGetters(['FBauthorized'])
   }
 };
 </script>

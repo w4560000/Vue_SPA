@@ -1,3 +1,21 @@
+@-webkit-keyframes title {
+  0% {
+    opacity: 0;
+  }
+  48% {
+    opacity: 0;
+  }
+  52% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes title {
   0% {
     opacity: 0;
@@ -16,12 +34,36 @@
   }
 }
 
+@-webkit-keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes fade {
   0% {
     opacity: 1;
   }
   100% {
     opacity: 0;
+  }
+}
+
+@-webkit-keyframes bg {
+  0% {
+    background-color: #306f99;
+  }
+  30% {
+    background-color: #19470f;
+  }
+  70% {
+    background-color: #734a10;
+  }
+  100% {
+    background-color: #306f99;
   }
 }
 
@@ -37,6 +79,42 @@
   }
   100% {
     background-color: #306f99;
+  }
+}
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
@@ -103,8 +181,10 @@
   left: 50%;
   padding: 30px 30px 30px 0;
   background: black;
-  animation: bg 1.5s linear infinite;
-  box-shadow: inset 0 0 45px 30px black;
+  -webkit-animation: bg 1.5s linear infinite;
+          animation: bg 1.5s linear infinite;
+  -webkit-box-shadow: inset 0 0 45px 30px black;
+          box-shadow: inset 0 0 45px 30px black;
 }
 
 .loading {
@@ -137,9 +217,11 @@
   height: 5.5px;
   width: 5.5px;
   background: #eaf7ff;
-  box-shadow: 0 0 15px #bce4ff;
+  -webkit-box-shadow: 0 0 15px #bce4ff;
+          box-shadow: 0 0 15px #bce4ff;
   border-radius: 8px;
-  animation: blink 1s infinite;
+  -webkit-animation: blink 1s infinite;
+          animation: blink 1s infinite;
 }
 
 .loading span:before {
@@ -151,12 +233,15 @@
   height: 5.5px;
   width: 5.5px;
   background: #eaf7ff;
-  box-shadow: 0 0 15px #bce4ff;
+  -webkit-box-shadow: 0 0 15px #bce4ff;
+          box-shadow: 0 0 15px #bce4ff;
   border-radius: 8px;
-  animation: blink 1s infinite;
+  -webkit-animation: blink 1s infinite;
+          animation: blink 1s infinite;
 }
 
 .loading span.title {
-  animation: title 1s linear infinite;
+  -webkit-animation: title 1s linear infinite;
+          animation: title 1s linear infinite;
 }
 /*# sourceMappingURL=loading.css.map */

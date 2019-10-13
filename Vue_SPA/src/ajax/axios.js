@@ -1,3 +1,5 @@
+import global from './components/common';
+
 // 引用axios
 var axios = require('axios');
 
@@ -30,12 +32,13 @@ instance.interceptors.response.use(
     var user = localStorage.getItem('login');
     var FBuser = localStorage.getItem('FBlogin');
 
-    if (response.data.jwt !== null || response.data.jwt !== undefined) {
-      if (user != null) {
-        window.localStorage.setItem(user + '_JWT', response.data.jwt);
-      } else if (FBuser !== null) {
-        window.localStorage.setItem(FBuser + '_JWT', response.data.jwt);
-      }
+    global.SetVuexLocalstorageForLogin(response.data.jwtData);
+global(SetVuexLocalstorageForLogout)
+    if(response.data.isFacebookLogin)
+    {
+global.SetVuexForFBLogin()
+    }
+
     }
 
     return response;
@@ -70,6 +73,11 @@ const api = {
   ReSendEmailForReSetPassWord: (accountData) => instance.post('/Account/ReSendEmailForReSetPassWord', accountData),
   CheckVerificationCodeForReSetPassWord: (accountData) => instance.post('/Account/CheckVerificationCodeForReSetPassWord', accountData),
   ResetPassWord: (accountData) => instance.post('/Account/ResetPassWord', accountData),
+  UpLoadImage: (uploadData) => instance.post('/Account/UpLoadImage', uploadData, {
+    headers: {
+      Authorization: 'bearer ' + localStorage.getItem(uploadData.account + '_JWT')
+    }
+  }),
   GetImage: (accountData) => instance.post('/Account/GetImage', accountData, {
     headers: {
       Authorization: 'bearer ' + localStorage.getItem(accountData.account + '_JWT')

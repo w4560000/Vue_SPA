@@ -8,6 +8,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: table;
+  -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
 }
 
@@ -21,7 +22,9 @@
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
   border-radius: 20px;
@@ -36,24 +39,30 @@
 }
 
 .alert-mask .alert-wrapper .alert-container .success .router-link-active {
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   width: 200px;
   height: 50px;
   margin-left: 50px;
   background: #f5548c;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-pack: center;
-      justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   text-decoration: none;
   border-radius: 5px;
 }
 
 .alert-mask .alert-wrapper .alert-container .success .router-link-active:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0.3em #830e35;
-  transition-duration: 0.15s;
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-box-shadow: 0 0.3em #830e35;
+          box-shadow: 0 0.3em #830e35;
+  -webkit-transition-duration: 0.15s;
+          transition-duration: 0.15s;
 }
 
 .alert-mask .alert-wrapper .alert-container .success .router-link-active span {

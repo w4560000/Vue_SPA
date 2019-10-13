@@ -72,7 +72,8 @@
   line-height: 1;
   border: 0;
   font-family: Microsoft JhengHei;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .g-header .g-wrap-expand .g-header-top .header-search #header-search-form .submit:hover {
@@ -119,8 +120,9 @@
   position: absolute;
   top: 23px;
   right: 5px;
-  -ms-flex-align: center;
-      align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-size: 14px;
 }
 
@@ -138,7 +140,8 @@
   font-weight: 400;
   line-height: 1.4;
   padding: 6px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "微軟正黑體", "Microsoft JhengHei", "Noto Sans T Chinese", "Droid Sans Fallback", sans-serif;
 }
 
@@ -194,10 +197,12 @@
 }
 
 .g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox {
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   border: 1px solid #ebebeb;
-  box-shadow: 0 8px 20px 10px rgba(41, 36, 45, 0.04);
+  -webkit-box-shadow: 0 8px 20px 10px rgba(41, 36, 45, 0.04);
+          box-shadow: 0 8px 20px 10px rgba(41, 36, 45, 0.04);
   padding-top: 14px;
   padding-bottom: 14px;
   background: #fff;
@@ -205,7 +210,8 @@
 
 .g-header .g-wrap-expand .g-header-top .header-right .relative .Tab_User .user_menu .user_menu_container .menu_border_flexbox .user_list {
   width: 250px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   padding-right: 14px;
   padding-left: 0px;
 }
@@ -371,6 +377,7 @@
   border-bottom: 2px solid #f5548c;
   color: #f5548c;
   padding-bottom: 10px;
+  -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 

@@ -12,12 +12,15 @@
   right: 0;
   bottom: 0;
   left: 0;
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-pack: center;
-      justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background-color: #d8d8d8;
 }
 
@@ -115,7 +118,8 @@
   border-radius: 5px 5px 0 0;
   width: 100%;
   padding: 17px 20px 17px 40px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-size: 14px;
   border: 1px solid #ccc;
   margin-bottom: -1px;
@@ -137,7 +141,8 @@
   right: 12px;
   top: 0;
   bottom: 3px;
-  transform: translate(15px, 0);
+  -webkit-transform: translate(15px, 0);
+          transform: translate(15px, 0);
   padding: 15px 30px 15px 28px;
   text-align: left;
   font-size: 16px;
@@ -152,7 +157,8 @@
 .login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .login-signup-ul #signup-password {
   width: 100%;
   padding: 17px 20px 17px 40px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-size: 14px;
   border: 1px solid #ccc;
   margin-bottom: -1px;
@@ -174,7 +180,8 @@
   right: 12px;
   top: 0;
   bottom: 3px;
-  transform: translate(15px, 0);
+  -webkit-transform: translate(15px, 0);
+          transform: translate(15px, 0);
   padding: 15px 30px 15px 28px;
   text-align: left;
   font-size: 16px;
@@ -191,7 +198,8 @@
   border-radius: 0 0 5px 5px;
   width: 100%;
   padding: 17px 20px 17px 40px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-size: 14px;
   border: 1px solid #ccc;
   margin-bottom: -1px;
@@ -212,7 +220,8 @@
   right: 12px;
   top: 0;
   bottom: 3px;
-  transform: translate(15px, 0);
+  -webkit-transform: translate(15px, 0);
+          transform: translate(15px, 0);
   padding: 15px 30px 15px 28px;
   text-align: left;
   font-size: 16px;
@@ -246,7 +255,8 @@
 .login-body .login-outer .login-wrapper-signup .login-inner-wrapper .form-wrapper .login-form .button-wrapper {
   margin-top: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   width: 300px;
   margin-left: auto;
   margin-right: auto;
@@ -258,7 +268,8 @@
   padding-right: 40px;
   padding-left: 40px;
   width: 100%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-weight: 600;
   cursor: pointer;
   font-size: 21px;
@@ -278,7 +289,8 @@
   margin-top: 0;
   display: none;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   width: 300px;
   margin-left: auto;
   margin-right: auto;
@@ -290,12 +302,16 @@
   padding-right: 40px;
   padding-left: 40px;
   width: 100%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-weight: 600;
   cursor: pointer;
   font-size: 21px;
   background: #f5548c;
+  -webkit-transition: -webkit-transform 0.1s linear, -webkit-box-shadow 0.1s linear;
+  transition: -webkit-transform 0.1s linear, -webkit-box-shadow 0.1s linear;
   transition: transform 0.1s linear, box-shadow 0.1s linear;
+  transition: transform 0.1s linear, box-shadow 0.1s linear, -webkit-transform 0.1s linear, -webkit-box-shadow 0.1s linear;
   color: #fff;
   text-align: center;
   letter-spacing: 2px;

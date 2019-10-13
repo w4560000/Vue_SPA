@@ -249,19 +249,18 @@ export default {
       ) {
         var _this = this;
         this.api.Signin(this.global.SetAccountData(_this.User_Data))
-          .then(data => {
-            debugger;
-            if (data.data.responseStatusCode === _this.responseStatusCode.signinSuccess.statusCode) {
-              _this.API_Response_Message = Array.join(data.data.result);
+          .then(response => {
+            if (response.data.responseStatusCode === _this.responseStatusCode.signinSuccess.statusCode) {
+              _this.API_Response_Message = _this.global.GetResponseMessage(response);
               _this.Is_Signin_success = true;
-            } else if (data.data.responseStatusCode === _this.responseStatusCode.emailUnAuthentication.statusCode) {
+            } else if (response.data.responseStatusCode === _this.responseStatusCode.emailUnAuthentication.statusCode) {
               _this.showModal = true;
-              _this.Response_Message = data.data.message;
+              _this.Response_Message = response.data.message;
               _this.showvalidation_message = true;
               _this.Button_Message = '驗證';
             } else {
               _this.IsSignin_error = true;
-              _this.Message = data.data.message;
+              _this.Message = response.data.message;
             }
           })
           .catch(err => {

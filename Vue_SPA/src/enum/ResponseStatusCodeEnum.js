@@ -62,6 +62,26 @@ const responseStatusCodeEnum = {
     statusCode: '032',
     message: '驗證失敗！請確認驗證碼是否輸入正確！'},
 
+  // 上傳帳號大頭貼失敗 檔名錯誤
+  accountImageTypeError: {
+    statusCode: '040',
+    message: '上傳失敗！請上傳JPF檔orPNG檔！'},
+
+  // 上傳帳號大頭貼失敗 AzureStorage上傳失敗
+  upLoadAccountImageFail: {
+    statusCode: '041',
+    message: '上傳帳號大頭貼失敗！'},
+
+  // 上傳帳號大頭貼成功
+  upLoadAccountImageSuccess: {
+    statusCode: '042',
+    message: '上傳帳號大頭貼成功！'},
+
+  // 取得帳號大頭貼成功
+  getAccountImageSuccess: {
+    statusCode: '043',
+    message: '取得帳號大頭貼成功！'},
+
   // 資料庫新增失敗
   InsertError: {
     statusCode: '100',

@@ -166,7 +166,6 @@ export default {
     };
   },
   mounted () {
-    debugger;
     this.UserData.ResendMailType = this.resendMailType;
   },
   methods: {
@@ -192,10 +191,8 @@ export default {
       // 若帳號與信箱都已填寫，並驗證，則傳送驗證信
       if (!this.IsAccount_alert && !this.IsEmail_alert) {
         var _this = this;
-        debugger;
         this.api.ReSendEmailForReSetPassWord(this.global.SetAccountData(this.UserData))
           .then(response => {
-            debugger;
             // 開啟驗證信子元件視窗
             _this.showModal = true;
             _this.Response_Message = _this.global.GetResponseMessage(response);

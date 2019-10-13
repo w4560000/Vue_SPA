@@ -10,6 +10,38 @@ function SetVuexLocalstorageForLogin (jwtData) {
   window.localStorage.setItem('login', jwtData.account);
   window.localStorage.setItem(jwtData.account + '_JWT', jwtData.jwt);
 }
+
+// 更新使用者的JWT
+function UpdateUserJwt (JWT) {
+  store.dispatch('Update_Token', JWT);
+  window.localStorage.removeItem(window.localStorage.getItem('login') + '_JWT');
+  window.localStorage.setItem(window.localStorage.getItem('login') + '_JWT', JWT);
+}
+
+// 全局設定FB登入資訊
+function SetVuexForFBLogin (response, JWT) {
+  store.dispatch('Check_Login', true);
+  store.dispatch('SetFBauthorized', true);
+
+  store.dispatch('SetFBprofile', response);
+  store.dispatch('Update_Token', JWT);
+
+  if (response !== '') {
+    store.dispatch('Update_Login_User', response.name);
+    window.localStorage.setItem('IsFBUser', true);
+    window.localStorage.setItem('FBlogin', response.name);
+    window.localStorage.setItem('FBuserID', response.id);
+    window.localStorage.setItem(response.name + '_JWT', JWT);
+  } else store.dispatch('Update_Login_User', '');
+}
+
+// 更新FB使用者的JWT
+function UpdateFBUserJwt (JWT) {
+  store.dispatch('Update_Token', JWT);
+  window.localStorage.removeItem(window.localStorage.getItem('FBlogin') + '_JWT');
+  window.localStorage.setItem(window.localStorage.getItem('FBlogin') + '_JWT', JWT);
+}
+
 // 全局設定刪除登出者訊息
 function SetVuexLocalstorageForLogout (Account) {
   store.dispatch('Update_Token', '');
@@ -23,22 +55,6 @@ function SetVuexLocalstorageForLogout (Account) {
   window.localStorage.removeItem(Account + '_JWT');
 }
 
-// 全局設定FB登入資訊
-function SetVuexForFBLogin (response, JWT) {
-  store.dispatch('Check_Login', true);
-  store.dispatch('SetFBauthorized', true);
-
-  store.dispatch('SetFBprofile', response);
-  store.dispatch('Update_Token', JWT);
-
-  if (response !== '') {
-    store.dispatch('Update_Login_User', response.name);
-    window.localStorage.setItem('FBlogin', response.name);
-    window.localStorage.setItem('FBuserID', response.id);
-    window.localStorage.setItem(response.name + '_JWT', JWT);
-  } else store.dispatch('Update_Login_User', '');
-}
-
 // mapping成API viewModel
 function SetAccountData (userData) {
   return {
@@ -46,7 +62,10 @@ function SetAccountData (userData) {
     PassWord: userData.PassWord !== undefined ? userData.PassWord : null,
     Email: userData.Email !== undefined ? userData.Email : null,
     VerificationCode: userData.VerificationCode !== undefined ? userData.VerificationCode : null,
-    ResendMailType: userData.ResendMailType !== undefined ? userData.ResendMailType : 0
+    ResendMailType: userData.ResendMailType !== undefined ? userData.ResendMailType : 0,
+
+    // 抓取localStorage 來判定是否從FB登入
+    IsFacebookLogin: window.localStorage.getItem(window.localStorage.getItem('FBlogin') + '_JWT')
   };
 }
 
@@ -76,8 +95,10 @@ function getEnumByValue (value, enumObj) {
 // 暴露出这些属性和方法
 export default {
   SetVuexLocalstorageForLogin,
-  SetVuexLocalstorageForLogout,
+  UpdateUserJwt,
   SetVuexForFBLogin,
+  UpdateFBUserJwt,
+  SetVuexLocalstorageForLogout,
   SetAccountData,
   GetResponseMessage,
   getEnumByValue
