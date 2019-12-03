@@ -86,7 +86,6 @@
       v-on:show_reset_password="onshow_reset_password"
       v-on:Reset_API_Response_Message="onReset_API_Response_Message"
     ></modal>
-    <Loading v-if="IsLoading" @close="IsLoading"></Loading>
     <reset
       v-if="Is_Reset_password"
       :Reset_API_Response_Message="Reset_API_Response_Message"

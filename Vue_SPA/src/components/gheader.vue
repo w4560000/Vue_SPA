@@ -170,7 +170,7 @@ export default {
             _this.Is_LogOut = true;
 
             // 刪除登陸訊息
-            _this.global.SetVuexLocalstorageForLogout(_this.Login_User);
+            _this.global.SetVuexLocalstorageForLogout();
           }
         });
     },

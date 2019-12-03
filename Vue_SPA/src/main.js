@@ -25,19 +25,6 @@ api.instance.interceptors.request.use(function (config) {
   return config;
 });
 
-api.instance.interceptors.response.use(response => {
-  debugger;
-  if (response.status === 200) {
-    store.dispatch('SetLoading', false);
-
-    if (response.data.jwtData !== null && response.data.jwtData.jwt !== null) {
-      global.SetVuexLocalstorageForLogin(response.data.jwtData);
-    }
-  }
-
-  return response;
-});
-
 //  这样就可以通过$axios发起请求了（个人使用喜好）
 Vue.prototype.api = api;
 Vue.prototype.global = global;
@@ -60,12 +47,12 @@ router.beforeEach((to, from, next) => {
     api.ResponseJwt({ Account: Account });
   }
   if (user != null) {
-    store.dispatch('Update_Login_User', user);
+    store.dispatch('Login_User', user);
     store.dispatch('Check_Login', true);
     store.dispatch('Update_Token', localStorage.getItem('JWT'));
   } else if (FBuser != null) {
     store.dispatch('Check_Login', true);
-    store.dispatch('Update_Login_User', FBuser);
+    store.dispatch('Login_User', FBuser);
     store.dispatch('Update_Token', localStorage.getItem('JWT'));
     store.dispatch('SetFBauthorized', true);
 
@@ -78,8 +65,9 @@ router.beforeEach((to, from, next) => {
     store.dispatch('updateIsShowHeader', true);
     store.dispatch('updateIsShowFooter', true);
     if (Account !== '') {
-      api.GetImage({AccountName: Account})
+      api.GetImage({ AccountName: Account })
         .then(response => {
+          debugger;
           if (response.data.responseStatusCode === responseStatusCodeEnum.getAccountImageSuccess.statusCode) {
             store.dispatch('SetImageURL', response.data.data + `?random= + ${Math.random()}`);
           }

@@ -12,7 +12,7 @@
 <script>
 
 export default {
-  name: "loading",
+  name: 'loading'
 };
 </script>
 

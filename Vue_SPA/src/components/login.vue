@@ -7,13 +7,24 @@
             <div class="logo"></div>
             <div class="social-btn">
               <div class="inner-btn-wrapper">
-                <div class="social-login-btn" :class="{'animation-toright':prev}" v-if="prev">
-                  <a class="m-button-fb" @click="FBLogin">用Facebook登入</a>
+                <div
+                  class="social-login-btn"
+                  :class="{'animation-toright':prev}"
+                  v-if="prev"
+                >
+                  <a
+                    class="m-button-fb"
+                    @click="FBLogin"
+                  >用Facebook登入</a>
                   <a class="m-button-weibo">
                     <i class="useless"></i>无法用Weibo登录
                   </a>
                 </div>
-                <div class="social-login-btn" :class="{'animation-toleft':!prev}" v-if="!prev">
+                <div
+                  class="social-login-btn"
+                  :class="{'animation-toleft':!prev}"
+                  v-if="!prev"
+                >
                   <a class="m-button-twitter">
                     <i class="useless"></i>無法用Twitter登入
                   </a>
@@ -24,15 +35,29 @@
               </div>
             </div>
             <div class="prev-next">
-              <i data-click="btn-back" :class="{'back':prev}" @click="prev=!prev;"></i>
-              <i data-click="btn-next" :class="{'next':!prev}" @click="prev=!prev;"></i>
+              <i
+                data-click="btn-back"
+                :class="{'back':prev}"
+                @click="prev=!prev;"
+              ></i>
+              <i
+                data-click="btn-next"
+                :class="{'next':!prev}"
+                @click="prev=!prev;"
+              ></i>
             </div>
             <p class="promo">加入會員 72 小時內首次購物享 95 折優惠！</p>
           </div>
           <div class="form-wrapper">
-            <form id="login-form" @submit.prevent="login_submit">
+            <form
+              id="login-form"
+              @submit.prevent="login_submit"
+            >
               <div class="login-message"></div>
-              <div class="login-pinkoi-account" :class="{signin_error : IsSignin_error}">{{Message}}</div>
+              <div
+                class="login-pinkoi-account"
+                :class="{signin_error : IsSignin_error}"
+              >{{Message}}</div>
               <ul>
                 <li>
                   <input
@@ -91,8 +116,14 @@
             </form>
             <div class="login-help">
               <div class="login-problem">
-                <span data-click="forgetpassword" @click="forget_password">忘記密碼</span>
-                <span data-click="resend" @click="forget_validation">重寄認證信</span>
+                <span
+                  data-click="forgetpassword"
+                  @click="forget_password"
+                >忘記密碼</span>
+                <span
+                  data-click="resend"
+                  @click="forget_validation"
+                >重寄認證信</span>
               </div>
               <div class="lower-block">還不是會員嗎?
                 <router-link to="/login_signup">
@@ -104,7 +135,10 @@
         </div>
       </div>
     </div>
-    <alert v-if="Is_Signin_success" :API_Response_Message="API_Response_Message"></alert>
+    <alert
+      v-if="Is_Signin_success"
+      :API_Response_Message="API_Response_Message"
+    ></alert>
     <modal
       v-if="showModal"
       @close="showModal = false"
@@ -255,12 +289,12 @@ export default {
               _this.Is_Signin_success = true;
             } else if (response.data.responseStatusCode === _this.responseStatusCode.emailUnAuthentication.statusCode) {
               _this.showModal = true;
-              _this.Response_Message = response.data.message;
+              _this.Response_Message = response.data.result.join('，');
               _this.showvalidation_message = true;
               _this.Button_Message = '驗證';
             } else {
               _this.IsSignin_error = true;
-              _this.Message = response.data.message;
+              _this.Message = response.data.result.join('，');
             }
           })
           .catch(err => {
@@ -335,7 +369,7 @@ export default {
     },
     FBLogin: function () {
       var _this = this;
-      this.FB.login(
+      window.FB.login(
         function (response) {
           _this.statusChangeCallback(response);
         },
@@ -349,7 +383,7 @@ export default {
     statusChangeCallback (response) {
       var _this = this;
       if (response.status === 'connected') {
-        this.FB.api('/me?fields=name,id', function (response) {
+        window.FB.api('/me?fields=name,id', function (response) {
           _this.axios
             .post('/Account/ResponseJWT', {
               Account: response.name

@@ -3,42 +3,48 @@
     <v-header v-if="IsShowHeader"></v-header>
     <router-view></router-view>
     <v-footer v-if="IsShowFooter"></v-footer>
+    <Loading v-if="IsLoading"></Loading>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 import gheader from './components/gheader'
 import gfooter from './components/gfooter'
+import Loading from './components/loading/index';
+
 export default {
-  name: "App",
-  data(){
-    return{}
+  name: 'App',
+  data () {
+    return {}
   },
-  mounted() {
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId: "303337550271827",
+  mounted () {
+    window.fbAsyncInit = function () {
+      window.FB.init({
+        appId: '303337550271827',
         cookie: true,
         xfbml: true,
-        version: "v2.9"
+        version: 'v2.9'
       });
-      FB.AppEvents.logPageView();
+      window.FB.AppEvents.logPageView();
 
-      console.log("fbAsyncInit");
+      console.log('fbAsyncInit');
 
-      FB.getLoginStatus(response => {
-        console.log("res", response); // 這裡可以得到 fb 回傳的結果
+      window.FB.getLoginStatus(response => {
+        console.log('res', response); // 這裡可以得到 fb 回傳的結果
       });
     };
   },
   components: {
-    'v-header' :gheader,
-    'v-footer' :gfooter,
+    'v-header': gheader,
+    'v-footer': gfooter,
+    Loading: Loading
+
   },
-  computed:{
-    ...mapGetters(["IsShowHeader"]),
-    ...mapGetters(["IsShowFooter"]),
+  computed: {
+    ...mapGetters(['IsShowHeader']),
+    ...mapGetters(['IsShowFooter']),
+    ...mapGetters(['IsLoading'])
   }
 
 };

@@ -1,4 +1,5 @@
-import global from './components/common';
+import global from '../components/common';
+import store from '../store/index';
 
 // 引用axios
 var axios = require('axios');
@@ -17,8 +18,10 @@ instance.defaults.headers.post['Access-Control-Allow-Origin'] = 'origin-list';
 
 // 全局封装错误处理函数
 instance.interceptors.request.use(
-  config => {
-    return config
+  request => {
+    request.headers.post.Authorization = 'bearer ' + window.localStorage.getItem('Jwt');
+    store.dispatch('SetLoading', true);
+    return request
   },
   err => {
     return Promise.reject(err)
@@ -29,17 +32,13 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   response => {
     // 若API回傳JWT 則馬上儲存
-    var user = localStorage.getItem('login');
-    var FBuser = localStorage.getItem('FBlogin');
-
-    global.SetVuexLocalstorageForLogin(response.data.jwtData);
-global(SetVuexLocalstorageForLogout)
-    if(response.data.isFacebookLogin)
-    {
-global.SetVuexForFBLogin()
+    if (response.data.jwtData.jwt !== null) {
+      global.SetVuexLocalstorageForLogin(response.data.jwtData);
+      if (response.data.isFacebookLogin) {
+        global.SetVuexForFBLogin();
+      }
     }
-
-    }
+    store.dispatch('SetLoading', false);
 
     return response;
   },
@@ -73,16 +72,7 @@ const api = {
   ReSendEmailForReSetPassWord: (accountData) => instance.post('/Account/ReSendEmailForReSetPassWord', accountData),
   CheckVerificationCodeForReSetPassWord: (accountData) => instance.post('/Account/CheckVerificationCodeForReSetPassWord', accountData),
   ResetPassWord: (accountData) => instance.post('/Account/ResetPassWord', accountData),
-  UpLoadImage: (uploadData) => instance.post('/Account/UpLoadImage', uploadData, {
-    headers: {
-      Authorization: 'bearer ' + localStorage.getItem(uploadData.account + '_JWT')
-    }
-  }),
-  GetImage: (accountData) => instance.post('/Account/GetImage', accountData, {
-    headers: {
-      Authorization: 'bearer ' + localStorage.getItem(accountData.account + '_JWT')
-    }
-  })
-};
+  UpLoadImage: (uploadData) => instance.post('/Account/UpLoadImage', uploadData),
+  GetImage: (accountData) => instance.post('/Account/GetImage', accountData)};
 
 export default api;
