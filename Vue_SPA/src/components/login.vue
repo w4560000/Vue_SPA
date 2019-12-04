@@ -287,6 +287,7 @@ export default {
             if (response.data.responseStatusCode === _this.responseStatusCode.signinSuccess.statusCode) {
               _this.API_Response_Message = _this.global.GetResponseMessage(response);
               _this.Is_Signin_success = true;
+              _this.global.SetVuexLocalstorageForLogin(response.data.jwtData)
             } else if (response.data.responseStatusCode === _this.responseStatusCode.emailUnAuthentication.statusCode) {
               _this.showModal = true;
               _this.Response_Message = response.data.result.join('，');
@@ -368,8 +369,9 @@ export default {
       this.submit_box_shadow = 'none';
     },
     FBLogin: function () {
+      this.store.dispatch('SetLoading', true);
       var _this = this;
-      window.FB.login(
+      FB.login(
         function (response) {
           _this.statusChangeCallback(response);
         },
@@ -383,25 +385,20 @@ export default {
     statusChangeCallback (response) {
       var _this = this;
       if (response.status === 'connected') {
-        window.FB.api('/me?fields=name,id', function (response) {
-          _this.axios
-            .post('/Account/ResponseJWT', {
-              Account: response.name
-            })
+        FB.api('/me?fields=name,id', function (response) {
+          _this.User_Data.Account = response.name;
+          _this.api.ResponseJwt(_this.global.SetAccountData(_this.User_Data, true))
             .then(data => {
               // 儲存登入資訊至Vuex&Localstorage
               _this.global.SetVuexForFBLogin(
                 response,
                 data.data.jwt
               );
-            })
-            .catch(err => {
-              console.log(err);
+              _this.API_Response_Message = 'Facebook登入成功！';
+              _this.Is_Signin_success = true;
+              this.store.dispatch('SetLoading', true);
             });
         });
-
-        this.API_Response_Message = 'Facebook登入成功！';
-        _this.Is_Signin_success = true;
       } else {
         _this.global.SetVuex_Localstorage_ForFBLoginProfile('');
       }

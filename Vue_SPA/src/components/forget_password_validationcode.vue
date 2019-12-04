@@ -96,14 +96,11 @@
 
 <script>
 import loginSignupMessage from './login_Signup_Message';
-import Loading from './loading/index';
 import ResetPassword from './reset_password';
 
-import { mapGetters } from 'vuex';
 export default {
   components: {
     modal: loginSignupMessage,
-    Loading: Loading,
     reset: ResetPassword
   },
   props: {
@@ -317,8 +314,7 @@ export default {
         'transition-duration': 0.15 + 's',
         'box-shadow': this.forget_submit_box_shadow
       };
-    },
-    ...mapGetters(['IsLoading'])
+    }
   },
   directives: {
     focus: {

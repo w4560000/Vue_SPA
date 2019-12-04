@@ -19,8 +19,15 @@ instance.defaults.headers.post['Access-Control-Allow-Origin'] = 'origin-list';
 // 全局封装错误处理函数
 instance.interceptors.request.use(
   request => {
-    request.headers.post.Authorization = 'bearer ' + window.localStorage.getItem('Jwt');
-    store.dispatch('SetLoading', true);
+    if (window.localStorage.getItem('Jwt') !== null) {
+      request.headers.post.Authorization = 'bearer ' + window.localStorage.getItem('Jwt');
+    }
+
+    // 在背景重置Jwt時 不跑Loading，其餘request則正常顯示Loading畫面
+    if (!request.url.includes('ResponseJwt')) {
+      store.dispatch('SetLoading', true);
+    }
+
     return request
   },
   err => {
@@ -33,10 +40,7 @@ instance.interceptors.response.use(
   response => {
     // 若API回傳JWT 則馬上儲存
     if (response.data.jwtData.jwt !== null) {
-      global.SetVuexLocalstorageForLogin(response.data.jwtData);
-      if (response.data.isFacebookLogin) {
-        global.SetVuexForFBLogin();
-      }
+      global.UpdateUserJwt(response.data.jwtData.jwt);
     }
     store.dispatch('SetLoading', false);
 
@@ -67,7 +71,6 @@ const api = {
   Signin: (accountData) => instance.post('/Account/Signin', accountData),
   ResponseJwt: (accountData) => instance.post('/Account/ResponseJwt', accountData),
   CheckVerificationCodeForSignUp: (accountData) => instance.post('/Account/CheckVerificationCodeForSignUp', accountData),
-  ResponseJWT: (accountData) => instance.post('/Account/ResponseJWT', accountData),
   Logout: (accountData) => instance.post('/Account/Logout', accountData),
   ReSendEmailForReSetPassWord: (accountData) => instance.post('/Account/ReSendEmailForReSetPassWord', accountData),
   CheckVerificationCodeForReSetPassWord: (accountData) => instance.post('/Account/CheckVerificationCodeForReSetPassWord', accountData),

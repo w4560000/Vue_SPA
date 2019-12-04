@@ -1,13 +1,25 @@
 <template>
   <div class="login-body">
     <div class="login-outer">
-      <div class="login-wrapper-signup" ref="login_wrapper_signup" :style="com_height">
+      <div
+        class="login-wrapper-signup"
+        ref="login_wrapper_signup"
+        :style="com_height"
+      >
         <div class="login-inner-wrapper">
           <div class="logo"></div>
           <div class="form-wrapper">
             <h2 class="sign_up_string">註冊個人帳號</h2>
-            <form id="login-signup-form" class="login-form" @submit.prevent="signup_submit">
-              <div v-html="data_error" id="login-message" :class="{submit_error : Issubmit_error}"></div>
+            <form
+              id="login-signup-form"
+              class="login-form"
+              @submit.prevent="signup_submit"
+            >
+              <div
+                v-html="data_error"
+                id="login-message"
+                :class="{submit_error : Issubmit_error}"
+              ></div>
               <div class="login-result">
                 <h2>註冊成功</h2>
                 <p>認證信已寄至您的信箱！</p>
@@ -100,7 +112,11 @@
             </form>
 
             <div class="button-wrapper-shoping">
-              <input type="button" class="button-shoping" value="繼續逛 Pinkoi">
+              <input
+                type="button"
+                class="button-shoping"
+                value="繼續逛 Pinkoi"
+              >
             </div>
             <div class="back-to-main">已經有帳號了?
               <router-link to="/login">
@@ -120,17 +136,14 @@
       :Button_Message="Button_Message"
       v-on:forget_hiddenMessage="onhiddenMessage"
     ></modal>
-
-    <Loading v-if="IsLoading" @close="IsLoading"></Loading>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import login_Signup_Message from './login_Signup_Message';
-import Loading from './loading/index';
+import loginSignupMessage from './login_Signup_Message';
 export default {
-  components: { modal: login_Signup_Message, Loading: Loading },
+  components: { modal: loginSignupMessage },
   name: 'login_signup',
   data () {
     return {

@@ -20,17 +20,17 @@ export default {
   },
   mounted () {
     window.fbAsyncInit = function () {
-      window.FB.init({
+      FB.init({
         appId: '303337550271827',
         cookie: true,
         xfbml: true,
         version: 'v2.9'
       });
-      window.FB.AppEvents.logPageView();
+      FB.AppEvents.logPageView();
 
       console.log('fbAsyncInit');
 
-      window.FB.getLoginStatus(response => {
+      FB.getLoginStatus(response => {
         console.log('res', response); // 這裡可以得到 fb 回傳的結果
       });
     };

@@ -29,7 +29,6 @@ function SetVuexForFBLogin (response, jwt) {
 
   if (response !== '') {
     store.dispatch('Login_User', response.name);
-    window.localStorage.setItem('IsFBUser', true);
     window.localStorage.setItem('FBlogin', response.name);
     window.localStorage.setItem('FBuserID', response.id);
     window.localStorage.setItem('Jwt', jwt);
@@ -54,11 +53,12 @@ function SetVuexLocalstorageForLogout () {
 
   window.localStorage.removeItem('login');
   window.localStorage.removeItem('FBlogin');
+  window.localStorage.removeItem('FBuserID');
   window.localStorage.removeItem('Jwt');
 }
 
 // mapping成API viewModel
-function SetAccountData (userData) {
+function SetAccountData (userData, isFacebookLogin = false) {
   return {
     AccountName: userData.Account !== undefined ? userData.Account : null,
     PassWord: userData.PassWord !== undefined ? userData.PassWord : null,
@@ -67,7 +67,7 @@ function SetAccountData (userData) {
     ResendMailType: userData.ResendMailType !== undefined ? userData.ResendMailType : 0,
 
     // 抓取localStorage 來判定是否從FB登入
-    IsFacebookLogin: window.localStorage.getItem(window.localStorage.getItem('FBlogin') + '_JWT') !== null
+    IsFacebookLogin: window.localStorage.getItem('FBlogin') !== null || isFacebookLogin
   };
 }
 
