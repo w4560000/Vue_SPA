@@ -1,12 +1,10 @@
 import global from '../components/common';
 import store from '../store/index';
+import constant from '../components/constant/index'
 
 // 引用axios
 var axios = require('axios');
-
-// 配置API接口地址与服务器静态文件地址
-// var root = 'https://bxwebside.azurewebsites.net';
-var root = 'https://localhost:44319';
+var root = constant.apiUrl;
 
 var instance = axios.create({
   baseURL: root,
