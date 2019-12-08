@@ -167,6 +167,7 @@ export default {
 
                 _this.Is_Signup_success = true;
                 _this.API_Response_Message = _this.global.GetResponseMessage(response);
+                _this.global.SetVuexLocalstorageForLogin(response.data.jwtData);
               }
             } else {
               // 若驗證不成功，error div開啟

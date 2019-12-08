@@ -63,9 +63,9 @@
                   <input
                     id="login-id"
                     ref="Account"
-                    v-model="User_Data.Account"
+                    v-model="UserData.Account"
                     @click="Focus_Account_input"
-                    @blur="Account_placeholder(User_Data.Account)"
+                    @blur="Account_placeholder(UserData.Account)"
                     v-on:keydown.9="login_nextfocus('PassWord')"
                     :tabindex="tabindex1"
                     v-focus="true"
@@ -84,9 +84,9 @@
                     id="login-password"
                     type="password"
                     ref="PassWord"
-                    v-model="User_Data.PassWord"
+                    v-model="UserData.PassWord"
                     @click="Focus_PassWord_input"
-                    @blur="PassWord_placeholder(User_Data.PassWord)"
+                    @blur="PassWord_placeholder(UserData.PassWord)"
                     :tabindex="tabindex2"
                     v-on:keydown.9="login_nextfocus('submitbutton')"
                     maxlength="16"
@@ -144,8 +144,9 @@
       @close="showModal = false"
       :Response_Message_s="Response_Message"
       :showvalidation_message="showvalidation_message"
-      :User_Data="User_Data"
+      :UserData="UserData"
       :Button_Message="Button_Message"
+      v-on:forget_hiddenMessage="onhiddenMessage"
     ></modal>
     <forget
       v-if="Is_click_forget"
@@ -190,10 +191,12 @@ export default {
       IsSignin_error: false,
 
       // 使用者資料
-      User_Data: {
+      UserData: {
         Account: '',
-        PassWord: ''
+        PassWord: '',
+        Email: ''
       },
+
       Message: '使用 Pinkoi 帳號登入',
 
       // setting click tab鍵的排序
@@ -222,6 +225,11 @@ export default {
     };
   },
   methods: {
+    // 子元件傳來的值: 判斷是否隱藏子元件
+    onhiddenMessage: function (data) {
+      debugger;
+      this.showModal = data;
+    },
     // Focus Input時的動作
     Focus_Account_input: function () {
       this.$refs.Account.focus();
@@ -264,14 +272,14 @@ export default {
     },
     // 送出submit的動作
     login_submit: function () {
-      if (this.User_Data.Account === '') {
+      if (this.UserData.Account === '') {
         this.IsLoginAccount_alert = true;
         return;
       } else {
         this.IsLoginAccount_alert = false;
       }
 
-      if (this.User_Data.PassWord === '') {
+      if (this.UserData.PassWord === '') {
         this.IsLoginPassWord_alert = true;
         return;
       } else {
@@ -282,12 +290,12 @@ export default {
         this.IsLoginPassWord_alert === false
       ) {
         var _this = this;
-        this.api.Signin(this.global.SetAccountData(_this.User_Data))
+        this.api.Signin(this.global.SetAccountData(_this.UserData))
           .then(response => {
             if (response.data.responseStatusCode === _this.responseStatusCode.signinSuccess.statusCode) {
               _this.API_Response_Message = _this.global.GetResponseMessage(response);
               _this.Is_Signin_success = true;
-              _this.global.SetVuexLocalstorageForLogin(response.data.jwtData)
+              _this.global.SetVuexLocalstorageForLogin(response.data.jwtData);
             } else if (response.data.responseStatusCode === _this.responseStatusCode.emailUnAuthentication.statusCode) {
               _this.showModal = true;
               _this.Response_Message = response.data.result.join('，');
@@ -386,8 +394,8 @@ export default {
       var _this = this;
       if (response.status === 'connected') {
         FB.api('/me?fields=name,id', function (response) {
-          _this.User_Data.Account = response.name;
-          _this.api.ResponseJwt(_this.global.SetAccountData(_this.User_Data, true))
+          _this.UserData.Account = response.name;
+          _this.api.ResponseJwt(_this.global.SetAccountData(_this.UserData, true))
             .then(data => {
               // 儲存登入資訊至Vuex&Localstorage
               _this.global.SetVuexForFBLogin(

@@ -201,6 +201,10 @@ export default {
             if (response.data.responseStatusCode === _this.responseStatusCode.reSetPassWordVerificationCode.statusCode) {
               _this.showvalidation_message = true;
               _this.Button_Message = '驗證';
+
+              if (_this.submit_text === '重新寄送認證信') {
+                _this.Response_Message = '重新寄送認證信';
+              }
             } else {
               _this.Button_Message = '確認';
             }

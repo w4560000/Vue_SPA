@@ -151,13 +151,15 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { debug } from 'util';
 import logout_Alert from './login_Signin_Signup_Alert';
 export default {
   components: { alert: logout_Alert },
   name: 'gheader',
   data () {
     return { Is_LogOut: false };
+  },
+  mounted () {
+    setInterval(() => { this.checkUserLoginTimeout(); }, 5000);
   },
   methods: {
     // 登出動作
@@ -181,6 +183,18 @@ export default {
     closeh_f: function () {
       this.$store.dispatch('updateIsShowHeader', false);
       this.$store.dispatch('updateIsShowFooter', false);
+    },
+    checkUserLoginTimeout: function () {
+      var _this = this;
+      if (this.Login_User !== '') {
+        this.api.CheckUserLoginTimeout(this.global.SetAccountData({Account: this.Login_User}))
+          .then((response) => {
+            if (response.data.responseStatusCode === _this.responseStatusCode.loginTimeout.statusCode) {
+              _this.global.SetVuexLocalstorageForLogout();
+              alert(_this.global.GetResponseMessage(response));
+            }
+          });
+      }
     }
   },
   computed: {

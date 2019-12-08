@@ -27,6 +27,12 @@ const responseStatusCodeEnum = {
     statusCode: '006',
     message: '請輸入驗證碼後重設密碼。'},
 
+  // 長時間無動作，強制登出
+  loginTimeout: {
+    statusCode: '007',
+    message: '您長時間無動作，系統自動登出。'
+  },
+
   // 帳號登入失敗
   signinFail: {
     statusCode: '011',

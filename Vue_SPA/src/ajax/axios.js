@@ -21,8 +21,8 @@ instance.interceptors.request.use(
       request.headers.post.Authorization = 'bearer ' + window.localStorage.getItem('Jwt');
     }
 
-    // 在背景重置Jwt時 不跑Loading，其餘request則正常顯示Loading畫面
-    if (!request.url.includes('ResponseJwt')) {
+    // 在背景重置Jwt時 不跑Loading，其餘request則正常顯示Loading畫面s
+    if (!(request.url.includes('ResponseJwt') || request.url.includes('CheckUserLoginTimeout'))) {
       store.dispatch('SetLoading', true);
     }
 
@@ -74,6 +74,8 @@ const api = {
   CheckVerificationCodeForReSetPassWord: (accountData) => instance.post('/Account/CheckVerificationCodeForReSetPassWord', accountData),
   ResetPassWord: (accountData) => instance.post('/Account/ResetPassWord', accountData),
   UpLoadImage: (uploadData) => instance.post('/Account/UpLoadImage', uploadData),
-  GetImage: (accountData) => instance.post('/Account/GetImage', accountData)};
+  GetImage: (accountData) => instance.post('/Account/GetImage', accountData),
+  CheckUserLoginTimeout: (accountData) => instance.post('/Account/CheckUserLoginTimeout', accountData)
+};
 
 export default api;

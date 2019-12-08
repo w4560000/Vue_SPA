@@ -31,10 +31,6 @@ router.beforeEach((to, from, next) => {
   if (user != null) Account = user;
   else if (FBuser != null) Account = FBuser;
 
-  if (Account !== '') {
-    // 載入頁面等同於user有在操作系統，幫他更新JWT
-    api.ResponseJwt(global.SetAccountData({ Account: Account }));
-  }
   if (user != null) {
     store.dispatch('Login_User', user);
     store.dispatch('Check_Login', true);
@@ -61,6 +57,11 @@ router.beforeEach((to, from, next) => {
           }
         });
     }
+  }
+
+  if (Account !== '') {
+    // 載入頁面等同於user有在操作系統，幫他更新JWT
+    api.ResponseJwt(global.SetAccountData({ Account: Account }));
   }
   next();
 });
