@@ -151,9 +151,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import logout_Alert from './login_Signin_Signup_Alert';
+import logoutAlert from './login_Signin_Signup_Alert';
 export default {
-  components: { alert: logout_Alert },
+  components: { alert: logoutAlert },
   name: 'gheader',
   data () {
     return { Is_LogOut: false };
@@ -190,8 +190,9 @@ export default {
         this.api.CheckUserLoginTimeout(this.global.SetAccountData({Account: this.Login_User}))
           .then((response) => {
             if (response.data.responseStatusCode === _this.responseStatusCode.loginTimeout.statusCode) {
+              _this.API_Response_Message = _this.global.GetResponseMessage(response);
+              _this.Is_LogOut = true;
               _this.global.SetVuexLocalstorageForLogout();
-              alert(_this.global.GetResponseMessage(response));
             }
           });
       }

@@ -23,7 +23,7 @@ Vue.prototype.mailEnum = mailEnum;
 Vue.config.productionTip = false;
 
 // 載入router前，先抓取localstorage的值，來判斷是否登錄過，並更新Vuex
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   var user = localStorage.getItem('login');
   var FBuser = localStorage.getItem('FBlogin');
   var Account = '';
@@ -50,7 +50,7 @@ router.beforeEach((to, from, next) => {
     store.dispatch('updateIsShowHeader', true);
     store.dispatch('updateIsShowFooter', true);
     if (Account !== '' && FBuser === null) {
-      api.GetImage({ AccountName: Account })
+      await api.GetImage({ AccountName: Account })
         .then(response => {
           if (response.data.responseStatusCode === responseStatusCodeEnum.getAccountImageSuccess.statusCode) {
             store.dispatch('SetImageURL', response.data.data + `?random= + ${Math.random()}`);
