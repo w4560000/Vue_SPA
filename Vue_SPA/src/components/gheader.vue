@@ -159,7 +159,7 @@ export default {
     return { Is_LogOut: false };
   },
   mounted () {
-    setInterval(() => { this.checkUserLoginTimeout(); }, 5000);
+    setInterval(() => { this.checkUserLoginTimeout(); }, 60000);
   },
   methods: {
     // 登出動作

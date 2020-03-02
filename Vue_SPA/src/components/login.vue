@@ -227,7 +227,6 @@ export default {
   methods: {
     // 子元件傳來的值: 判斷是否隱藏子元件
     onhiddenMessage: function (data) {
-      debugger;
       this.showModal = data;
     },
     // Focus Input時的動作

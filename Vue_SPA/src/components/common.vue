@@ -3,7 +3,6 @@ import store from '../store/index';
 
 // 全局設定儲存登入者訊息
 function SetVuexLocalstorageForLogin (jwtData) {
-  debugger;
   store.dispatch('Update_Token', jwtData.jwt);
   store.dispatch('Check_Login', true);
   store.dispatch('Login_User', jwtData.account);
