@@ -403,7 +403,7 @@ export default {
               );
               _this.API_Response_Message = 'Facebook登入成功！';
               _this.Is_Signin_success = true;
-              _this.store.dispatch('SetLoading', true);
+              _this.store.dispatch('SetLoading', false);
             });
         });
       } else {
